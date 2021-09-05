@@ -1,8 +1,8 @@
-{% extends 'base.html' %} {% block content %} <h1 class="text-primary fs-2">Registration</h1>
+{% extends 'base.html' %} {% block content %} <h1 class="dark-blue fs-2">Registration</h1>
 <div>Already a member? <a href="/login">Log in</a></div>
 <p class="lead text-danger mt-3">This application is still in beta and not fully secure. <b>Do not use real emails or
         passwords.</b></p>
-<form method="POST"> {{ form.hidden_tag() }} <div class="row">
+<form id="user-form" action="/register" method="POST"> {{ form.hidden_tag() }} <div class="row">
         <div class="col-12 col-md-4"> {{form.username.label}} {{form.username(class_="form-control")}} {% for error in
             form.username.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                 class="form-text text-muted">Required</small></div>
@@ -22,13 +22,10 @@
                 class="form-text text-muted">Required</small> </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-9"> {{form.street_address.label}} {{form.street_address(class_="form-control")}} {%
-            for error in form.street_address.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
-            %}<small class="form-text text-muted">Required</small>
+        <div class="col-12"> {{form.street_address.label}} {{form.street_address(class_=" form-control")}} {% for error
+            in form.street_address.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small>
         </div>
-        <div class="col-12 col-md-3"> {{form.apartment_number.label}} {{form.apartment_number(class_="form-control")}}
-            {% for error in form.apartment_number.errors %} <span class="form-text text-danger">{{error}}</span> {%
-            endfor %} </div>
     </div>
     <div class="row">
         <div class="col-12 col-md-4"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
@@ -41,7 +38,6 @@
             form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                 class="form-text text-muted">Required</small> </div>
     </div>
-    <div class="mt-3">
-        <button type="submit" class="btn btn-success btn-large">Register</button>
-    </div>
+    <div id="verify-btn"><a class="btn btn-primary btn-large mt-2" id="verify-user">Verify Address</a></div>
+    <div id="verify-user-address" class="mt-2"></div>
 </form> {% endblock %}

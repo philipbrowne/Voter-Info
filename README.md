@@ -32,7 +32,9 @@ It is very likely that more tables will be added to this project as this project
 
 **API Links for Project**
 
-I am planning to use multiple APIs for this project.  Several of the proposed ones are below, I will review documentation for each and proceed based on which will be the most useful.  Once I have achieved an Minimum Viable Product for the application, I will begin to implement additional features and add them using the APIs below.
+I am planning to use multiple APIs for this project. Several of the proposed ones are below, I will review documentation for each and proceed based on which will be the most useful. Once I have achieved an Minimum Viable Product for the application, I will begin to implement additional features and add them using the APIs below.
+
+Lob API for Address Verification: https://docs.lob.com/python -- Using for User Registration to Verify Address
 
 Mapquest API for any necessary geocoding of user location: https://developer.mapquest.com/documentation/
 
@@ -53,10 +55,3 @@ WeVoteUSA API: https://api.wevoteusa.org/apis/v1/docs/
 Voting Information Project API: https://vip-specification.readthedocs.io/en/release/index.html
 
 CivicEngine API: https://developers.civicengine.com/docs/api/v1
-
-
-
-
-
-
-

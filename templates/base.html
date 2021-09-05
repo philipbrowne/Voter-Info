@@ -19,6 +19,9 @@
             crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.2/axios.min.js"
+            integrity="sha512-SRGf0XYPMWMGCYQg7sQsW2/FMWq0L/mYhwxDraoUOeZ9sWO2/+R48bcXZaWOpwjCQbyRWP24zsbtqQxJXU1W2w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
 
     <body>
@@ -68,6 +71,7 @@
             <div class="container" style="margin-top: 2em"> {% for category, msg in
                 get_flashed_messages(with_categories=True) %} <div class="alert alert-{{category}}">{{ msg }}</div> {%
                 endfor %} <div class="container"> {% block content %} {% endblock %} </div>
+                <script src="/script/verify_address.js"></script>
         </body>
 
 </html>

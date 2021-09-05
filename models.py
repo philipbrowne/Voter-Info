@@ -21,7 +21,6 @@ class User(db.Model):
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
     street_address = db.Column(db.String, nullable=False)
-    apartment_number = db.Column(db.String(255))
     city = db.Column(db.String(255), nullable=False)
     state = db.Column(db.String(50), nullable=False)
     zip_code = db.Column(db.String(20), nullable=False)

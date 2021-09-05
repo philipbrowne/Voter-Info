@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block content %} <h1>{{user.username}}</h1>
-<table class="table">
+{% extends 'base.html' %} {% block content %} <h1 class="dark-blue">{{user.username}}</h1>
+<table class="table table-hover">
     <thead>
         <tr>
             <th scope="col"></th>
@@ -7,6 +7,10 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <th scope="row">Name</th>
+            <td>{{user.first_name}} {{user.last_name}}</td>
+        </tr>
         <tr>
             <th scope="row">Username</th>
             <td>{{user.username}}</td>
@@ -17,8 +21,11 @@
         </tr>
         <tr>
             <th scope="row">Mailing Address</th>
-            <td>{{user.street_address}}{% if user.apartment_number %}<span> {{user.apartment_number}}</span>{% endif
-                %}<br>{{user.city}}, {{user.state}} {{user.zip_code}}</td>
+            <td>{{user.street_address}}<br>{{user.city}}, {{user.state}} {{user.zip_code}}</td>
         </tr>
     </tbody>
-</table> {% endblock %}
+</table>
+<div class="mt-2"><a href="/users/{{user.username}}/edit"><button class="btn btn-primary mx-1">Edit</button></a>
+    <form action="/users/{{user.username}}/delete" method="POST" class="d-inline"><button
+            class="btn btn-danger mx-1">Delete</button></form>
+</div> {% endblock %}
