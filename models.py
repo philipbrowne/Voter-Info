@@ -24,7 +24,7 @@ class User(db.Model):
     apartment_number = db.Column(db.Text(255))
     city = db.Column(db.Text(255), nullable=False)
     state = db.Column(db.Text(50), nullable=False)
-    zip_code = db.Column(db.Integer(20), nullable=False)
+    zip_code = db.Column(db.String(20), nullable=False)
     date_of_birth = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     cell_phone_number = db.Column(db.String)
