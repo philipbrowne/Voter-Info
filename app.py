@@ -63,3 +63,28 @@ def register():
         return redirect('/')
     else:
         return render_template('register.html', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def log_in():
+    """Logs user into site"""
+    form = UserLoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = User.authenticate(username, password)
+        if user:
+            flash(f'Welcome back, {user.username}!', 'success')
+            session['username'] = user.username
+            return redirect(f'/users/{user.username}')
+        else:
+            form.username.errors = ['Invalid Username/Password']
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def log_out_user():
+    """Logs user out of site"""
+    session.pop('username')
+    flash('User logged out!', 'success')
+    return redirect('/')
