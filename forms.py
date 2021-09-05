@@ -84,7 +84,7 @@ class NewUserForm(FlaskForm):
                         InputRequired(message='This field is required')])
     zip_code = StringField('Zip Code', validators=[InputRequired(message='This field is required'), Length(
         min=5, max=20, message='Please enter a valid length between 5 and 20 characters')])
-    date_of_birth = DateField('Start Date', format='%m/%d/%Y',
+    date_of_birth = DateField('Date of Birth', format='%m/%d/%Y',
                               validators=[InputRequired(message='This field is required')])
 
 

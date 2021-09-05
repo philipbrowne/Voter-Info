@@ -29,8 +29,34 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     """User Registration Page"""
     form = NewUserForm()
-    return render_template('register.html')
+    if form.validate_on_submit():
+        username = form.username.data
+        password = User.register(username, form.password.data).password
+        email = form.email.data
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        street_address = form.street_address.data
+        if form.apartment_number.data:
+            apartment_number = form.apartment_number.data
+        else:
+            apartment_number = 'N/A'
+        city = form.city.data
+        state = form.state.data
+        zip_code = form.zip_code.data
+        date_of_birth = form.date_of_birth.data
+        new_user = User(username=username, password=password,
+                        email=email, )
+        db.session.add(new_user)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            form.username.errors = ['Sorry - that username is already taken!']
+            return render_template('register.html', form=form)
+        session['username'] = new_user.username
+        flash(f'Welcome {new_user.username}!', 'success')
+        return redirect(f'/users/{new_user.username}')
+    return render_template('register.html', form=form)

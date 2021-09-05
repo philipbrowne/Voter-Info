@@ -1,5 +1,62 @@
 {% extends 'base.html' %} {% block content %} <h1 class="text-primary fs-2">Registration</h1>
-<p class="lead text-warning">This application is still in beta and not fully secure. <b>Do not use real emails or
-        passwords.</b></p> {% include 'form.j2' %} <button type="submit"
-    class="btn btn-success btn-large">Register</button>
+<div>Already a member? <a href="/login">Log in</a></div>
+<p class="lead text-danger mt-3">This application is still in beta and not fully secure. <b>Do not use real emails or
+        passwords.</b></p>
+<form method="POST"> {{ form.hidden_tag() }} <div class="row">
+        <div class="col-12 col-md-6"> {{form.username.label}} {{form.username(class_="form-control")}} {% for error in
+            form.username.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small></div>
+        <div class="col-12 col-md-6"> {{form.email.label}} {{form.email(class_="form-control")}} {% for error in
+            form.email.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small></div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6"> {{form.password.label}} {{form.password(class_="form-control")}} {% for error in
+            form.password.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+        <div class="col-12 col-md-6"> {{form.confirm.label}} {{form.confirm(class_="form-control")}} {% for error in
+            form.confirm.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6"> {{form.first_name.label}} {{form.first_name(class_="form-control")}} {% for error
+            in form.first_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+        <div class="col-12 col-md-6"> {{form.last_name.label}} {{form.last_name(class_="form-control")}} {% for error in
+            form.last_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-9"> {{form.street_address.label}} {{form.street_address(class_="form-control")}} {%
+            for error in form.street_address.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
+            %}<small class="form-text text-muted">Required</small>
+        </div>
+        <div class="col-12 col-md-3"> {{form.apartment_number.label}} {{form.apartment_number(class_="form-control")}}
+            {% for error in form.apartment_number.errors %} <span class="form-text text-danger">{{error}}</span> {%
+            endfor %} </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
+            form.city.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+        <div class="col-12 col-md-4"> {{form.state.label}} {{form.state(class_="form-control")}} {% for error in
+            form.state.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+        <div class="col-12 col-md-4"> {{form.zip_code.label}} {{form.zip_code(class_="form-control")}} {% for error in
+            form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                class="form-text text-muted">Required</small> </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-12">
+                <label for="date_of_birth">Date of Birth</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" class="form-control">{% for error in
+                form.date_of_birth.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success btn-large">Register</button>
+    </div>
 </form> {% endblock %}
