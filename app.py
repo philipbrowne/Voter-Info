@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 import json
 
 # from forms import NewUserForm, UserLoginForm
-# from models import connect_db, db, User, Score
+from models import connect_db, db, User
 
 from sqlalchemy.exc import IntegrityError
 import os
