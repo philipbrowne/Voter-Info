@@ -27,3 +27,10 @@ connect_db(app)
 def index():
     """Landing Page"""
     return render_template('index.html')
+
+
+@app.route('/register')
+def register():
+    """User Registration Page"""
+    form = NewUserForm()
+    return render_template('register.html')
