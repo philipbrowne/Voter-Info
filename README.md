@@ -26,3 +26,5 @@ User flow would include the user entering their location and the application ret
 
 My initial Schema will incorporate a single user table - I have added a screenshot of the proposed schema in my project_screenshots folder.
 
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-v1.png?raw=true)
+
