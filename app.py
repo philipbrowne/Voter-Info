@@ -40,15 +40,13 @@ def register():
         first_name = form.first_name.data
         last_name = form.last_name.data
         street_address = form.street_address.data
-        if form.apartment_number.data:
-            apartment_number = form.apartment_number.data
-        else:
-            apartment_number = 'N/A'
         city = form.city.data
         state = form.state.data
         zip_code = form.zip_code.data
         new_user = User(username=username, password=password,
-                        email=email, first_name=first_name, last_name=last_name, street_address=street_address, apartment_number=apartment_number, city=city, state=state, zip_code=zip_code)
+                        email=email, first_name=first_name, last_name=last_name, street_address=street_address, city=city, state=state, zip_code=zip_code)
+        if form.apartment_number.data:
+            new_user.apartment_number = form.apartment_number.data
         db.session.add(new_user)
         try:
             db.session.commit()
@@ -76,7 +74,7 @@ def log_in():
         if user:
             flash(f'Welcome back, {user.username}!', 'success')
             session['username'] = user.username
-            return redirect(f'/users/{user.username}')
+            return redirect(f'/')
         else:
             form.username.errors = ['Invalid Username/Password']
     return render_template('login.html', form=form)
@@ -88,3 +86,32 @@ def log_out_user():
     session.pop('username')
     flash('User logged out!', 'success')
     return redirect('/')
+
+
+@app.route('/users/<username>')
+def show_user_profile(username):
+    """Shows profile of current user"""
+    print(session['username'])
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
+    if session['username'] != username:
+        flash('Cannot access this page', 'danger')
+        return redirect('/')
+    user = User.query.get_or_404(username)
+    return render_template('user_details.html', user=user)
+
+
+@app.route('/users/<username>/edit')
+def edit_user_info(username):
+    """Edits registered user information for that user"""
+    print(session['username'])
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
+    if session['username'] != username:
+        flash('Cannot access this page', 'danger')
+        return redirect('/')
+    user = User.query.get_or_404(username)
+
+    return render_template('edit_user.html')

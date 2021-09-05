@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %} <h1>{{user.username}}</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Username</th>
+            <td>{{user.username}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email Address</th>
+            <td>{{user.email}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Mailing Address</th>
+            <td>{{user.street_address}}{% if user.apartment_number %}<span> {{user.apartment_number}}</span>{% endif
+                %}<br>{{user.city}}, {{user.state}} {{user.zip_code}}</td>
+        </tr>
+    </tbody>
+</table> {% endblock %}

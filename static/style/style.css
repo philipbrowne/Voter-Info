@@ -1,11 +1,15 @@
 #navbarcontainer {
-  background-color: #00008b;
+  background-color: #01013a;
 }
 
 .brand-text {
-  color: #fa8072 !important;
+  color: rgb(148, 186, 241) !important;
 }
 
 .brand-text:hover {
-  color: #f34936 !important;
+  color: white !important;
+}
+
+.nav-link:hover {
+  color: #fcb9b1 !important;
 }
