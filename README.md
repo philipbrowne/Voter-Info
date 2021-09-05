@@ -28,3 +28,35 @@ My initial Schema will incorporate a single user table - I have added a screensh
 
 ![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-v1.png?raw=true)
 
+It is very likely that more tables will be added to this project as this project gets more complex, but I believe that the basic application should be able to properly operate with this single table of data for now.
+
+**API Links for Project**
+
+I am planning to use multiple APIs for this project.  Several of the proposed ones are below, I will review documentation for each and proceed based on which will be the most useful.  Once I have achieved an Minimum Viable Product for the application, I will begin to implement additional features and add them using the APIs below.
+
+Mapquest API for any necessary geocoding of user location: https://developer.mapquest.com/documentation/
+
+Google Civic Information API: https://developers.google.com/civic-information
+
+RockTheVote API (will be useful for assisting with Voter Registration): https://rock-the-vote.github.io/Voter-Registration-Tool-API-Docs/#overview
+
+US Vote Foundation API: https://civicdata.usvotefoundation.org/
+
+Democracy Works Elections API: https://www.democracy.works/elections-api
+
+VoteSmart API: https://votesmart.org/share/api
+
+Elections Online API: https://www.electionsonline.com/integrations/api.cfm
+
+WeVoteUSA API: https://api.wevoteusa.org/apis/v1/docs/
+
+Voting Information Project API: https://vip-specification.readthedocs.io/en/release/index.html
+
+CivicEngine API: https://developers.civicengine.com/docs/api/v1
+
+
+
+
+
+
+
