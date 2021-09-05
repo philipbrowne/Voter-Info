@@ -47,9 +47,8 @@ def register():
         city = form.city.data
         state = form.state.data
         zip_code = form.zip_code.data
-        date_of_birth = form.date_of_birth.data
         new_user = User(username=username, password=password,
-                        email=email, first_name=first_name, last_name=last_name, street_address=streetaddress, apartment_number=apartment_number, city=city, state=state, zip_code=zip_code)
+                        email=email, first_name=first_name, last_name=last_name, street_address=street_address, apartment_number=apartment_number, city=city, state=state, zip_code=zip_code)
         db.session.add(new_user)
         try:
             db.session.commit()
