@@ -49,14 +49,18 @@ def register():
         zip_code = form.zip_code.data
         date_of_birth = form.date_of_birth.data
         new_user = User(username=username, password=password,
-                        email=email, )
+                        email=email, first_name=first_name, last_name=last_name, street_address=streetaddress, apartment_number=apartment_number, city=city, state=state, zip_code=zip_code, date_of_birth=date_of_birth)
         db.session.add(new_user)
         try:
             db.session.commit()
         except IntegrityError:
-            form.username.errors = ['Sorry - that username is already taken!']
+            form.username.errors = [
+                'Sorry - this username or email is already registered']
+            form.email.errors = [
+                'Sorry - this username or email address is already registered']
             return render_template('register.html', form=form)
         session['username'] = new_user.username
         flash(f'Welcome {new_user.username}!', 'success')
-        return redirect(f'/users/{new_user.username}')
-    return render_template('register.html', form=form)
+        return redirect('/')
+    else:
+        return render_template('register.html', form=form)

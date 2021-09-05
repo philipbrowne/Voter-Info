@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, DateField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms import StringField, PasswordField, SelectField
+from wtforms.validators import InputRequired, Length, Email
 
 
 STATES = ["Alaska",
@@ -66,8 +66,7 @@ class NewUserForm(FlaskForm):
         min=4, max=50, message='Please select a valid length of between 4 and 50 characters')])
     password = PasswordField('Password', validators=[
                              InputRequired(message='Please enter a password of at least 8 characters'), Length(
-                                 min=8, max=255, message='Please select a valid length of between 8 and 255 characters'), EqualTo('confirm', message='Passwords must match')])
-    confirm = PasswordField('Repeat Password')
+                                 min=8, max=255, message='Please select a valid length of between 8 and 255 characters')])
     email = StringField('Email Address', validators=[InputRequired(message='This field is required'), Length(
         min=6, max=255, message='Please enter a valid length between 6 and 255 characters'), Email(message='Please enter a valid email address')])
     first_name = StringField('First Name', validators=[InputRequired(message='This field is required'), Length(
@@ -84,8 +83,6 @@ class NewUserForm(FlaskForm):
                         InputRequired(message='This field is required')])
     zip_code = StringField('Zip Code', validators=[InputRequired(message='This field is required'), Length(
         min=5, max=20, message='Please enter a valid length between 5 and 20 characters')])
-    date_of_birth = DateField('Date of Birth', format='%m/%d/%Y',
-                              validators=[InputRequired(message='This field is required')])
 
 
 class UserLoginForm(FlaskForm):
