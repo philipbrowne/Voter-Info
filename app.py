@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
 import json
-from api_keys import LOB_API_KEY
+from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY
+import requests
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
 from models import connect_db, db, User
@@ -93,7 +94,7 @@ def verify_user_address():
     return jsonify(verify_response)
 
 
-@ app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def log_in():
     """Logs user into site"""
     form = UserLoginForm()
@@ -110,7 +111,7 @@ def log_in():
     return render_template('login.html', form=form)
 
 
-@ app.route('/logout')
+@app.route('/logout')
 def log_out_user():
     """Logs user out of site"""
     session.pop('username')
@@ -118,7 +119,7 @@ def log_out_user():
     return redirect('/')
 
 
-@ app.route('/users/<username>')
+@app.route('/users/<username>')
 def show_user_profile(username):
     """Shows profile of current user"""
     print(session['username'])
@@ -132,7 +133,7 @@ def show_user_profile(username):
     return render_template('user_details.html', user=user)
 
 
-@ app.route('/users/<username>/edit', methods=['GET', 'POST'])
+@app.route('/users/<username>/edit', methods=['GET', 'POST'])
 def edit_user_info(username):
     """Edits registered user information for that user"""
     print(session['username'])
@@ -164,7 +165,7 @@ def edit_user_info(username):
     return render_template('edit_user.html', form=form, user=user)
 
 
-@ app.route('/users/<username>/delete', methods=['POST'])
+@app.route('/users/<username>/delete', methods=['POST'])
 def delete_user(username):
     """Deletes user from database and site"""
     curr_user = User.query.filter(
@@ -180,3 +181,20 @@ def delete_user(username):
         session.pop('username')
         flash('User deleted', 'success')
         return redirect('/')
+
+
+@app.route('/representatives')
+def get_representatives():
+    """Returns local representatives from user's address"""
+    curr_user = User.query.filter(
+        User.username == session.get('username')).first()
+    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state} {curr_user.zip_code}'
+    resp = requests.get(
+        f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
+    response_info = json.loads(resp)
+    print(response_info)
+    return 'Hi!'
+
+
+{'normalizedInput': {'line1': '13161 Brayton Drive', 'city': 'Anchorage', 'state': 'AK', 'zip': '99516'}, 'kind': 'civicinfo#representativeInfoResponse', 'divisions': {'ocd-division/country:us': {'name': 'United States', 'officeIndices': [0, 1]}, 'ocd-division/country:us/state:ak': {'name': 'Alaska', 'officeIndices': [2, 3, 4, 5, 6, 7]}, 'ocd-division/country:us/state:ak/borough:anchorage': {'name': 'Anchorage Municipality', 'alsoKnownAs': ['ocd-division/country:us/state:ak/place:anchorage'], 'officeIndices': [8]}}, 'offices': [{'name': 'President of the United States', 'divisionId': 'ocd-division/country:us', 'levels': ['country'], 'roles': ['headOfGovernment', 'headOfState'], 'officialIndices': [0]}, {'name': 'Vice President of the United States', 'divisionId': 'ocd-division/country:us', 'levels': ['country'], 'roles': ['deputyHeadOfGovernment'], 'officialIndices': [1]}, {'name': 'U.S. Senator', 'divisionId': 'ocd-division/country:us/state:ak', 'levels': ['country'], 'roles': ['legislatorUpperBody'], 'officialIndices': [2, 3]}, {'name': 'U.S. Representative', 'divisionId': 'ocd-division/country:us/state:ak', 'levels': ['country'], 'roles': ['legislatorLowerBody'], 'officialIndices': [4]}, {'name': 'Governor of Alaska', 'divisionId': 'ocd-division/country:us/state:ak', 'levels': ['administrativeArea1'], 'roles': ['headOfGovernment'], 'officialIndices': [5]}, {'name': 'Lieutenant Governor of Alaska', 'divisionId': 'ocd-division/country:us/state:ak', 'levels': ['administrativeArea1'], 'roles': ['deputyHeadOfGovernment'], 'officialIndices': [6]}, {'name': 'AK Supreme Court Justice', 'divisionId': 'ocd-division/country:us/state:ak', 'levels': ['administrativeArea1'], 'roles': ['judge'], 'officialIndices': [7, 8, 9, 10, 11]}, {'name': 'AK Court of Appeals Judge', 'divisionId': 'ocd-division/country:us/state:ak', 'levels': ['administrativeArea1'], 'roles': ['judge'], 'officialIndices': [12, 13, 14]}, {'name': 'Mayor of Anchorage', 'divisionId': 'ocd-division/country:us/state:ak/borough:anchorage', 'levels': ['administrativeArea2'], 'roles': ['headOfGovernment'], 'officialIndices': [15]}], 'officials': [{'name': 'Joseph R. Biden', 'address': [{'line1': '1600 Pennsylvania Avenue Northwest', 'city': 'Washington', 'state': 'DC', 'zip': '20500'}], 'party': 'Democratic Party', 'phones': ['(202) 456-1111'], 'urls': ['https://www.whitehouse.gov/'], 'channels': [{'type': 'Twitter', 'id': 'potus'}]}, {'name': 'Kamala D. Harris', 'address': [{'line1': '1600 Pennsylvania Avenue Northwest', 'city': 'Washington', 'state': 'DC', 'zip': '20500'}], 'party': 'Democratic Party', 'phones': ['(202) 456-1111'], 'urls': ['https://www.whitehouse.gov/'], 'channels': [{'type': 'Twitter', 'id': 'VP'}]}, {'name': 'Dan Sullivan', 'address': [{'line1': '302 Hart Senate Office Building', 'city': 'Washington', 'state': 'DC', 'zip': '20510'}], 'party': 'Republican Party', 'phones': ['(202) 224-3004'], 'urls': ['https://www.sullivan.senate.gov/'], 'photoUrl': 'http://bioguide.congress.gov/bioguide/photo/S/S001198.jpg', 'channels': [{'type': 'Facebook', 'id': 'SenDanSullivan'}, {'type': 'Twitter', 'id': 'SenDanSullivan'}, {'type': 'YouTube', 'id': 'UC7tXCm8gKlAhTFo2kuf5ylw'}]}, {'name': 'Lisa Murkowski', 'address': [{'line1': '522 Hart Senate Office Building', 'city': 'Washington', 'state': 'DC', 'zip': '20510'}], 'party': 'Republican Party', 'phones': [
+    '(202) 224-6665'], 'urls': ['https://www.murkowski.senate.gov/'], 'photoUrl': 'http://bioguide.congress.gov/bioguide/photo/M/M001153.jpg', 'channels': [{'type': 'Facebook', 'id': 'SenLisaMurkowski'}, {'type': 'Twitter', 'id': 'lisamurkowski'}, {'type': 'YouTube', 'id': 'senatormurkowski'}]}, {'name': 'Don Young', 'address': [{'line1': '2314 Rayburn House Office Building', 'city': 'Washington', 'state': 'DC', 'zip': '20515'}], 'party': 'Republican Party', 'phones': ['(202) 225-5765'], 'urls': ['https://donyoung.house.gov/'], 'photoUrl': 'http://donyoung.house.gov/UploadedFiles/PressKit/DY-Official_Photo.jpg', 'channels': [{'type': 'Facebook', 'id': 'RepDonYoung'}, {'type': 'Twitter', 'id': 'repdonyoung'}, {'type': 'YouTube', 'id': 'RepDonYoung'}]}, {'name': 'Mike Dunleavy', 'party': 'Republican Party', 'phones': ['(907) 465-3500'], 'urls': ['https://gov.alaska.gov/'], 'channels': [{'type': 'Facebook', 'id': 'GovDunleavy'}, {'type': 'Twitter', 'id': 'GovDunleavy'}]}, {'name': 'Kevin Meyer', 'party': 'Republican Party', 'phones': ['(907) 465-3520'], 'urls': ['https://ltgov.alaska.gov/'], 'channels': [{'type': 'Facebook', 'id': 'LtGovMeyer'}, {'type': 'Twitter', 'id': 'ltgovmeyer'}]}, {'name': 'Daniel E. Winfree', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'Dario Borghesan', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'Peter J. Maassen', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'Susan M. Carney', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'VACANT', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'Bethany S. Harbison', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'Marjorie K. Allard', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'Tracey Wollenberg', 'address': [{'line1': '303 K Street', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 264-0612'], 'urls': ['http://courts.alaska.gov/judges/']}, {'name': 'David Bronson', 'address': [{'line1': '632 West 6th Avenue', 'city': 'Anchorage', 'state': 'AK', 'zip': '99501'}], 'party': 'Nonpartisan', 'phones': ['(907) 343-7177'], 'urls': ['http://www.muni.org/Departments/Mayor/Pages/default.aspx'], 'emails': ['dave.bronson@anchorageak.gov'], 'channels': [{'type': 'Facebook', 'id': 'MayorDaveBronson'}, {'type': 'Twitter', 'id': 'MayorBronson'}]}]}
