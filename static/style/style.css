@@ -2,6 +2,10 @@
   background-color: #01013a;
 }
 
+#navbar-brand {
+  width: 120px !important;
+}
+
 .brand-text {
   color: rgb(148, 186, 241) !important;
 }
