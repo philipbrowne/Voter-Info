@@ -38,6 +38,10 @@ I am planning to use multiple APIs for this project. Several of the proposed one
 
 Lob API for Address Verification: https://docs.lob.com/python -- Using for User Registration to Verify Address
 
+Random Address File from RRAD: https://github.com/EthanRBrown/rrad - Using to Generate Random User Mailing Address
+
+Associated Press Elections API: https://developer.ap.org/ap-elections-api/
+
 Mapquest API for any necessary geocoding of user location: https://developer.mapquest.com/documentation/
 
 Google Civic Information API: https://developers.google.com/civic-information

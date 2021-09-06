@@ -21,3 +21,7 @@
 .dark-blue {
   color: #00005c !important;
 }
+
+#state-flag{
+  max-width: 400px
+}

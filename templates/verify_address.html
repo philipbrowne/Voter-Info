@@ -1,4 +1,0 @@
-{% extends 'base.html' %} {% block content %} <h1>Verify if this is correct address</h1>
-<div id="user-address"> {{user.street_address}}{% if user.apartment_number %}<span> {{user.apartment_number}}</span> {%
-    endif %}<br>{{user.city}}, {{user.state}}, {{user.zip_code}} </div>
-<div id="verified-address"></div> {% endblock %}

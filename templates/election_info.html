@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Info on Election</h1>
+
+    <script>
+        const data = {{ data | tojson | safe }}
+    </script>
+{% endblock  %}

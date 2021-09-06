@@ -1,2 +1,36 @@
 {% extends 'base.html' %} {% block content %} <h1>Upcoming Elections</h1>
-<div>Election Info will be posted here!</div> {% endblock %}
+{% if data['election'] %}
+<div class="container mt-4">
+    <div class="card">
+    <h3>{{data['election']['name']}}</h3>
+    <h5>{{data['election']['electionDay']}}</h5>
+    {% if data['contests'] %}
+    {% for contest in data['contests'] %}
+    <div class="card"><b>Ballot Item {% if contest['ballotPlacement'] %}#{{contest['ballotPlacement']}}
+    {% endif %}:</b>{% if contest['ballotTitle'] %}
+    {{contest['ballotTitle']}}  
+    {% endif %}
+    <div>{% if contest['candidates'] %}
+        <ul>{% for candidate in contest['candidates'] %}
+            <li>{{candidate['name']}} - {{candidate['party']}}</li>
+        {% endfor %}</ul>
+    {% endif %}
+        {% if contest['referendumBallotResponses'] %}
+            <ul>
+                {% for response in contest['referendumBallotResponses'] %}
+                    <li>{{response}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+{% endfor %}
+</div></div>
+    {% endif %}
+</div>
+</div>
+{% else %}
+<div class="container mt-4">Could not find any upcoming elections near your address.</div>
+{% endif %}
+<script>
+    const data = {{ data | tojson | safe }}
+</script> {% endblock %}

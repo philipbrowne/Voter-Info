@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<div><h4>Voter Registration information for {{full_state_name}}</h4></div>
+<img src="/assets/images/state-flags/{{user.state}}.png" alt="" id="state-flag">
+<div class="fs-5">Register to vote in {{full_state_name}} <a href="{{state_url}}" target="_blank">here</a>!</div>
+{% endblock  %}

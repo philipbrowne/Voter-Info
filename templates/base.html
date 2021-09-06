@@ -39,20 +39,20 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li> {% if session['username'] %} <li class="nav-item">
-                                <a class="nav-link text-light" href="#">Registration</a>
+                                <a class="nav-link text-light" href="/registration">Registration</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="#">Vote by Mail</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="#">Upcoming Elections</a>
+                                <a class="nav-link text-light" href="/elections">Upcoming Elections</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="/representatives">Representatives</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link text-light" href="#">Get Election Reminders</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="/users/{{session['username']}}">User Profile</a>
                             </li>
@@ -70,6 +70,7 @@
         <div class="container" style="margin-top: 2em"> {% for category, msg in
             get_flashed_messages(with_categories=True) %} <div class="alert alert-{{category}}">{{ msg }}</div> {%
             endfor %} <div class="container"> {% block content %} {% endblock %} </div>
+            <script src="/data/random-address-data.js"></script>
             <script src="/script/verify_address.js"></script>
     </body>
 

@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
 import json
-from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY
+from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY
 import requests
+from state_info import STATE_REGISTRATION_URLS, US_STATES
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
 from models import connect_db, db, User
@@ -70,13 +71,35 @@ def verify_user_address():
     """Verifies user address through Lob API"""
     form = NewUserForm()
     verify_response = {'response': {}, 'errors': {}}
-    print(request.json)
     street_address = request.json['street_address']
     city = request.json['city']
     state = request.json['state']
     zip_code = request.json['zip_code']
     resp = lob.USVerification.create(
         address=f'{street_address} {city} {state} {zip_code}')
+    if resp['deliverability'] == 'undeliverable':
+        verify_response['errors']['error'] = 'Invalid address'
+        print('INVALID ADDRESS!')
+        return jsonify(verify_response)
+    verified_first_line = resp['primary_line']
+    if resp['secondary_line']:
+        verified_second_line = resp['secondary_line']
+        verify_response['response'][
+            'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
+    else:
+        verify_response['response']['verified_street_address'] = verified_first_line
+    verify_response['response']['verified_city'] = resp['components']['city']
+    verify_response['response']['verified_state'] = resp['components']['state']
+    verify_response['response']['verified_zip_code'] = resp['components']['zip_code']
+    return jsonify(verify_response)
+
+
+@app.route('/verify-random-address', methods=['POST'])
+def verify_random_address():
+    verify_response = {'response': {}, 'errors': {}}
+    address = request.json['full_address']
+    resp = lob.USVerification.create(
+        address=address)
     if resp['deliverability'] == 'undeliverable':
         verify_response['errors']['error'] = 'Invalid address'
         print('INVALID ADDRESS!')
@@ -207,4 +230,13 @@ def get_elections():
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/voterinfo?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-    return jsonify(response_info)
+    return render_template('elections.html', data=response_info)
+
+@app.route('/registration')
+def get_registration_info():
+    """Returns info to user on Voter Registration in their State"""
+    curr_user = User.query.filter(
+        User.username == session.get('username')).first()
+    full_state_name = US_STATES[curr_user.state]
+    state_url = STATE_REGISTRATION_URLS[curr_user.state]
+    return render_template('registration.html', user=curr_user, state_url=state_url, full_state_name=full_state_name)
