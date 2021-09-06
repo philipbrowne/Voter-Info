@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %} <h1>Upcoming Elections</h1>
+{% extends 'base.html' %} {% block content %} <h1>Upcoming Elections in {{full_state_name}}</h1>
+<div class="text-success fs-4"><img src="/assets/images/state-flags/{{user.state}}.png" alt="" id="state-flag"><br>More info on elections in {{full_state_name}} can be found <a href="{{state_elections_url}}" target="_blank">here</a>.</div>
 {% if data['election'] %}
 <div class="container mt-4">
     <div class="card">
@@ -28,8 +29,6 @@
     {% endif %}
 </div>
 </div>
-{% else %}
-<div class="container mt-4">Could not find any upcoming elections near your address.</div>
 {% endif %}
 <script>
     const data = {{ data | tojson | safe }}

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 import json
 from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY
 import requests
-from state_info import STATE_REGISTRATION_URLS, US_STATES
+from state_info import STATE_REGISTRATION_URLS, US_STATES, STATE_ELECTION_INFO_URLS
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
 from models import connect_db, db, User
@@ -230,13 +230,17 @@ def get_elections():
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/voterinfo?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-    return render_template('elections.html', data=response_info)
+    state_elections_url = STATE_ELECTION_INFO_URLS[curr_user.state]
+    state_url = STATE_REGISTRATION_URLS[curr_user.state]
+    full_state_name = US_STATES[curr_user.state]
+    return render_template('elections.html', user=curr_user, full_state_name=full_state_name, data=response_info, state_elections_url=state_elections_url)
 
 @app.route('/registration')
 def get_registration_info():
     """Returns info to user on Voter Registration in their State"""
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
+    state = curr_user.state
     full_state_name = US_STATES[curr_user.state]
     state_url = STATE_REGISTRATION_URLS[curr_user.state]
     return render_template('registration.html', user=curr_user, state_url=state_url, full_state_name=full_state_name)
