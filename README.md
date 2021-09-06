@@ -1,5 +1,7 @@
 # Voter Info
 
+![](https://github.com/philipbrowne/Voter-Info/blob/main/static/assets/images/promo-img.png)
+
 Voter Information Application - designed to provide information on voting to US Residents based on their area in an effort to increase accessibility and engagement.
 
 ## Initial Capstone Proposal
