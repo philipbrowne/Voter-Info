@@ -1,2 +1,38 @@
 {% extends 'base.html' %} {% block content %} <h1>Representatives</h1>
-<div>Here is a place where information on representatives will go!</div> {% endblock %}
+<div class="container mt-4">{% for office in resp['offices'] %} <div class="d-flex flex-column my-2">
+        <h3 class="card-title dark-blue text-align-center">{{office['name']}}</h5>{% set officialIndices =
+            office['officialIndices'] %} {% for index in officialIndices %} <div>
+                <ul class="list-group list-group-flush">
+                    <div class="card my-2">
+                        <li class="list-group-item card-body">
+                            <div>
+                                <h4 class="card-subtitle mb-2 dark-blue"> {% if resp['officials'][index]['urls'] %} <a
+                                        href="{{resp['officials'][index]['urls'][0]}}">{% endif
+                                        %}{{resp['officials'][index]['name']}}{% if resp['officials'][index]['urls'] %}
+                                    </a> {% endif %} </h6> {% if resp['officials'][index]['address'] %}<div
+                                        class="my-1">
+                                        <b>Address</b><br>
+                                        {{resp['officials'][index]['address'][0]['line1']}}<br>{{resp['officials'][index]['address'][0]['city']}},
+                                        {{resp['officials'][index]['address'][0]['state']}}
+                                        {{resp['officials'][index]['address'][0]['zip']}}
+                                    </div>{% endif %}{% if resp['officials'][index]['phones'] %}<div class="my-1">
+                                        <b>Phone Number: </b><br> {{resp['officials'][index]['phones'][0]}} </div> {%
+                                    endif %}{%if resp['officials'][index]['urls'] %}<div class="my-1"><b>Website:
+                                        </b><br><a
+                                            href="{{resp['officials'][index]['urls'][0]}}">{{resp['officials'][index]['urls'][0]}}</a>
+                                    </div> {% endif %}
+                            </div>
+                        </li>
+                    </div> {% endfor %}
+            </div>
+            </ul>
+    </div> {% endfor %}</div>
+<script>
+    const representatives = {{ resp | tojson | safe}}
+
+</script> {% endblock %} <h5 class="card-title">Card title</h5>
+<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+<a href="#" class="card-link">Card link</a>
+<a href="#" class="card-link">Another link</a>
+</div>
+</div>
