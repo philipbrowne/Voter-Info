@@ -1,0 +1,28 @@
+{% extends 'index.html' %} {% block content %} <h2 class="my-1 dark-blue">Information for {{user.state.name}}</h2>
+<div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Name</th>
+            <td>{{user.state.name}} ({{user.state.id}})</td>
+        </tr>
+        <tr>
+            <th scope="row">Capital</th>
+            <td>{{user.state.capital}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Voter Registration URL</th>
+            <td><a href="{{user.state.registration_url}}" target="_blank">{{user.state.registration_url}}</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Upcoming Elections URL</th>
+            <td><a href="{{user.state.elections_url}}" target="_blank">{{user.state.elections_url}}</a></td>
+        </tr>
+    </tbody>
+</table> {% endblock %}

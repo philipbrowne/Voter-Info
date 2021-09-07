@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, IntegerField
 from wtforms.validators import InputRequired, Length, Email
-from state_info import US_STATES
+from states import US_STATES
 
 STATES = US_STATES.keys()
 

@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
-{% block content %}
-<div><h1 class="my-2">Voter Registration information for {{full_state_name}}</h1></div>
-<img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag" class="my-2">
-<div class="fs-3 my-2">Register to vote in {{full_state_name}} <a href="{{state_url}}" target="_blank">here</a>!</div>
-{% endblock  %}
+{% extends 'base.html' %} {% block content %} <h1 class="my-2">Voter Registration information for {{user.state.name}}
+</h1>
+<div class="text-success fs-4">
+    <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
+    <div class="fs-3 my-2">Register to vote in {{user.state.name}} <a href="{{user.state.registration_url}}"
+            target="_blank">here</a>.</div>
+</div> {% endblock %}

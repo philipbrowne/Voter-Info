@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 import json
 from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY
 import requests
-from state_info import STATE_REGISTRATION_URLS, US_STATES, STATE_ELECTION_INFO_URLS
+from states import US_STATES
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
 from models import connect_db, db, User, State
@@ -73,10 +73,10 @@ def verify_user_address():
     verify_response = {'response': {}, 'errors': {}}
     street_address = request.json['street_address']
     city = request.json['city']
-    state = request.json['state']
+    state_id = request.json['state_id']
     zip_code = request.json['zip_code']
     resp = lob.USVerification.create(
-        address=f'{street_address} {city} {state} {zip_code}')
+        address=f'{street_address} {city} {state_id} {zip_code}')
     if resp['deliverability'] == 'undeliverable':
         verify_response['errors']['error'] = 'Invalid address'
         print('INVALID ADDRESS!')
@@ -152,14 +152,17 @@ def show_user_profile(username):
     if session['username'] != username:
         flash('Cannot access this page', 'danger')
         return redirect('/')
-    user = User.query.get_or_404(username)
-    return render_template('user_details.html', user=user)
+    curr_user = User.query.get_or_404(username)
+    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
+    resp = requests.get(
+        f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
+    response_info = json.loads(resp)
+    return render_template('user_details.html', user=curr_user, data=response_info)
 
 
 @app.route('/users/<username>/edit', methods=['GET', 'POST'])
 def edit_user_info(username):
     """Edits registered user information for that user"""
-    print(session['username'])
     if 'username' not in session:
         flash('Please sign in first', 'danger')
         return redirect('/')
@@ -209,38 +212,50 @@ def delete_user(username):
 @app.route('/representatives')
 def get_representatives():
     """Returns local representatives from user's address"""
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
     address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-    divisions = response_info['divisions']
-    offices = list(response_info['offices'])
-    officials = list(response_info['officials'])
     return render_template('representatives.html', resp=response_info)
 
 
 @app.route('/elections')
 def get_elections():
     """Returns local elections"""
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
     address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/voterinfo?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-    state_elections_url = STATE_ELECTION_INFO_URLS[curr_user.state_id]
-    state_url = STATE_REGISTRATION_URLS[curr_user.state_id]
-    full_state_name = US_STATES[curr_user.state_id]
-    return render_template('elections.html', user=curr_user, full_state_name=full_state_name, data=response_info, state_elections_url=state_elections_url)
+    return render_template('elections.html', user=curr_user, data=response_info)
+
 
 @app.route('/registration')
 def get_registration_info():
     """Returns info to user on Voter Registration in their State"""
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    state = curr_user.state_id
-    full_state_name = US_STATES[curr_user.state_id]
-    state_url = STATE_REGISTRATION_URLS[curr_user.state_id]
-    return render_template('registration.html', user=curr_user, state_url=state_url, full_state_name=full_state_name)
+    return render_template('registration.html', user=curr_user)
+
+
+@app.route('/state-information')
+def get_state_info():
+    """Returns info on user's state to user including election links and voter registration links"""
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
+    curr_user = User.query.filter(
+        User.username == session.get('username')).first()
+    return render_template('state-info.html', user=curr_user)

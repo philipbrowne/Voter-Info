@@ -22,6 +22,10 @@
   color: #00005c !important;
 }
 
-#state-flag{
-  max-width: 400px
+#state-flag {
+  max-width: 400px;
+}
+
+#small-flag {
+  max-width: 200px;
 }

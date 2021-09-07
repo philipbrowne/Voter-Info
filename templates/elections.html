@@ -1,35 +1,21 @@
-{% extends 'base.html' %} {% block content %} <h1>Upcoming Elections in {{full_state_name}}</h1>
-<div class="text-success fs-4"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"><br>More info on elections in {{full_state_name}} can be found <a href="{{state_elections_url}}" target="_blank">here</a>.</div>
-{% if data['election'] %}
-<div class="container mt-4">
+{% extends 'base.html' %} {% block content %} <h1>Upcoming Elections in {{user.state.name}}</h1>
+<div class="text-success fs-4">
+    <div><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
+    <div class="fs-3 my-2">More info on elections in {{user.state.name}} can be found <a
+            href="{{user.state.elections_url}}" target="_blank">here</a>.</div>
+</div> {% if data['election'] %} <div class="container mt-4">
     <div class="card">
-    <h3>{{data['election']['name']}}</h3>
-    <h5>{{data['election']['electionDay']}}</h5>
-    {% if data['contests'] %}
-    {% for contest in data['contests'] %}
-    <div class="card"><b>Ballot Item {% if contest['ballotPlacement'] %}#{{contest['ballotPlacement']}}
-    {% endif %}:</b>{% if contest['ballotTitle'] %}
-    {{contest['ballotTitle']}}  
-    {% endif %}
-    <div>{% if contest['candidates'] %}
-        <ul>{% for candidate in contest['candidates'] %}
-            <li>{{candidate['name']}} - {{candidate['party']}}</li>
-        {% endfor %}</ul>
-    {% endif %}
-        {% if contest['referendumBallotResponses'] %}
-            <ul>
-                {% for response in contest['referendumBallotResponses'] %}
-                    <li>{{response}}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        
-{% endfor %}
-</div></div>
-    {% endif %}
-</div>
-</div>
-{% endif %}
+        <h3>{{data['election']['name']}}</h3>
+        <h5>{{data['election']['electionDay']}}</h5> {% if data['contests'] %} {% for contest in data['contests'] %}
+        <div class="card"><b>Ballot Item {% if contest['ballotPlacement'] %}#{{contest['ballotPlacement']}} {% endif
+                %}:</b>{% if contest['ballotTitle'] %} {{contest['ballotTitle']}} {% endif %} <div>{% if
+                contest['candidates'] %} <ul>{% for candidate in contest['candidates'] %} <li>{{candidate['name']}} -
+                        {{candidate['party']}}</li> {% endfor %}</ul> {% endif %} {% if
+                contest['referendumBallotResponses'] %} <ul> {% for response in contest['referendumBallotResponses'] %}
+                    <li>{{response}}</li> {% endfor %} </ul> {% endif %} {% endfor %} </div>
+        </div> {% endif %}
+    </div>
+</div> {% endif %}
 <script>
     const data = {{ data | tojson | safe }}
 </script> {% endblock %}

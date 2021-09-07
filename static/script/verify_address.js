@@ -10,7 +10,7 @@ async function verifyUserAddress(evt) {
   formData = {
     street_address: $('#street_address').val(),
     city: $('#city').val(),
-    state: $('#state_id').val(),
+    state_id: $('#state_id').val(),
     zip_code: $('#zip_code').val(),
   };
   res = await axios.post('/verify-address', formData);

@@ -3,15 +3,18 @@
         <h3 class="card-title dark-blue text-align-center">{{office['name']}}</h5>{% set officialIndices =
             office['officialIndices'] %} {% for index in officialIndices %} <div>
                 <ul class="list-group list-group-flush">
+                    
                     <div class="card my-2">
                         <li class="list-group-item card-body">
                             <div>
                                 <h4 class="card-subtitle mb-2 dark-blue"> {% if resp['officials'][index]['urls'] %} <a
                                         href="{{resp['officials'][index]['urls'][0]}}">{% endif
                                         %}{{resp['officials'][index]['name']}}{% if resp['officials'][index]['urls'] %}
-                                    </a> {% endif %} </h6> {% if resp['officials'][index]['address'] %}<div
-                                        class="my-1">
-                                        <b>Address</b><br>
+                                    </a> {% endif %} </h6>{% if resp['officials'][index]['party'] %}                                 
+                                    <div><b>Political
+                                            Party:</b><br>{{resp['officials'][index]['party']}}</div> {% endif %}{% if
+                                    resp['officials'][index]['address'] %}<div class="my-1">
+                                        <b>Address:</b><br>
                                         {{resp['officials'][index]['address'][0]['line1']}}<br>{{resp['officials'][index]['address'][0]['city']}},
                                         {{resp['officials'][index]['address'][0]['state']}}
                                         {{resp['officials'][index]['address'][0]['zip']}}
