@@ -10,7 +10,7 @@ async function verifyUserAddress(evt) {
   formData = {
     street_address: $('#street_address').val(),
     city: $('#city').val(),
-    state: $('#state').val(),
+    state: $('#state_id').val(),
     zip_code: $('#zip_code').val(),
   };
   res = await axios.post('/verify-address', formData);
@@ -29,11 +29,11 @@ async function verifyUserAddress(evt) {
     $('#verify-btn').html('');
     $('#street_address').val(verifiedStreetAddress);
     $('#city').val(verifiedCity);
-    $(`#state option[value="${verifiedState}"]`).attr('selected', 'selected');
+    $(`#state_id option[value="${verifiedState}"]`).attr('selected', 'selected');
     $('#zip_code').val(verifiedZipCode);
     $('#street_address').attr('readonly', 'readonly');
     $('#city').attr('readonly', 'readonly');
-    $('#state').prop('disabled', true);
+    $('#state_id').prop('disabled', true);
     $('#zip_code').attr('readonly', 'readonly');
     $('#verify-user-address').html(
       `<b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}`
@@ -66,11 +66,11 @@ async function generateRandomAddress() {
     $('#verify-btn').html('');
     $('#street_address').val(verifiedStreetAddress);
     $('#city').val(verifiedCity);
-    $(`#state option[value="${verifiedState}"]`).attr('selected', 'selected');
+    $(`#state_id option[value="${verifiedState}"]`).attr('selected', 'selected');
     $('#zip_code').val(verifiedZipCode);
     $('#street_address').attr('readonly', 'readonly');
     $('#city').attr('readonly', 'readonly');
-    $('#state').prop('disabled', true);
+    $('#state_id').prop('disabled', true);
     $('#zip_code').attr('readonly', 'readonly');
     $('#verify-user-address').html(
       `<b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}`
@@ -86,7 +86,7 @@ function cancelVerify() {
   $('#submit-form').remove();
   $('#street_address').prop('readonly', false);
   $('#city').prop('readonly', false);
-  $('#state').prop('disabled', false);
+  $('#state_id').prop('disabled', false);
   $('#zip_code').prop('readonly', false);
   $('#cancel-verify').remove();
   $('#verify-user-address').html('');

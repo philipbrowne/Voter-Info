@@ -11,7 +11,14 @@ def connect_db(app):
     """Connect to database"""
     db.app = app
     db.init_app(app)
-
+    
+class State(db.Model):
+    """State Model"""
+    __tablename__ = 'states'
+    id = db.Column(db.String(2), primary_key=True, unique=True)
+    name = db.Column(db.String(255), nullable=False)
+    registration_url = db.Column(db.String(255))
+    elections_url = db.Column(db.String(255))
 
 class User(db.Model):
     """User Model"""
@@ -22,10 +29,12 @@ class User(db.Model):
     last_name = db.Column(db.String(255), nullable=False)
     street_address = db.Column(db.String, nullable=False)
     city = db.Column(db.String(255), nullable=False)
-    state = db.Column(db.String(50), nullable=False)
+    state_id = db.Column(db.String(20), db.ForeignKey(
+        'states.id', onupdate='CASCADE', ondelete='CASCADE'))
     zip_code = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-
+    state = db.relationship('State', backref='users')
+    
     @classmethod
     def register(cls, username, password):
         """Register usedr with hashed password and return user"""

@@ -5,7 +5,7 @@ import requests
 from state_info import STATE_REGISTRATION_URLS, US_STATES, STATE_ELECTION_INFO_URLS
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
-from models import connect_db, db, User
+from models import connect_db, db, User, State
 
 from sqlalchemy.exc import IntegrityError
 import os
@@ -46,10 +46,10 @@ def register():
         last_name = form.last_name.data
         street_address = form.street_address.data
         city = form.city.data
-        state = form.state.data
+        state_id = form.state_id.data
         zip_code = form.zip_code.data
         new_user = User(username=username, password=password,
-                        email=email, first_name=first_name, last_name=last_name, street_address=street_address, city=city, state=state, zip_code=zip_code)
+                        email=email, first_name=first_name, last_name=last_name, street_address=street_address, city=city, state_id=state_id, zip_code=zip_code)
         db.session.add(new_user)
         try:
             db.session.commit()
@@ -173,7 +173,7 @@ def edit_user_info(username):
         form.last_name.data = user.last_name
         form.street_address.data = user.street_address
         form.city.data = user.city
-        form.state.data = user.state
+        form.state_id.data = user.state_id
         form.zip_code.data = user.zip_code
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -181,7 +181,7 @@ def edit_user_info(username):
             user.last_name = form.last_name.data
             user.street_address = form.street_address.data
             user.city = form.city.data
-            user.state = form.state.data
+            user.state_id = form.state_id.data
             user.zip_code = form.zip_code.data
             db.session.commit()
             return redirect(f'/users/{username}')
@@ -211,7 +211,7 @@ def get_representatives():
     """Returns local representatives from user's address"""
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state} {curr_user.zip_code}'
+    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
@@ -226,13 +226,13 @@ def get_elections():
     """Returns local elections"""
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state} {curr_user.zip_code}'
+    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/voterinfo?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-    state_elections_url = STATE_ELECTION_INFO_URLS[curr_user.state]
-    state_url = STATE_REGISTRATION_URLS[curr_user.state]
-    full_state_name = US_STATES[curr_user.state]
+    state_elections_url = STATE_ELECTION_INFO_URLS[curr_user.state_id]
+    state_url = STATE_REGISTRATION_URLS[curr_user.state_id]
+    full_state_name = US_STATES[curr_user.state_id]
     return render_template('elections.html', user=curr_user, full_state_name=full_state_name, data=response_info, state_elections_url=state_elections_url)
 
 @app.route('/registration')
@@ -240,7 +240,7 @@ def get_registration_info():
     """Returns info to user on Voter Registration in their State"""
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    state = curr_user.state
-    full_state_name = US_STATES[curr_user.state]
-    state_url = STATE_REGISTRATION_URLS[curr_user.state]
+    state = curr_user.state_id
+    full_state_name = US_STATES[curr_user.state_id]
+    state_url = STATE_REGISTRATION_URLS[curr_user.state_id]
     return render_template('registration.html', user=curr_user, state_url=state_url, full_state_name=full_state_name)

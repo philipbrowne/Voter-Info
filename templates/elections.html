@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %} <h1>Upcoming Elections in {{full_state_name}}</h1>
-<div class="text-success fs-4"><img src="/assets/images/state-flags/{{user.state}}.png" alt="" id="state-flag"><br>More info on elections in {{full_state_name}} can be found <a href="{{state_elections_url}}" target="_blank">here</a>.</div>
+<div class="text-success fs-4"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"><br>More info on elections in {{full_state_name}} can be found <a href="{{state_elections_url}}" target="_blank">here</a>.</div>
 {% if data['election'] %}
 <div class="container mt-4">
     <div class="card">

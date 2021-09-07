@@ -23,7 +23,7 @@ class NewUserForm(FlaskForm):
                                  InputRequired(message='This field is required')])
     city = StringField('City', validators=[InputRequired(message='This field is required'), Length(
         min=1, max=255, message='Please enter a valid length between 1 and 255 characters')])
-    state = SelectField('State', choices=[(state, state) for state in STATES], validators=[
+    state_id = SelectField('State', choices=[(state, state) for state in STATES], validators=[
                         InputRequired(message='This field is required')])
     zip_code = StringField('Zip Code', validators=[InputRequired(message='This field is required'), Length(
         min=5, max=5, message='Please enter zip code length of 5 characters'), ])
@@ -38,7 +38,7 @@ class EditUserForm(FlaskForm):
                                  InputRequired(message='This field is required')])
     city = StringField('City', validators=[InputRequired(message='This field is required'), Length(
         min=1, max=255, message='Please enter a valid length between 1 and 255 characters')])
-    state = SelectField('State', choices=[(state, state) for state in STATES], validators=[
+    state_id = SelectField('State', choices=[(state, state) for state in STATES], validators=[
                         InputRequired(message='This field is required')])
     zip_code = StringField('Zip Code', validators=[InputRequired(message='This field is required'), Length(
         min=5, max=20, message='Please enter a valid length between 5 and 20 characters')])
