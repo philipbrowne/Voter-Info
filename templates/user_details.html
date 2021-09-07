@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %} <h1 class="dark-blue">User Profile: {{user.username}}</h1>
-<table class="table table-hover">
+<table class="table table-hover table-sm">
     <thead>
         <tr>
             <th scope="col"></th>
@@ -23,10 +23,10 @@
             <th scope="row">Mailing Address</th>
             <td>{{user.street_address}}<br>{{user.city}}, {{user.state_id}} {{user.zip_code}}</td>
         </tr>
-        <tr>
-            <th scope="row">County</th>
+        <!-- <tr>
+            <th scope="row">County/District</th>
             <td> {{data2['divisions'][county_key]['name']}} </td>
-        </tr>
+        </tr> -->
     </tbody>
 </table>
 <div class="my-2"><a href="/users/{{user.username}}/edit"><button class="btn btn-primary mx-1">Edit</button></a>
