@@ -32,6 +32,11 @@ My initial Schema will incorporate a single user table - I have added a screensh
 
 It is very likely that more tables will be added to this project as this project gets more complex, but I believe that the basic application should be able to properly operate with this single table of data for now.
 
+**Update (9/7): Second Table Added:**
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-v2.png)
+
+I have added a second table for State which I will incorporate various important state-specific details such as voter registration URL, elections schedule URL, etc.  I will add more columns to this table over time.
+
 **API Links for Project**
 
 I am planning to use multiple APIs for this project. Several of the proposed ones are below, I will review documentation for each and proceed based on which will be the most useful. Once I have achieved an Minimum Viable Product for the application, I will begin to implement additional features and add them using the APIs below.
