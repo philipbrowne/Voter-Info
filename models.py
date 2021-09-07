@@ -21,6 +21,9 @@ class State(db.Model):
     capital = db.Column(db.String(255), nullable=False)
     registration_url = db.Column(db.String(255))
     elections_url = db.Column(db.String(255))
+    registration_in_person_deadline = db.Column(db.Text)
+    registration_mail_deadline = db.Column(db.Text)
+    registration_online_deadline = db.Column(db.Text)
 
 
 class User(db.Model):
@@ -38,7 +41,7 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True)
     state = db.relationship('State', backref='users')
 
-    @classmethod
+    @ classmethod
     def register(cls, username, password):
         """Register usedr with hashed password and return user"""
         hashed = bcrypt.generate_password_hash(password)
@@ -47,7 +50,7 @@ class User(db.Model):
         # Return instance of user with username and hashed password
         return cls(username=username, password=hashed_utf8)
 
-    @classmethod
+    @ classmethod
     def authenticate(cls, username, password):
         """Validate that user exists and password is correct
 

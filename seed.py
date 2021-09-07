@@ -5,107 +5,107 @@ db.drop_all()
 db.create_all()
 
 AL = State(id='AL', name='Alabama', capital='Montgomery', registration_url='https://www.sos.alabama.gov/alabama-votes/voter/register-to-vote?ref=voteusa',
-           elections_url='https://www.sos.alabama.gov/alabama-votes/voter/upcoming-elections')
+           elections_url='https://www.sos.alabama.gov/alabama-votes/voter/upcoming-elections', registration_in_person_deadline='15 days before Election Day.', registration_mail_deadline='Postmarked 15 days before Election Day.', registration_online_deadline='15 days before Election Day.')
 AK = State(id='AK', name='Alaska', capital='Juneau', registration_url='https://www.elections.alaska.gov/Core/voterregistration.php',
-           elections_url='https://www.elections.alaska.gov/Core/generalelectioninformation.php')
+           elections_url='https://www.elections.alaska.gov/Core/generalelectioninformation.php', registration_in_person_deadline='30 days before Election Day.', registration_mail_deadline='Postmarked at least 30 days before Election Day.', registration_online_deadline='30 days before Election Day.')
 AZ = State(id='AZ', name='Arizona', capital='Phoenix', registration_url='https://azsos.gov/elections/voting-election/register-vote-or-update-your-current-voter-information',
-           elections_url='https://azsos.gov/elections/elections-calendar-upcoming-events')
+           elections_url='https://azsos.gov/elections/elections-calendar-upcoming-events', registration_in_person_deadline='29 days before Election Day, or on the next immediate business day if the deadline falls on a legal holiday or weekend.', registration_mail_deadline='Postmarked 29 days before Election Day, or on the next immediate business day if the deadline falls on a legal holiday or weekend.', registration_online_deadline='29 days before Election Day.')
 AR = State(id='AR', name='Arkansas', capital='Little Rock',
-           registration_url='https://www.sos.arkansas.gov/elections/for-voters', elections_url='https://www.sos.arkansas.gov/elections')
+           registration_url='https://www.sos.arkansas.gov/elections/for-voters', elections_url='https://www.sos.arkansas.gov/elections', registration_in_person_deadline='30 days before Election Day. If this falls on a Saturday, Sunday, or legal holiday, then on the next day which is not a Saturday, Sunday, or legal holiday.', registration_mail_deadline='Postmarked 30 days before Election Day. If this falls on a Saturday, Sunday, or legal holiday, then on the next day which is not a Saturday, Sunday, or legal holiday.', registration_online_deadline='N/A')
 CA = State(id='CA', name='California', capital='Sacramento',
-           registration_url='https://registertovote.ca.gov/', elections_url='https://www.sos.ca.gov/elections')
+           registration_url='https://registertovote.ca.gov/', elections_url='https://www.sos.ca.gov/elections', registration_in_person_deadline='15 days before Election Day.', registration_mail_deadline='Postmarked 15 days before Election Day.', registration_online_deadline='15 days before Election Day.')
 CO = State(id='CO', name='Colorado', capital='Denver', registration_url='https://www.sos.state.co.us/voter/pages/pub/olvr/verifyNewVoter.xhtml',
-           elections_url='https://www.sos.state.co.us/pubs/elections/electionInfo.html')
+           elections_url='https://www.sos.state.co.us/pubs/elections/electionInfo.html', registration_in_person_deadline='Election Day.', registration_mail_deadline='Received 8 days before Election Day.', registration_online_deadline='8 days before Election Day.')
 CT = State(id='CT', name='Connecticut', capital='Hartford', registration_url='https://voterregistration.ct.gov/OLVR/welcome.do',
-           elections_url='https://portal.ct.gov/SOTS/Election-Services/Calendars/Election-Calendars')
+           elections_url='https://portal.ct.gov/SOTS/Election-Services/Calendars/Election-Calendars', registration_in_person_deadline='Note: Connecticut also has Election Day Registration on Election Day.', registration_mail_deadline='Postmarked or received 7 days before Election Day.', registration_online_deadline='7 days before Election Day.')
 DE = State(id='DE', name='Delaware', capital='Dover', registration_url='https://ivote.de.gov/VoterView',
-           elections_url='https://elections.delaware.gov/calendars.shtml')
+           elections_url='https://elections.delaware.gov/calendars.shtml', registration_in_person_deadline='The fourth Saturday before Election Day.', registration_mail_deadline='Postmarked by the fourth Saturday before Election Day.', registration_online_deadline='The fourth Saturday before Election Day.')
 DC = State(id='DC', name='District of Columbia', capital='District of Columbia',
-           registration_url='https://www.dcboe.org/Voters/Register-To-Vote/Register-to-Vote', elections_url='https://dcboe.org/Community-Outreach/Events')
+           registration_url='https://www.dcboe.org/Voters/Register-To-Vote/Register-to-Vote', elections_url='https://dcboe.org/Community-Outreach/Events', registration_in_person_deadline='If you submit your application in person at the Board of Elections or another voter registration agency, your application should be received no later than the day before the start of the early voting period. OR If you miss the deadline, Same-Day Registration is available during Early Voting and on Election Day, with proof of residency.', registration_mail_deadline='Received 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 FL = State(id='FL', name='Florida', capital='Tallahassee', registration_url='https://registertovoteflorida.gov/home',
-           elections_url='https://dos.myflorida.com/elections/for-voters/election-dates/')
+           elections_url='https://dos.myflorida.com/elections/for-voters/election-dates/', registration_in_person_deadline='29 days before Election Day.', registration_mail_deadline='Postmarked 29 days before Election Day.', registration_online_deadline='29 days before Election Day.')
 GA = State(id='GA', name='Georgia', capital='Atlanta', registration_url='https://georgia.gov/register-to-vote',
-           elections_url='https://sos.ga.gov/index.php/elections/elections_and_voter_registration_calendars')
+           elections_url='https://sos.ga.gov/index.php/elections/elections_and_voter_registration_calendars', registration_in_person_deadline='The fifth Monday before Election Day.', registration_mail_deadline='Postmarked the fifth Monday before Election Day.', registration_online_deadline='The fifth Monday before Election Day.')
 HI = State(id='HI', name='Hawaii', capital='Honolulu', registration_url='https://elections.hawaii.gov/register-to-vote/registration/',
-           elections_url='https://elections.hawaii.gov/voting/contest-schedule/')
+           elections_url='https://elections.hawaii.gov/voting/contest-schedule/', registration_in_person_deadline='30 days before Election Day, extended to the next business day if this falls on a Sunday.', registration_mail_deadline='Postmarked 30 days before Election Day, extended to the next business day if this falls on a Sunday.', registration_online_deadline='30 days before Election Day, extended to the next business day if this falls on a Sunday.')
 ID = State(id='ID', name='Idaho', capital='Boise', registration_url='https://elections.sos.idaho.gov/ElectionLink/ElectionLink/ApplicationInstructions.aspx',
-           elections_url='https://sos.idaho.gov/elections-division/calendars/')
+           elections_url='https://sos.idaho.gov/elections-division/calendars/', registration_in_person_deadline='25 days before Election Day. If you miss this deadline, you may also register on Election Day. (You must show proof of residence to register at the poll.)', registration_mail_deadline='Postmarked 25 days before Election Day.', registration_online_deadline='25 days before Election Day.')
 IL = State(id='IL', name='Illinois', capital='Springfield', registration_url='https://ova.elections.il.gov/?Name=Em5DYCKC4wXCKQSXTgsQ9knm%2b5Ip27VC&T=637623864062530637',
-           elections_url='https://www.elections.il.gov/Main/CalendarEventsAll.aspx?T=637665305487546022')
+           elections_url='https://www.elections.il.gov/Main/CalendarEventsAll.aspx?T=637665305487546022', registration_in_person_deadline='28 days before Election Day, after which you may register during the early voting period through Election Day.', registration_mail_deadline='Postmarked 28 days before Election Day.', registration_online_deadline='16 days before Election Day.')
 IN = State(id='IN', name='Indiana', capital='Indianapolis', registration_url='https://www.in.gov/sos/elections/voter-information/register-to-vote/',
-           elections_url='https://www.in.gov/sos/elections/voter-information/')
+           elections_url='https://www.in.gov/sos/elections/voter-information/', registration_in_person_deadline='29 days before Election Day.', registration_mail_deadline='Postmarked 29 days before Election Day.', registration_online_deadline='29 days before Election Day.')
 IA = State(id='IA', name='Iowa', capital='Des Moines', registration_url='https://sos.iowa.gov/elections/voterinformation/voterregistration.html',
-           elections_url='https://sos.iowa.gov/elections/electioninfo/3yrelectioncal.html')
+           elections_url='https://sos.iowa.gov/elections/electioninfo/3yrelectioncal.html', registration_in_person_deadline='15 days before Election Day. If you miss the deadline, you can also register to vote in-person during early vote or on Election Day.', registration_mail_deadline='Postmarked 15 days before Election Day.', registration_online_deadline='15 days before Election Day.')
 KS = State(id='KS', name='Kansas', capital='Topeka', registration_url='https://www.kdor.ks.gov/Apps/VoterReg/Default.aspx',
-           elections_url='https://www.sos.ks.gov/elections/elections.html')
+           elections_url='https://www.sos.ks.gov/elections/elections.html', registration_in_person_deadline='21 days before Election Day.', registration_mail_deadline='Postmarked 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 KY = State(id='KY', name='Kentucky', capital='Frankfort',
-           registration_url='https://fj.usembassy.gov/u-s-citizen-services/voting/', elections_url='')
+           registration_url='https://fj.usembassy.gov/u-s-citizen-services/voting/', elections_url='https://elect.ky.gov/Resources/Pages/Election-Calendar.aspx', registration_in_person_deadline='29 days before Election Day.', registration_mail_deadline='Postmarked 29 days before Election Day.', registration_online_deadline='29 days before Election Day.')
 LA = State(id='LA', name='Louisiana', capital='Baton Rouge', registration_url='https://www.sos.la.gov/ElectionsAndVoting/RegisterToVote/Pages/default.aspx',
-           elections_url='https://www.sos.la.gov/ElectionsAndVoting/GetElectionInformation/SearchElectionDates/Pages/default.aspx')
+           elections_url='https://www.sos.la.gov/ElectionsAndVoting/GetElectionInformation/SearchElectionDates/Pages/default.aspx', registration_in_person_deadline='30 days before Election Day.', registration_mail_deadline='Postmarked 30 days before Election Day.', registration_online_deadline='20 days before Election Day.')
 ME = State(id='ME', name='Maine', capital='Augusta', registration_url='https://www.maine.gov/sos/cec/elec/voter-info/votreg.html',
-           elections_url='https://www.maine.gov/sos/cec/elec/upcoming/index.html')
+           elections_url='https://www.maine.gov/sos/cec/elec/upcoming/index.html', registration_in_person_deadline='Election Day.', registration_mail_deadline='Received 15 business days before Election Day.', registration_online_deadline='N/A')
 MD = State(id='MD', name='Maryland', capital='Annapolis', registration_url='https://elections.maryland.gov/voter_registration/index.html',
-           elections_url='https://elections.maryland.gov/elections/')
+           elections_url='https://elections.maryland.gov/elections/', registration_in_person_deadline='21 days before Election Day. You may also register during early voting or on Election Day with proof of address. See Election Day registration instructions.', registration_mail_deadline='Postmarked 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 MA = State(id='MA', name='Massachusetts', capital='Boston', registration_url='https://www.sec.state.ma.us/OVR/',
-           elections_url='https://www.sec.state.ma.us/ele/elesched/schedidx.htm')
+           elections_url='https://www.sec.state.ma.us/ele/elesched/schedidx.htm', registration_in_person_deadline='10 days before Election Day.', registration_mail_deadline='Postmarked 10 days before Election Day.', registration_online_deadline='10 days before Election Day.')
 MI = State(id='MI', name='Michigan', capital='Lansing', registration_url='https://mvic.sos.state.mi.us/Home/RegisterToVote',
-           elections_url='https://www.michigan.gov/sos/0,4670,7-127-1633---,00.html')
+           elections_url='https://www.michigan.gov/sos/0,4670,7-127-1633---,00.html', registration_in_person_deadline='Any time up to 8:00 p.m. on Election Day at your city or township clerk office. The voter registration deadline is 15 days before Election Day, if you submit an application form through a voter registration drive or deliver it to a county clerk or secretary of state office.', registration_mail_deadline='Postmarked 15 days before Election Day.', registration_online_deadline='15 days before Election Day.')
 MN = State(id='MN', name='Minnesota', capital='St. Paul', registration_url='https://www.sos.state.mn.us/elections-voting/register-to-vote/',
-           elections_url='https://www.sos.state.mn.us/election-administration-campaigns/elections-calendar/')
+           elections_url='https://www.sos.state.mn.us/election-administration-campaigns/elections-calendar/', registration_in_person_deadline='Election Day.', registration_mail_deadline='Received 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 MS = State(id='MS', name='Mississippi', capital='Jackson', registration_url='https://www.sos.state.mn.us/elections-voting/register-to-vote/',
-           elections_url='https://www.sos.ms.gov/elections-voting')
+           elections_url='https://www.sos.ms.gov/elections-voting', registration_in_person_deadline='30 days before Election Day.', registration_mail_deadline='Postmarked 30 days before Election Day.', registration_online_deadline='N/A')
 MO = State(id='MO', name='Missouri', capital='Jefferson City', registration_url='https://www.sos.mo.gov/elections/goVoteMissouri/register',
-           elections_url='https://www.sos.mo.gov/elections/calendar/')
+           elections_url='https://www.sos.mo.gov/elections/calendar/', registration_in_person_deadline='27 days before Election Day.', registration_mail_deadline='Postmarked 27 days before Election Day.', registration_online_deadline='27 days before Election Day.')
 MT = State(id='MT', name='Montana', capital='Helena', registration_url='https://sosmt.gov/elections/vote/',
-           elections_url='https://sosmt.gov/elections/calendars/')
+           elections_url='https://sosmt.gov/elections/calendars/', registration_in_person_deadline='Election Day.', registration_mail_deadline='Postmarked 8 days before Election Day and received 5 days before Election Day.', registration_online_deadline='N/A')
 NE = State(id='NE', name='Nebraska', capital='Lincoln', registration_url='https://www.nebraska.gov/apps-sos-voter-registration/',
-           elections_url='https://www.nebraska.gov/featured/elections-voting/')
+           elections_url='https://www.nebraska.gov/featured/elections-voting/', registration_in_person_deadline='11 days before Election Day.', registration_mail_deadline='Postmarked 18 days before Election Day. Received 14 days before Election Day, if there\'s an illegible postmark.', registration_online_deadline='18 days before Election Day')
 NV = State(id='NV', name='Nevada', capital='Carson City', registration_url='https://www.nvsos.gov/sos/elections/voters/registering-to-vote',
-           elections_url='https://www.nvsos.gov/sos/elections/election-information')
+           elections_url='https://www.nvsos.gov/sos/elections/election-information', registration_in_person_deadline='Election Day.', registration_mail_deadline='Postmarked 28 days before Election Day.', registration_online_deadline='5 days before Election Day.')
 NH = State(id='NH', name='New Hampshire', capital='Concord', registration_url='https://sos.nh.gov/elections/voters/register-to-vote/',
-           elections_url='https://www.ncsbe.gov/voting/upcoming-election')
+           elections_url='https://www.ncsbe.gov/voting/upcoming-election', registration_in_person_deadline='Election Day. Before Election Day, the last day to register is the last meeting of the Supervisors of the Checklist. The supervisors meet once, 6-13 days before Election Day. Check your town/city website, or call your clerk\'s office for the date, time, and location of the Supervisor\'s meeting.', registration_mail_deadline='Received between 6 and 13 days before Election Day, depending on which town you live in.', registration_online_deadline='N/A')
 NJ = State(id='NJ', name='New Jersey', capital='Trenton', registration_url='https://nj.gov/state/elections/voter-registration.shtmll',
-           elections_url='https://www.state.nj.us/state/elections/election-information.shtml')
+           elections_url='https://www.state.nj.us/state/elections/election-information.shtml', registration_in_person_deadline='21 days before Election Day.', registration_mail_deadline='Postmarked 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 NM = State(id='NM', name='New Mexico', capital='Santa Fe', registration_url='https://portal.sos.state.nm.us/OVR/WebPages/InstructionsStep1.aspx',
-           elections_url='https://www.sos.state.nm.us/voting-and-elections/upcoming-elections/')
+           elections_url='https://www.sos.state.nm.us/voting-and-elections/upcoming-elections/', registration_in_person_deadline='Saturday before Election Day at the county clerk\'s office. 28 days before Election Day otherwise.', registration_mail_deadline='Postmarked 28 days before Election Day. However, an application may be accepted through the Friday following the deadline if the application is postmarked before the deadline.', registration_online_deadline='28 days before Election Day.')
 NY = State(id='NY', name='New York', capital='Albany', registration_url='https://www.elections.ny.gov/VotingRegister.html',
-           elections_url='https://vote.nyc/page/upcoming-elections')
+           elections_url='https://vote.nyc/page/upcoming-elections', registration_in_person_deadline='25 days before Election Day.', registration_mail_deadline='Postmarked 25 days before Election Day. Received 20 days before Election Day.', registration_online_deadline='25 days before Election Day.')
 NC = State(id='NC', name='North Carolina', capital='Raleigh', registration_url='https://www.ncsbe.gov/registering',
-           elections_url='https://www.ncsbe.gov/voting/upcoming-election')
+           elections_url='https://www.ncsbe.gov/voting/upcoming-election', registration_in_person_deadline='The Saturday before Election Day if voting early in person. Otherwise 25 days before Election Day.', registration_mail_deadline='Postmarked 25 days before Election Day. If the postmark is missing or unclear, the application will still be processed if it is Received 20 days before Election Day.', registration_online_deadline='25 days before Election Day.')
 ND = State(id='ND', name='North Dakota', capital='Bismarck', registration_url='https://vote.nd.gov/PortalListDetails.aspx?ptlhPKID=73&ptlPKID=5',
-           elections_url='https://vip.sos.nd.gov/pdfs/Portals/electioncalendar.pdf')
+           elections_url='https://vip.sos.nd.gov/pdfs/Portals/electioncalendar.pdf', registration_in_person_deadline='North Dakota does not have voter registration. You simply need to bring valid proof of ID and residency to the polls in order to vote.', registration_mail_deadline='North Dakota does not have voter registration. You simply need to bring valid proof of ID and residency to the polls in order to vote.', registration_online_deadline='N/A')
 OH = State(id='OH', name='Ohio', capital='Columbus', registration_url='https://olvr.ohiosos.gov/',
-           elections_url='https://www.ohiosos.gov/elections/voters/current-voting-schedule/')
+           elections_url='https://www.ohiosos.gov/elections/voters/current-voting-schedule/', registration_in_person_deadline='30 days before Election Day, extended to the next business day if this falls on a Sunday.', registration_mail_deadline='Postmarked 30 days before Election Day, extended to the next business day if this falls on a Sunday.', registration_online_deadline='30 days before Election Day.')
 OK = State(id='OK', name='Oklahoma', capital='Oklahoma City', registration_url='https://oklahoma.gov/elections/voter-info/register-to-vote.html',
-           elections_url='https://hosting.okelections.us/electionlist.html')
+           elections_url='https://hosting.okelections.us/electionlist.html', registration_in_person_deadline='25 days before Election Day.', registration_mail_deadline='Postmarked 25 days before Election Day.', registration_online_deadline='N/A')
 OR = State(id='OR', name='Oregon', capital='Salem', registration_url='https://sos.oregon.gov/voting/Pages/registration.aspx?lang=en',
-           elections_url='https://sos.oregon.gov/voting/Pages/current-election.aspx')
+           elections_url='https://sos.oregon.gov/voting/Pages/current-election.aspx', registration_in_person_deadline='21 days before Election Day.', registration_mail_deadline='Received 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 PA = State(id='PA', name='Pennsylvania', capital='Harrisburg', registration_url='https://www.pavoterservices.pa.gov/Pages/VoterRegistrationApplication.aspx',
-           elections_url='https://www.votespa.com/About-Elections/Pages/Upcoming-Elections.aspx')
+           elections_url='https://www.votespa.com/About-Elections/Pages/Upcoming-Elections.aspx', registration_in_person_deadline='15 days before Election Day.', registration_mail_deadline='Received 15 days before Election Day.', registration_online_deadline='15 days before Election Day.')
 RI = State(id='RI', name='Rhode Island', capital='Providence', registration_url='https://vote.sos.ri.gov/Home/RegistertoVote?ActiveFlag=1',
-           elections_url='https://elections.ri.gov/elections/upcoming/index.php')
+           elections_url='https://elections.ri.gov/elections/upcoming/index.php', registration_in_person_deadline='30 days before Election Day.', registration_mail_deadline='Postmarked 30 days before Election Day. If the postmark is missing or unclear and the registration form is received no later than 5 days after the deadline, the individual shall be presumed to have been registered by the deadline.', registration_online_deadline='30 days before Election Day.')
 SC = State(id='SC', name='South Carolina', capital='Columbia', registration_url='https://www.scvotes.gov/south-carolina-voter-registration-information',
-           elections_url='https://www.scvotes.gov/schedule-elections')
+           elections_url='https://www.scvotes.gov/schedule-elections', registration_in_person_deadline='30 days before Election Day. If this falls on a Sunday, the last preceding day that the county board of voter registration and elections is open.', registration_mail_deadline='Postmarked 30 days before Election Day, the deadline is extended to the next business day if this falls on a Sunday.', registration_online_deadline='30 days before Election Day.')
 SD = State(id='SD', name='South Dakota', capital='Pierre', registration_url='https://sdsos.gov/elections-voting/voting/register-to-vote/default.aspx',
-           elections_url='https://sdsos.gov/elections-voting/upcoming-elections/general-information/default.aspx')
+           elections_url='https://sdsos.gov/elections-voting/upcoming-elections/general-information/default.aspx', registration_in_person_deadline='15 days before Election Day.', registration_mail_deadline='Received 15 days before Election Day.', registration_online_deadline='N/A')
 TN = State(id='TN', name='Tennessee', capital='Nashville', registration_url='https://sos.tn.gov/products/elections/register-vote',
-           elections_url='https://sos.tn.gov/elections/election-information')
+           elections_url='https://sos.tn.gov/elections/election-information', registration_in_person_deadline='30 days before Election Day. If this falls on a Sunday, 29 days before Election Day.', registration_mail_deadline='Postmarked 30 days before Election Day, the deadline is extended to the next business day if this falls on a Sunday.', registration_online_deadline='30 days before Election Day.')
 TX = State(id='TX', name='Texas', capital='Austin', registration_url='https://www.votetexas.gov/register/index.html',
-           elections_url='https://www.sos.state.tx.us/elections/voter/important-election-dates.shtml')
+           elections_url='https://www.sos.state.tx.us/elections/voter/important-election-dates.shtml', registration_in_person_deadline='30 days before Election Day. If this falls on a Sunday, 29 days before Election Day.', registration_mail_deadline='Postmarked 30 days before Election Day, the deadline is extended to the next business day if this falls on a Sunday.', registration_online_deadline='N/A')
 UT = State(id='UT', name='Utah', capital='Salt Lake City', registration_url='https://voteinfo.utah.gov/learn-about-registering-to-vote/',
-           elections_url='https://voteinfo.utah.gov/election-dates-deadlines/')
+           elections_url='https://voteinfo.utah.gov/election-dates-deadlines/', registration_in_person_deadline='7 days before Election Day in clerk\'s office, but may also register during early vote and on Election Day. However, individuals must vote by provisional ballot if they register in person during early voting or on Election Day.', registration_mail_deadline='Received 11 days before Election Day, the deadline is extended to the next business day if this falls on a Sunday.', registration_online_deadline='11 days before Election Day.')
 VT = State(id='VT', name='Vermont', capital='Montpelier', registration_url='https://sos.vermont.gov/elections/voters/registration/',
-           elections_url='https://sos.vermont.gov/elections-calendar/')
+           elections_url='https://sos.vermont.gov/elections-calendar/', registration_in_person_deadline='Election Day (you must show proof of residence to register at the polls on Election Day).', registration_mail_deadline='Received Election Day.', registration_online_deadline='Election Day. But if you register online the day before or on Election Day, your application may not be processed and your name may not appear on the checklist and you may be asked to fill out another application at the polls. To be sure your name appears on the checklist, please register by the Friday before the election.')
 VA = State(id='VA', name='Virginia', capital='Richmond', registration_url='https://www.elections.virginia.gov/registration/',
-           elections_url='https://www.elections.virginia.gov/casting-a-ballot/calendars-schedules/upcoming-elections.html')
+           elections_url='https://www.elections.virginia.gov/casting-a-ballot/calendars-schedules/upcoming-elections.html', registration_in_person_deadline='Received by close of business 22 days before Election Day.', registration_mail_deadline='Postmarked 22 days before Election Day.', registration_online_deadline='Received by 11:59 PM 22 days before Election Day.')
 WA = State(id='WA', name='Washington', capital='Olympia', registration_url='https://voter.votewa.gov/WhereToVote.aspx',
-           elections_url='https://www.elections.virginia.gov/casting-a-ballot/calendars-schedules/upcoming-elections.html')
+           elections_url='https://www.elections.virginia.gov/casting-a-ballot/calendars-schedules/upcoming-elections.html', registration_in_person_deadline='Election Day.', registration_mail_deadline='Received 8 days before Election Day.', registration_online_deadline='8 days before Election Day.')
 WV = State(id='WV', name='West Virginia', capital='Charleston', registration_url='https://ovr.sos.wv.gov/Register/Landing',
-           elections_url='https://sos.wv.gov/elections/Pages/default.aspx')
+           elections_url='https://sos.wv.gov/elections/Pages/default.aspx', registration_in_person_deadline='21 days before Election Day.', registration_mail_deadline='Postmarked 21 days before Election Day.', registration_online_deadline='21 days before Election Day.')
 WI = State(id='WI', name='Wisconsin', capital='Madison', registration_url='https://myvote.wi.gov/en-us/Register-To-Vote',
-           elections_url='https://elections.wi.gov/elections-voting/elections')
+           elections_url='https://elections.wi.gov/elections-voting/elections', registration_in_person_deadline='The Friday before Election Day.', registration_mail_deadline='Postmarked 20 days before Election Day.', registration_online_deadline='20 days before Election Day.')
 WY = State(id='WY', name='Wyoming', capital='Cheyenne', registration_url='https://sos.wyo.gov/Elections/State/RegisteringToVote.aspx',
-           elections_url='https://sos.wyo.gov/Elections/Default.aspx')
+           elections_url='https://sos.wyo.gov/Elections/Default.aspx', registration_in_person_deadline='14 days before Election Day.', registration_mail_deadline='Postmarked 14 days before Election Day. After this date, individuals may register to vote by mail if their registration is also accompanied by an absentee ballot request.', registration_online_deadline='N/A')
 
 db.session.add_all([AK, AL, AR, AZ, CA, CO, CT, DE, DC, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI,
                    MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY])

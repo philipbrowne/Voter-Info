@@ -25,4 +25,29 @@
             <td><a href="{{user.state.elections_url}}" target="_blank">{{user.state.elections_url}}</a></td>
         </tr>
     </tbody>
-</table> {% endblock %}
+</table>
+<div class="my-3">
+    <h2 class="my-1 dark-blue">{{user.state.name}} Registration Deadlines</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Registration Deadline In-Person:</th>
+                <td>{{user.state.registration_in_person_deadline}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Registration Deadline By Mail:</th>
+                <td>{{user.state.registration_mail_deadline}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Registration Deadline Online</th>
+                <td>{{user.state.registration_online_deadline}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div> {% endblock %}

@@ -1,44 +1,45 @@
 {% extends 'base.html' %} {% block content %} <h1>Representatives</h1> {% if resp['offices'] %} <div
     class="container mt-4">{% for office in resp['offices'] %} <div class="d-flex flex-column my-2">
-        <h3 class="card-title dark-blue d-flex justify-content-center text-align-center">{{office['name']}}</h5>{% set officialIndices =
-            office['officialIndices'] %} {% for index in officialIndices %} <div>
+        <h3 class="card-title dark-blue d-flex justify-content-center text-align-center">{{office['name']}}</h5>{% set
+            officialIndices = office['officialIndices'] %} {% for index in officialIndices %} <div>
                 <ul class="list-group list-group-flush">
-                    
                     <div class="card my-2">
                         <li class="list-group-item card-body">
                             <div>
-                                <h4 class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-align-center"> {% if resp['officials'][index]['urls'] %} <a
+                                <h4
+                                    class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-align-center">
+                                    {% if resp['officials'][index]['urls'] %} <a
                                         href="{{resp['officials'][index]['urls'][0]}}">{% endif
                                         %}{{resp['officials'][index]['name']}}{% if resp['officials'][index]['urls'] %}
                                     </a> {% endif %} </h4>
-                                    <div class="row">
-                                        <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center">{% if resp['officials'][index]['photoUrl'] %}
-                                            <img src="{{resp['officials'][index]['photoUrl']}}" alt="{{resp['officials'][index]['name']}}" class="rep-photo">
-
-                                            {% elif 'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name'] == 'Joseph R. Biden' %}
-                                            <img src="/assets/images/officials/joe-biden.png" alt="{{resp['officials'][index]['name']}}" class="rep-photo">
-                                            {% elif 'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name'] == 'Kamala D. Harris' %}
-                                            <img src="/assets/images/officials/kamala-harris.png" alt="{{resp['officials'][index]['name']}}" class="rep-photo">
-                                            {% else %}
-                                            <img src="/assets/images/officials/blank-user-photo.png" alt="blank photo" class="rep-photo">
-                                        {% endif %}
-                                    
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center">{% if
+                                        resp['officials'][index]['photoUrl'] %} <img
+                                            src="{{resp['officials'][index]['photoUrl']}}"
+                                            onerror="this.onerror=null;this.src='/assets/images/officials/blank-user-photo.png';"
+                                            alt="{{resp['officials'][index]['name']}}" class="rep-photo"> {% elif
+                                        'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name']
+                                        == 'Joseph R. Biden' %} <img src="/assets/images/officials/joe-biden.png"
+                                            alt="{{resp['officials'][index]['name']}}" class="rep-photo"> {% elif
+                                        'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name']
+                                        == 'Kamala D. Harris' %} <img src="/assets/images/officials/kamala-harris.png"
+                                            alt="{{resp['officials'][index]['name']}}" class="rep-photo"> {% else %}
+                                        <img src="/assets/images/officials/blank-user-photo.png" alt="blank photo"
+                                            class="rep-photo"> {% endif %} </div>
+                                    <div class="col-md-6 col-lg-9">{% if resp['officials'][index]['party'] %} <div>
+                                            <b>Political Party:</b><br>{{resp['officials'][index]['party']}}
+                                        </div> {% endif %}{% if resp['officials'][index]['address'] %}<div class="my-1">
+                                            <b>Address:</b><br>
+                                            {{resp['officials'][index]['address'][0]['line1']}}<br>{{resp['officials'][index]['address'][0]['city']}},
+                                            {{resp['officials'][index]['address'][0]['state']}}
+                                            {{resp['officials'][index]['address'][0]['zip']}}
+                                        </div>{% endif %}{% if resp['officials'][index]['phones'] %}<div class="my-1">
+                                            <b>Phone Number: </b><br> {{resp['officials'][index]['phones'][0]}}
+                                        </div> {% endif %}{%if resp['officials'][index]['urls'] %}<div class="my-1">
+                                            <b>Website: </b><br><a
+                                                href="{{resp['officials'][index]['urls'][0]}}">{{resp['officials'][index]['urls'][0]}}</a>
+                                        </div>
                                     </div>
-                                        <div class="col-md-6 col-lg-9">{% if resp['officials'][index]['party'] %}                                 
-                                            <div><b>Political
-                                                    Party:</b><br>{{resp['officials'][index]['party']}}</div> {% endif %}{% if
-                                            resp['officials'][index]['address'] %}<div class="my-1">
-                                                <b>Address:</b><br>
-                                                {{resp['officials'][index]['address'][0]['line1']}}<br>{{resp['officials'][index]['address'][0]['city']}},
-                                                {{resp['officials'][index]['address'][0]['state']}}
-                                                {{resp['officials'][index]['address'][0]['zip']}}
-                                            </div>{% endif %}{% if resp['officials'][index]['phones'] %}<div class="my-1">
-                                                <b>Phone Number: </b><br> {{resp['officials'][index]['phones'][0]}}
-                                            </div> {% endif %}{%if resp['officials'][index]['urls'] %}<div class="my-1">
-                                                <b>Website: </b><br><a
-                                                    href="{{resp['officials'][index]['urls'][0]}}">{{resp['officials'][index]['urls'][0]}}</a></div>
-                                    
-                                    </div> 
                                 </div>{% endif %}
                             </div>
                         </li>
@@ -49,5 +50,11 @@
     address. Please update your profile.</div> {% endif %}
 <script>
     const representatives = {{ resp | tojson | safe}}
-
+    const federal_pattern = "ocd-division/country:us";
+    const state_pattern = /ocd-division\/country:us\/state:(\D{2}$)/;
+    const cd_pattern = /ocd-division\/country:us\/state:(\D{2})\/cd:/;
+    const sl_pattern = /ocd-division\/country:us\/state:(\D{2})\/(sldl:|sldu:)/;
+    const county_pattern = /ocd-division\/country:us\/state:\D{2}\/county:\D+/;
+    const local_pattern = /ocd-division\/country:us\/state:\D{2}\/place:\D+/;
+    const district_pattern = /ocd-division\/country:us\/district:\D+/;
 </script> {% endblock %}
