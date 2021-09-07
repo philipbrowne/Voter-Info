@@ -35,6 +35,7 @@ class User(db.Model):
     last_name = db.Column(db.String(255), nullable=False)
     street_address = db.Column(db.String, nullable=False)
     city = db.Column(db.String(255), nullable=False)
+    county = db.Column(db.String(255))
     state_id = db.Column(db.String(20), db.ForeignKey(
         'states.id', onupdate='CASCADE', ondelete='CASCADE'))
     zip_code = db.Column(db.String(20), nullable=False)

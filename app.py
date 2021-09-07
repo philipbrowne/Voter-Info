@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
 import json
-from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY
+from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY, MAPQUEST_API_KEY
 import requests
 from states import US_STATES
 
@@ -50,6 +50,11 @@ def register():
         zip_code = form.zip_code.data
         new_user = User(username=username, password=password,
                         email=email, first_name=first_name, last_name=last_name, street_address=street_address, city=city, state_id=state_id, zip_code=zip_code)
+        resp = lob.USVerification.create(
+            address=f'{street_address} {city} {state_id} {zip_code}')
+        if resp['components'].get('county'):
+            county = resp['components']['county']
+            new_user.county = county
         db.session.add(new_user)
         try:
             db.session.commit()
@@ -164,7 +169,7 @@ def show_user_profile(username):
     return render_template('user_details.html', user=curr_user, data=response_info, data2=response_info2, county_key=county_key)
 
 
-@app.route('/users/<username>/edit', methods=['GET', 'POST'])
+@ app.route('/users/<username>/edit', methods=['GET', 'POST'])
 def edit_user_info(username):
     """Edits registered user information for that user"""
     if 'username' not in session:
@@ -190,12 +195,17 @@ def edit_user_info(username):
             user.city = form.city.data
             user.state_id = form.state_id.data
             user.zip_code = form.zip_code.data
-            db.session.commit()
-            return redirect(f'/users/{username}')
+            resp = lob.USVerification.create(
+                address=f'{user.street_address} {user.city} {user.state_id} {user.zip_code}')
+        if resp['components'].get('county'):
+            county = resp['components']['county']
+            user.county = county
+        db.session.commit()
+        return redirect(f'/users/{username}')
     return render_template('edit_user.html', form=form, user=user)
 
 
-@app.route('/users/<username>/delete', methods=['POST'])
+@ app.route('/users/<username>/delete', methods=['POST'])
 def delete_user(username):
     """Deletes user from database and site"""
     curr_user = User.query.filter(
@@ -213,7 +223,7 @@ def delete_user(username):
         return redirect('/')
 
 
-@app.route('/representatives')
+@ app.route('/representatives')
 def get_representatives():
     """Returns local representatives from user's address"""
     if 'username' not in session:
@@ -231,7 +241,7 @@ def get_representatives():
     return render_template('representatives.html', resp=response_info)
 
 
-@app.route('/elections')
+@ app.route('/elections')
 def get_elections():
     """Returns local elections"""
     if 'username' not in session:
@@ -246,7 +256,7 @@ def get_elections():
     return render_template('elections.html', user=curr_user, data=response_info)
 
 
-@app.route('/registration')
+@ app.route('/registration')
 def get_registration_info():
     """Returns info to user on Voter Registration in their State"""
     if 'username' not in session:
@@ -257,7 +267,7 @@ def get_registration_info():
     return render_template('registration.html', user=curr_user)
 
 
-@app.route('/state-information')
+@ app.route('/state-information')
 def get_state_info():
     """Returns info on user's state to user including election links and voter registration links"""
     if 'username' not in session:
@@ -265,4 +275,4 @@ def get_state_info():
         return redirect('/')
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    return render_template('state-info.html', user=curr_user, data=data)
+    return render_template('state-info.html', user=curr_user)
