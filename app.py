@@ -156,8 +156,12 @@ def show_user_profile(username):
     address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
+    resp2 = requests.get(
+        f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}&levels=administrativeArea2').text
     response_info = json.loads(resp)
-    return render_template('user_details.html', user=curr_user, data=response_info)
+    response_info2 = json.loads(resp2)
+    county_key = list(response_info2['divisions'].keys())[0]
+    return render_template('user_details.html', user=curr_user, data=response_info, data2=response_info2, county_key=county_key)
 
 
 @app.route('/users/<username>/edit', methods=['GET', 'POST'])
@@ -223,7 +227,7 @@ def get_representatives():
     response_info = json.loads(resp)
     # img_urls = []
     # for representative in response_info['']:
-        
+
     return render_template('representatives.html', resp=response_info)
 
 
@@ -261,4 +265,4 @@ def get_state_info():
         return redirect('/')
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    return render_template('state-info.html', user=curr_user)
+    return render_template('state-info.html', user=curr_user, data=data)
