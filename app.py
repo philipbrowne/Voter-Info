@@ -221,6 +221,9 @@ def get_representatives():
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
+    # img_urls = []
+    # for representative in response_info['']:
+        
     return render_template('representatives.html', resp=response_info)
 
 

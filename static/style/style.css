@@ -29,3 +29,19 @@
 #small-flag {
   max-width: 200px;
 }
+
+.rep-photo{
+  width: 200px;
+}
+
+
+@media (max-width: 400px){
+  .rep-photo{
+    width: 120px;
+  }
+}
+@media (max-width: 300px){
+  .rep-photo{
+    width: 80px;
+  }
+}
