@@ -23,7 +23,7 @@
 }
 
 #state-flag {
-  max-width: 400px;
+  max-width: 600px;
 }
 
 #small-flag {
@@ -34,13 +34,31 @@
   width: 200px;
 }
 
+@media (max-width: 1200px) {
+  state-flag {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 800px) {
+  #state-flag {
+    max-width: 300px;
+  }
+}
+
 @media (max-width: 400px) {
   .rep-photo {
     width: 120px;
+  }
+  #state-flag {
+    max-width: 200px;
   }
 }
 @media (max-width: 300px) {
   .rep-photo {
     width: 80px;
+  }
+  #state-flag {
+    max-width: 150px;
   }
 }

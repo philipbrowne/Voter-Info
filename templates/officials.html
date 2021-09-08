@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block content %} <h1>Representatives</h1> {% if resp['offices'] %} <div
-    class="container mt-4">{% for office in resp['offices'] %} <div class="d-flex flex-column my-2">
+{% extends 'base.html' %} {% block content %} <h1 class="text-center dark-blue">Your Public Officials</h1> {% if
+resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] %} <div class="d-flex flex-column my-2">
         <h3 class="card-title dark-blue d-flex justify-content-center text-align-center">{{office['name']}}</h5>{% set
             officialIndices = office['officialIndices'] %} {% for index in officialIndices %} <div>
                 <ul class="list-group list-group-flush">
@@ -49,12 +49,5 @@
     </div> {% endfor %}</div> {% else %} <div class="container mt-4">Could not find any representatives for this
     address. Please update your profile.</div> {% endif %}
 <script>
-    const representatives = {{ resp | tojson | safe}}
-    const federal_pattern = "ocd-division/country:us";
-    const state_pattern = /ocd-division\/country:us\/state:(\D{2}$)/;
-    const cd_pattern = /ocd-division\/country:us\/state:(\D{2})\/cd:/;
-    const sl_pattern = /ocd-division\/country:us\/state:(\D{2})\/(sldl:|sldu:)/;
-    const county_pattern = /ocd-division\/country:us\/state:\D{2}\/county:\D+/;
-    const local_pattern = /ocd-division\/country:us\/state:\D{2}\/place:\D+/;
-    const district_pattern = /ocd-division\/country:us\/district:\D+/;
+    const data = {{ resp | tojson | safe}}
 </script> {% endblock %}

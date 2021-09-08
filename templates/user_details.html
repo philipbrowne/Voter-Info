@@ -28,8 +28,32 @@
             <td>{{user.county}}</td>
         </tr>
         <tr>
+            <th scope="row">Public Officials</th>
+            <td><a href="/officials" target="_blank">Public Officials for Your Area</a></td>
+        </tr>
+        <tr>
+            <th scope="row">State Information</th>
+            <td><a href="/state-information" target="_blank">Voter Information for {{user.state.name}}</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Voter Registration</th>
+            <td><a href="{{user.state.registration_url}}" target="_blank">Register to Vote in {{user.state.name}}</a>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Upcoming Elections</th>
+            <td>
+                <a href="{{user.state.elections_url}}" target="_blank">Upcoming Elections in {{user.state.name}}</a>
+            </td>
+        </tr>
+        <tr>
             <th scope="row">Check Your Registration</th>
             <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
+                    {{user.state.name}}</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Find Your Polling Location</th>
+            <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
                     {{user.state.name}}</a></td>
         </tr>
     </tbody>

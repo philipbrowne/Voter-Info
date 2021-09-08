@@ -220,8 +220,8 @@ def delete_user(username):
         return redirect('/')
 
 
-@ app.route('/representatives')
-def get_representatives():
+@ app.route('/officials')
+def get_officials():
     """Returns local representatives from user's address"""
     if 'username' not in session:
         flash('Please sign in first', 'danger')
@@ -232,10 +232,7 @@ def get_representatives():
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-    # img_urls = []
-    # for representative in response_info['']:
-
-    return render_template('representatives.html', resp=response_info)
+    return render_template('officials.html', resp=response_info, user=curr_user)
 
 
 @ app.route('/elections')
@@ -272,4 +269,8 @@ def get_state_info():
         return redirect('/')
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
-    return render_template('state-info.html', user=curr_user)
+    address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
+    resp = requests.get(
+        f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
+    response_info = json.loads(resp)
+    return render_template('state-info.html', user=curr_user, data=response_info)

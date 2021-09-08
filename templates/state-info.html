@@ -1,5 +1,8 @@
-{% extends 'index.html' %} {% block content %} <h2 class="my-1 dark-blue">Information for {{user.state.name}}</h2>
-<div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
+{% extends 'index.html' %} {% block content %} <div class="container d-flex flex-column align-items-center">
+    <h2 class="my-1 dark-blue">Voter Information for Your State</h2>
+    <h3 class="text-success">{{user.state.name}}</h6>
+        <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
+</div>
 <table class="table table-sm table-hover table-responsive">
     <thead>
         <tr>
@@ -32,6 +35,11 @@
             <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
                     {{user.state.name}}</a></td>
         </tr>
+        <tr>
+            <th scope="row">Find Your Polling Location</th>
+            <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
+                    {{user.state.name}}</a></td>
+        </tr>
     </tbody>
 </table>
 <div class="my-3">
@@ -58,4 +66,26 @@
             </tr>
         </tbody>
     </table>
-</div> {% endblock %}
+</div>
+<div class="my-3">
+    <h2 class="my-1 dark-blue">Public Officials in {{user.state.name}}</h2>
+    <table class="table table-sm table-hover table-responsive">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody> {% for office in data['offices'] %} {% set officialIndices = office['officialIndices'] %} {% for index
+            in officialIndices %} {% if office['divisionId'] ==
+            'ocd-division/country:us/state:{}'.format(user.state.id.lower()) %} <tr>
+                <th scope="row">{{office['name']}}</th>
+                <td> {% if data['officials'][index]['urls'] %} <a href="{{data['officials'][index]['urls'][0]}}"
+                        target="_blank">{% endif %}{{data['officials'][index]['name']}}{% if
+                        data['officials'][index]['urls'] %} </a> {% endif %}</td>
+            </tr>{% endif %}{% endfor %} {% endfor %} </tbody>
+    </table>
+</div>
+<script>
+    const data = {{ data | tojson | safe}}
+</script> {% endblock %}
