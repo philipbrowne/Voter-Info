@@ -29,7 +29,10 @@ async function verifyUserAddress(evt) {
     $('#verify-btn').html('');
     $('#street_address').val(verifiedStreetAddress);
     $('#city').val(verifiedCity);
-    $(`#state_id option[value="${verifiedState}"]`).attr('selected', 'selected');
+    $(`#state_id option[value="${verifiedState}"]`).attr(
+      'selected',
+      'selected'
+    );
     $('#zip_code').val(verifiedZipCode);
     $('#street_address').attr('readonly', 'readonly');
     $('#city').attr('readonly', 'readonly');
@@ -66,7 +69,10 @@ async function generateRandomAddress() {
     $('#verify-btn').html('');
     $('#street_address').val(verifiedStreetAddress);
     $('#city').val(verifiedCity);
-    $(`#state_id option[value="${verifiedState}"]`).attr('selected', 'selected');
+    $(`#state_id option[value="${verifiedState}"]`).attr(
+      'selected',
+      'selected'
+    );
     $('#zip_code').val(verifiedZipCode);
     $('#street_address').attr('readonly', 'readonly');
     $('#city').attr('readonly', 'readonly');

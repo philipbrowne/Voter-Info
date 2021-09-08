@@ -27,6 +27,11 @@
             <th scope="row">County/District</th>
             <td>{{user.county}}</td>
         </tr>
+        <tr>
+            <th scope="row">Check Your Registration</th>
+            <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
+                    {{user.state.name}}</a></td>
+        </tr>
     </tbody>
 </table>
 <div class="my-2"><a href="/users/{{user.username}}/edit"><button class="btn btn-primary mx-1">Edit</button></a>
@@ -35,5 +40,4 @@
 </div>
 <script>
     const data = {{ data | tojson | safe}}
-    const data2 = {{ data2 | tojson | safe}}
 </script> {% endblock %}

@@ -161,12 +161,9 @@ def show_user_profile(username):
     address = f'{curr_user.street_address} {curr_user.city} {curr_user.state_id} {curr_user.zip_code}'
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
-    resp2 = requests.get(
-        f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}&levels=administrativeArea2').text
     response_info = json.loads(resp)
-    response_info2 = json.loads(resp2)
-    county_key = list(response_info2['divisions'].keys())[0]
-    return render_template('user_details.html', user=curr_user, data=response_info, data2=response_info2, county_key=county_key)
+
+    return render_template('user_details.html', user=curr_user, data=response_info)
 
 
 @ app.route('/users/<username>/edit', methods=['GET', 'POST'])

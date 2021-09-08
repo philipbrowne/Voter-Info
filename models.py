@@ -24,6 +24,7 @@ class State(db.Model):
     registration_in_person_deadline = db.Column(db.Text)
     registration_mail_deadline = db.Column(db.Text)
     registration_online_deadline = db.Column(db.Text)
+    check_registration_url = db.Column(db.Text)
 
 
 class User(db.Model):
