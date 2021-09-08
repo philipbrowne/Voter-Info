@@ -67,11 +67,25 @@
             <th scope="row">Vote by Mail & Absentee Ballot</th>
             <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
             </td>
-        </tr>
-        <tr>
+        </tr> {% if user.state.ballot_tracker_url %} <tr>
+            <th scope="row">Mail/Absentee Vote Tracker</th>
+            <td><a href="{{user.state.ballot_tracker_url}}" target="_blank">Track Your {{user.state.name}} ballot</a>
+            </td>
+        </tr> {% endif %} <tr>
             <th scope="row">Find Your Polling Location</th>
             <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
                     {{user.state.name}}</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Local Election Office or Clerk Information</th>
+            <td><a href="{{user.state.local_election_url}}" target="_blank">Find local election office information in
+                    {{user.state.name}}</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Convicted of a Felony? Visit this Website to Restore your Vote. </th>
+            <td><a href="https://campaignlegal.org/restoreyourvote" target="_blank">Restore your vote in
+                    {{user.state.name}}</a>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -4,4 +4,76 @@
     <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
     <div class="fs-3 my-2">Register to vote in {{user.state.name}} <a href="{{user.state.registration_url}}"
             target="_blank">here</a>.</div>
+    <div class="container">
+        <h6>Voting Registration Rules for {{user.state.name}}</h6>
+        To register to vote in {{user.state.name}}, you must:
+        <ul class="list-group"> {% if user.state.id='AL' %} 
+            <li class="list-group-item">be a citizen of the United States;</li>
+            <li class="list-group-item">be a resident of Alabama and your county at the time of registration;</li>
+            <li class="list-group-item">be 18 years old before any election;</li>
+            <li class="list-group-item">not have been convicted of a disqualifying felony;</li>
+            <li class="list-group-item">not currently be declared mentally incompetent through a competency hearing;</li>
+            <li class="list-group-item">swear or affirm to "support and defend the Constitution of the US and the State of Alabama and further disavow any belief or affiliation with any group which advocates the overthrow of the governments of the US or the State of Alabama by unlawful means and that the information contained herein is true, so help me God."</li>
+            {% elif user.state.id='AK' %}
+            <li class="list-group-item">be a citizen of the United States;</li>
+            <li class="list-group-item">be at least 18 years old within 90 days of completing your registration;</li>
+            <li class="list-group-item">be a resident of Alaska;</li>
+            <li class="list-group-item">not be a convicted felon (unless unconditionally discharged); and</li>
+            <li class="list-group-item">not be registered to vote in another state.</li>
+            {% elif user.state.id='AZ' %}
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            {% elif user.state.id='AR' %}
+            {% elif user.state.id='CA' %}
+            {% elif user.state.id='CO' %}
+            {% elif user.state.id='CT' %}
+            {% elif user.state.id='DE' %}
+            {% elif user.state.id='DC' %}
+            {% elif user.state.id='FL' %}
+            {% elif user.state.id='GA' %}
+            {% elif user.state.id='HI' %}
+            {% elif user.state.id='ID' %}
+            {% elif user.state.id='IL' %}
+            {% elif user.state.id='IN' %}
+            {% elif user.state.id='IA' %}
+            {% elif user.state.id='KS' %}
+            {% elif user.state.id='KY' %}
+            {% elif user.state.id='LA' %}
+            {% elif user.state.id='ME' %}
+            {% elif user.state.id='MD' %}
+            {% elif user.state.id='MA' %}
+            {% elif user.state.id='MI' %}
+            {% elif user.state.id='MN' %}
+            {% elif user.state.id='MS' %}
+            {% elif user.state.id='MO' %}
+            {% elif user.state.id='MN' %}
+            {% elif user.state.id='NE' %}
+            {% elif user.state.id='NV' %}
+            {% elif user.state.id='NH' %}
+            {% elif user.state.id='NJ' %}
+            {% elif user.state.id='NM' %}
+            {% elif user.state.id='NY' %}
+            {% elif user.state.id='NC' %}
+            {% elif user.state.id='OH' %}
+            {% elif user.state.id='OK' %}
+            {% elif user.state.id='OR' %}
+            {% elif user.state.id='PA' %}
+            {% elif user.state.id='RI' %}
+            {% elif user.state.id='SC' %}
+            {% elif user.state.id='SD' %}
+            {% elif user.state.id='TN' %}
+            {% elif user.state.id='TX' %}
+            {% elif user.state.id='UT' %}
+            {% elif user.state.id='VT' %}
+            {% elif user.state.id='VA' %}
+            {% elif user.state.id='WA' %}
+            {% elif user.state.id='WV' %}
+            {% elif user.state.id='WI' %}
+            {% elif user.state.id='WY' %}
+            {% endif %} </ul>
+    </div>
 </div> {% endblock %}

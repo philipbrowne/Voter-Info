@@ -27,6 +27,8 @@ class State(db.Model):
     check_registration_url = db.Column(db.Text)
     polling_location_url = db.Column(db.Text)
     absentee_ballot_url = db.Column(db.Text)
+    local_election_url = db.Column(db.Text)
+    ballot_tracker_url = db.Column(db.Text)
 
 
 class User(db.Model):
