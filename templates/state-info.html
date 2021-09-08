@@ -36,6 +36,11 @@
                     {{user.state.name}}</a></td>
         </tr>
         <tr>
+            <th scope="row">Vote by Mail & Absentee Ballot</th>
+            <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
+            </td>
+        </tr>
+        <tr>
             <th scope="row">Find Your Polling Location</th>
             <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
                     {{user.state.name}}</a></td>

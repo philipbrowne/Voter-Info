@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %} <h1 class="dark-blue">User Profile: {{user.username}}</h1>
+{% extends 'base.html' %} {% block content %} <h1 class="dark-blue">{{user.first_name}} {{user.last_name}}</h1>
 <table class="table table-hover table-sm">
     <thead>
         <tr>
@@ -20,12 +20,24 @@
             <td>{{user.email}}</td>
         </tr>
         <tr>
-            <th scope="row">Mailing Address</th>
-            <td>{{user.street_address}}<br>{{user.city}}, {{user.state_id}} {{user.zip_code}} </td>
+            <th scope="row">Street Address</th>
+            <td>{{user.street_address}}</td>
+        </tr>
+        <tr>
+            <th scope="row">City</th>
+            <td>{{user.city.title()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">State</th>
+            <td>{{user.state.name.title()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Postal Code</th>
+            <td>{{user.zip_code}}</td>
         </tr>
         <tr>
             <th scope="row">County/District</th>
-            <td>{{user.county}}</td>
+            <td>{{user.county.capitalize()}}</td>
         </tr>
         <tr>
             <th scope="row">Public Officials</th>
@@ -50,6 +62,11 @@
             <th scope="row">Check Your Registration</th>
             <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
                     {{user.state.name}}</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Vote by Mail & Absentee Ballot</th>
+            <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
+            </td>
         </tr>
         <tr>
             <th scope="row">Find Your Polling Location</th>
