@@ -1,5 +1,7 @@
-{% extends 'base.html' %} {% block content %} <h1>Edit User {{user.username}}</h1>
-<form method="POST" id="user-form"> {{ form.hidden_tag() }} <div class="row">
+{% extends 'base.html' %} {% block content %} <div class="container p-1 d-flex flex-column align-items-center"><img
+        src="/assets/images/edit-user-v3.png" alt="" class="img-fluid"></div>
+<h5 class="text-center dark-blue">Edit User {{user.username}}</h5>
+<form method="POST" id="user-form" class="my-2 py-2"> {{ form.hidden_tag() }} <div class="row">
         <div class="col-12 col-md-6"> {{form.first_name.label}} {{form.first_name(class_="form-control")}} {% for error
             in form.first_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                 class="form-text text-muted">Required</small> </div>
@@ -24,7 +26,10 @@
             form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                 class="form-text text-muted">Required</small> </div>
     </div>
-    <div id="verify-btn"><a class="btn btn-primary btn-large mt-2" id="verify-user">Verify Address</a><a
-            class="btn btn-success btn-large mt-2 mx-2" id="random-address">Generate Random Address</a></div>
+    <div id="verify-btn">
+        <div class="d-flex flex-column align-items-center"><a class="btn btn-primary btn-large mt-2"
+                id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2"
+                id="random-address">Generate Random Address</a></div>
+    </div>
     <div id="verify-user-address" class="mt-2"></div>
 </form> {% endblock %}

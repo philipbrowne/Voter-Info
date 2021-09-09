@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %} 
-<div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/user-profile.png" alt="" class="img-fluid"></div>
-<table class="table table-hover table-sm">
+<div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/user-profile-v3.png" alt="" class="img-fluid"></div>
+
+<table class="table table-sm table-hover table-responsive user-table">
     <thead>
         <tr>
             <th scope="col"></th>
@@ -90,10 +91,12 @@
         </tr>
     </tbody>
 </table>
+</div>
 <div class="my-2 d-flex flex-column align-items-center"><a href="/users/{{user.username}}/edit"><button class="btn btn-primary mx-1 btn-lg">Edit</button></a>
     <form action="/users/{{user.username}}/delete" method="POST" class="d-inline mt-2"><button
             class="btn btn-danger mx-1 btn-lg">Delete</button></form>
 </div>
+
 <script>
     const data = {{ data | tojson | safe}}
 </script> {% endblock %}

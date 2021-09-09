@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
 import json
-from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY, MAPQUEST_API_KEY
+import easypost
+from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
 import requests
 from states import US_STATES
 
@@ -11,6 +12,7 @@ from sqlalchemy.exc import IntegrityError
 import os
 import lob
 lob.api_key = LOB_API_KEY
+easypost.api_key = EASYPOST_API_KEY
 
 app = Flask(__name__, static_url_path='',
             static_folder='static',
@@ -35,7 +37,6 @@ def index():
         user = User.query.filter(User.username == session['username'])
         return render_template('index.html')
     return render_template('index.html')
-
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -84,23 +85,39 @@ def verify_user_address():
     city = request.json['city']
     state_id = request.json['state_id']
     zip_code = request.json['zip_code']
-    resp = lob.USVerification.create(
-        address=f'{street_address} {city} {state_id} {zip_code}')
-    if resp['deliverability'] == 'undeliverable':
+    resp = easypost.Address.create(
+        verify=['delivery'], street1=street_address, city=city, state=state_id, zip=zip_code)
+    success_status = resp['verifications']['delivery']['success']
+    print(success_status)
+    if success_status == False:
         verify_response['errors']['error'] = 'Invalid address'
-        print('INVALID ADDRESS!')
         return jsonify(verify_response)
-    verified_first_line = resp['primary_line']
-    if resp['secondary_line']:
-        verified_second_line = resp['secondary_line']
-        verify_response['response'][
-            'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
-    else:
-        verify_response['response']['verified_street_address'] = verified_first_line
-    verify_response['response']['verified_city'] = resp['components']['city']
-    verify_response['response']['verified_state'] = resp['components']['state']
-    verify_response['response']['verified_zip_code'] = resp['components']['zip_code']
-    return jsonify(verify_response)
+    if success_status == True:
+        verified_first_line = resp['street1']
+        if resp['street2']:
+            verified_second_line = resp['street2']
+            verify_response['response'][
+                'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
+        else:
+            verify_response['response']['verified_street_address'] = verified_first_line
+        verify_response['response']['verified_city'] = resp['city']
+        verify_response['response']['verified_state'] = resp['state']
+        verify_response['response']['verified_zip_code'] = resp['zip'][0:5]
+        return jsonify(verify_response)
+    # Verification Using Lob - 300 use Rate Limit
+    # resp = lob.USVerification.create(
+    #     address=f'{street_address} {city} {state_id} {zip_code}')
+    # verified_first_line = resp['primary_line']
+    # if resp['secondary_line']:
+    #     verified_second_line = resp['secondary_line']
+    #     verify_response['response'][
+    #         'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
+    # else:
+    #     verify_response['response']['verified_street_address'] = verified_first_line
+    # verify_response['response']['verified_city'] = resp['components']['city']
+    # verify_response['response']['verified_state'] = resp['components']['state']
+    # verify_response['response']['verified_zip_code'] = resp['components']['zip_code']
+    # return jsonify(verify_response)
 
 
 @app.route('/verify-random-address', methods=['POST'])
@@ -252,17 +269,6 @@ def get_elections():
         f'https://www.googleapis.com/civicinfo/v2/voterinfo?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
     return render_template('elections.html', user=curr_user, data=response_info)
-
-
-@ app.route('/registration')
-def get_registration_info():
-    """Returns info to user on Voter Registration in their State"""
-    if 'username' not in session:
-        flash('Please sign in first', 'danger')
-        return redirect('/')
-    curr_user = User.query.filter(
-        User.username == session.get('username')).first()
-    return render_template('registration.html', user=curr_user)
 
 
 @ app.route('/state-information')

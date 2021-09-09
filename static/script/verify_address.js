@@ -19,7 +19,7 @@ async function verifyUserAddress(evt) {
 
   if (data.errors.error) {
     $('#verify-user-address').html(
-      '<span class="text-danger">Invalid Address - Please try again.</span>'
+      '<div class="d-flex flex-column align-items-center"><span class="text-danger">Invalid Address - Please try again.</span></div>'
     );
   } else {
     const verifiedStreetAddress = data.response.verified_street_address;
@@ -39,10 +39,10 @@ async function verifyUserAddress(evt) {
     $('#state_id').prop('disabled', true);
     $('#zip_code').attr('readonly', 'readonly');
     $('#verify-user-address').html(
-      `<b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}`
+      `<div class="d-flex flex-column align-items-center text-center"><b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}</div>`
     );
     $('#verify-btn').html(
-      '<button id="submit-form" class="btn btn-success btn-large mt-2">Confirm and Submit</button><br><a class="btn btn-danger btn-large mt-2" id="cancel-verify">Cancel and Make Changes</a>'
+      '<div class="d-flex flex-column align-items-center"><button id="submit-form" class="btn btn-success btn-large mt-2">Confirm and Submit</button><a class="btn btn-danger btn-large mt-2" id="cancel-verify">Cancel and Make Changes</a></div>'
     );
     $('#cancel-verify').on('click', cancelVerify);
   }
@@ -59,7 +59,7 @@ async function generateRandomAddress() {
   data = res.data;
   if (data.errors.error) {
     $('#verify-user-address').html(
-      '<span class="text-danger">Invalid Address - Please try again.</span>'
+      '<div class="d-flex flex-column align-items-center"><span class="text-danger">Invalid Address - Please try again.</span></div>'
     );
   } else {
     const verifiedStreetAddress = data.response.verified_street_address;
@@ -79,10 +79,10 @@ async function generateRandomAddress() {
     $('#state_id').prop('disabled', true);
     $('#zip_code').attr('readonly', 'readonly');
     $('#verify-user-address').html(
-      `<b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}`
+      `<div class="d-flex flex-column align-items-center text-center"><b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}</div>`
     );
     $('#verify-btn').html(
-      '<button id="submit-form" class="btn btn-success btn-large mt-2">Confirm and Submit</button><br><a class="btn btn-danger btn-large mt-2" id="cancel-verify">Cancel and Make Changes</a>'
+      '<div class="d-flex flex-column align-items-center"><button id="submit-form" class="btn btn-success btn-large mt-2">Confirm and Submit</button><a class="btn btn-danger btn-large mt-2" id="cancel-verify">Cancel and Make Changes</a></div>'
     );
     $('#cancel-verify').on('click', cancelVerify);
   }
@@ -97,7 +97,7 @@ function cancelVerify() {
   $('#cancel-verify').remove();
   $('#verify-user-address').html('');
   $('#verify-btn').html(
-    '<a class="btn btn-primary btn-large mt-2" id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2 mx-2" id="random-address">Generate Random Address</a>'
+    '<div class="d-flex flex-column align-items-center"><a class="btn btn-primary btn-large mt-2" id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2" id="random-address">Generate Random Address</a></div>'
   );
 }
 
