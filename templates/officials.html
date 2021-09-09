@@ -25,7 +25,7 @@ resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] 
         {% elif 'State Representative' in office['name'] %}
         <img class="img-fluid py-2" src="/assets/images/offices/state-representative.png" alt="{{office['name']}}">
         <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Supreme Court Justice' in office['name'] %}
+        {% elif 'Supreme Court Justice' in office['name'] or 'Supreme Court Chief Justice' in office['name'] or 'Supreme Court Associate Justice' in office['name'] %}
         <img class="img-fluid py-2" src="/assets/images/offices/state-supreme-court-justice.png" alt="{{office['name']}}">
         <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
         {% elif 'Secretary of State' in office['name'] %}
