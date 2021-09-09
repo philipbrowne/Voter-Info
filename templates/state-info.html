@@ -1,8 +1,10 @@
 {% extends 'index.html' %} {% block content %} <div class="container d-flex flex-column align-items-center">
-    <h2 class="my-1 dark-blue">Voter Information for Your State</h2>
-    <h3 class="text-success">{{user.state.name}}</h6>
+    <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/state-voting-info-v3.png" alt="" class="img-fluid"></div>
+    
         <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
 </div>
+<div class="my-2 card p-2 d-flex flex-column align-items-center">
+    <h5 class="dark-blue text-center">Information and Links for {{user.state.name}}</h5>
 <table class="table table-sm table-hover table-responsive">
     <thead>
         <tr>
@@ -13,7 +15,7 @@
     <tbody>
         <tr>
             <th scope="row">Name</th>
-            <td>{{user.state.name}} ({{user.state.id}})</td>
+            <td><h5>{{user.state.name}} ({{user.state.id}})</h5></td>
         </tr>
         <tr>
             <th scope="row">Capital</th>
@@ -61,16 +63,22 @@
         </tr>
     </tbody>
 </table>
-<div class="my-3">
-    <h2 class="my-1 dark-blue">Registration Rules for {{user.state.name}}</h1>
-    <ul>
+</div>
+
+<div class="card my-3 d-flex flex-column align-items-center justify-content-center">
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/state-voter-registration-rules-200x200.png" alt="Registration Rules"></div>
+        <h4 class="dark-blue text-center">Registration Rules for {{user.state.name}}</h4>
+<ul class="list-group">
+        <li class="list-group-item list-group-item-action"><h5 class="my-1 dark-blue">In order to vote in {{user.state.name}}..</h5></li>
         {% for rule in user.state.registration_rules %}
-        <li>{{rule.rule}}</li>
+        <li class="list-group-item list-group-item-action fs-6">{{rule.rule}}</li>
         {% endfor %}
     </ul>
 </div>
-<div class="my-3">
-    <h2 class="my-1 dark-blue">{{user.state.name}} Registration Deadlines</h2>
+<div class="my-2 card p-2 d-flex flex-column align-items-center">
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/voter-registration-deadlines-200x200.png" alt="Voter Registration Deadlines"></div>
+    <h5 class="my-1 dark-blue">{{user.state.name}} Voter Registration Deadlines</h5>
+    
     <table class="table table-sm table-hover table-responsive">
         <thead>
             <tr>
@@ -93,10 +101,41 @@
             </tr>
         </tbody>
     </table>
-
 </div>
-<div class="my-3">
-    <h2 class="my-1 dark-blue">Public Officials in {{user.state.name}}</h2>
+
+<div class="my-2 card p-2 d-flex flex-column align-items-center">
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/absentee-ballot-deadlines-200x200.png" alt="Absentee Ballot Deadlines"></div>
+    <h5 class="my-1 dark-blue">{{user.state.name}} Absentee Ballot Deadlines</h5>
+    <table class="table table-sm table-hover table-responsive">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Absentee Ballot Application - In Person:</th>
+                <td>{{user.state.absentee_application_in_person_deadline}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Absentee Ballot Application - By Mail:</th>
+                <td>{{user.state.absentee_application_mail_deadline}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Absentee Ballot Application - Online:</th>
+                <td>{{user.state.absentee_application_online_deadline}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Voted Absentee Ballot Due:</th>
+                <td>{{user.state.voted_absentee_ballot_deadline}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="my-2 card p-2 d-flex flex-column align-items-center">
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/public-officials-state-200x200.png" alt="Public Officials"></div>
+    <h5 class="my-1 dark-blue">Public Officials in {{user.state.name}}</h5>
     <table class="table table-sm table-hover table-responsive">
         <thead>
             <tr>
