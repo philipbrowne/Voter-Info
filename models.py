@@ -24,12 +24,17 @@ class State(db.Model):
     registration_in_person_deadline = db.Column(db.Text)
     registration_mail_deadline = db.Column(db.Text)
     registration_online_deadline = db.Column(db.Text)
+    absentee_application_in_person_deadline = db.Column(db.Text)
+    absentee_application_mail_deadline = db.Column(db.Text)
+    absentee_application_online_deadline = db.Column(db.Text)
+    voted_absentee_ballot_deadline = db.Column(db.Text)
     check_registration_url = db.Column(db.Text)
     polling_location_url = db.Column(db.Text)
     absentee_ballot_url = db.Column(db.Text)
     local_election_url = db.Column(db.Text)
     ballot_tracker_url = db.Column(db.Text)
     registration_rules = db.relationship('RegistrationRule', secondary='state_registration_rules', backref='states')
+    
 
 
 class User(db.Model):
