@@ -29,6 +29,7 @@ class State(db.Model):
     absentee_ballot_url = db.Column(db.Text)
     local_election_url = db.Column(db.Text)
     ballot_tracker_url = db.Column(db.Text)
+    registration_rules = db.relationship('RegistrationRule', secondary='state_registration_rules', backref='states')
 
 
 class User(db.Model):
@@ -70,3 +71,16 @@ class User(db.Model):
             return user
         else:
             return False
+
+class RegistrationRule(db.Model):
+    """Voter registration rule model"""
+    __tablename__ = 'registration_rules'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    rule = db.Column(db.Text, nullable=False, unique=True)
+    
+class StateRegistrationRule(db.Model):
+    """Table linking Voter Registration Rule to State""" 
+    __tablename__ = 'state_registration_rules'
+    state_id = db.Column(db.String(2), db.ForeignKey(
+        'states.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
+    rule_id = db.Column(db.Integer, db.ForeignKey('registration_rules.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)

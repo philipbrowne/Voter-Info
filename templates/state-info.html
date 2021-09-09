@@ -62,6 +62,14 @@
     </tbody>
 </table>
 <div class="my-3">
+    <h2 class="my-1 dark-blue">Registration Rules for {{user.state.name}}</h1>
+    <ul>
+        {% for rule in user.state.registration_rules %}
+        <li>{{rule.rule}}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="my-3">
     <h2 class="my-1 dark-blue">{{user.state.name}} Registration Deadlines</h2>
     <table class="table table-sm table-hover table-responsive">
         <thead>
@@ -85,6 +93,7 @@
             </tr>
         </tbody>
     </table>
+
 </div>
 <div class="my-3">
     <h2 class="my-1 dark-blue">Public Officials in {{user.state.name}}</h2>

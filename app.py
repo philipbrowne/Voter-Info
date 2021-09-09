@@ -5,7 +5,7 @@ import requests
 from states import US_STATES
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
-from models import connect_db, db, User, State
+from models import connect_db, db, User, State, RegistrationRule, StateRegistrationRule
 
 from sqlalchemy.exc import IntegrityError
 import os
@@ -31,7 +31,11 @@ connect_db(app)
 @app.route('/')
 def index():
     """Landing Page"""
+    if 'username' in session:
+        user = User.query.filter(User.username == session['username'])
+        return render_template('index.html')
     return render_template('index.html')
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
