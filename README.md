@@ -35,6 +35,10 @@ It is very likely that more tables will be added to this project as this project
 **Update (9/7): Second Table Added:**
 ![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-v2.png)
 
+Update(9/8) Third Table Added for Registration Rules, as well as Join Table between States/Registration Rules
+
+
+
 I have added a second table for State which I will incorporate various important state-specific details such as voter registration URL, elections schedule URL, etc.  I will add more columns to this table over time.
 
 **API Links for Project**
