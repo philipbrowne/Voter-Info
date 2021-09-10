@@ -92,6 +92,7 @@ class Election(db.Model):
     date = db.Column(db.Date, nullable=False)
     state_id = db.Column(db.String(20), db.ForeignKey(
         'states.id', onupdate='CASCADE', ondelete='CASCADE'))
+    state = db.relationship('State', backref='elections')
 
     @property
     def full_date(self):
