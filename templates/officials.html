@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %} <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/public-officials-v5.gif" alt="" class="img-fluid"></div> {% if
-resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] %} <div class="card d-flex flex-column my-4 py-2">
+resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] %} <div class="card d-flex flex-column my-4 py-3">
     <div class="container d-flex flex-column align-items-center mt-1">
         {% if office['name'] == 'President of the United States' %}
         <img class="img-fluid py-2" src="/assets/images/offices/president.png" alt="{{office['name']}}">
@@ -88,15 +88,15 @@ resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] 
                 <ul class="list-group list-group-flush">
                     <div class="card my-2">
                         <li class="list-group-item card-body">
-                            <div>
+                            <div class="p-2">
                                 <h4
-                                    class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-align-center">
+                                    class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-center py-1">
                                     {% if resp['officials'][index]['urls'] %} <a
                                         href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{% endif
                                         %}{{resp['officials'][index]['name']}}{% if resp['officials'][index]['urls'] %}
                                     </a> {% endif %} </h4>
                                 <div class="row">
-                                    <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center">{% if
+                                    <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center py-1">{% if
                                         resp['officials'][index]['photoUrl'] %} <img
                                             src="{{resp['officials'][index]['photoUrl']}}"
                                             onerror="this.onerror=null;this.src='/assets/images/officials/blank-user-photo.png';this.classList.add('blank-photo');"
