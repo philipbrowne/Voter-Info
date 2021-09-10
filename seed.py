@@ -1,5 +1,5 @@
 from requests.models import REDIRECT_STATI
-from models import RegistrationRule, StateRegistrationRule, db, State, User
+from models import RegistrationRule, StateRegistrationRule, db, State, User, Election
 from app import app
 
 db.drop_all()
@@ -34,7 +34,7 @@ ID = State(id='ID', name='Idaho', capital='Boise', registration_url='https://ele
 IL = State(id='IL', name='Illinois', capital='Springfield', registration_url='https://ova.elections.il.gov/?Name=Em5DYCKC4wXCKQSXTgsQ9knm%2b5Ip27VC&T=637623864062530637',
            elections_url='https://www.elections.il.gov/Main/CalendarEventsAll.aspx?T=637665305487546022', registration_in_person_deadline='28 days before Election Day, after which you may register during the early voting period through Election Day.', registration_mail_deadline='Postmarked 28 days before Election Day.', registration_online_deadline='16 days before Election Day.', check_registration_url='https://ova.elections.il.gov/RegistrationLookup.aspx', polling_location_url='https://ova.elections.il.gov/RegistrationLookup.aspx', absentee_ballot_url='https://www.elections.il.gov/ElectionOperations/VotingByMailAgreement.aspx?T=637623864274160862', local_election_url='https://elections.il.gov/electionoperations/electionauthorities.aspx', absentee_application_in_person_deadline='Received 1 day before Election Day.', absentee_application_mail_deadline='Received 5 days before Election Day.', absentee_application_online_deadline='Received 5 days before Election Day.', voted_absentee_ballot_deadline='Postmarked by Election Day and received by 14 days after Election Day.')
 IN = State(id='IN', name='Indiana', capital='Indianapolis', registration_url='https://www.in.gov/sos/elections/voter-information/register-to-vote/',
-           elections_url='https://www.in.gov/sos/elections/voter-information/', registration_in_person_deadline='29 days before Election Day.', registration_mail_deadline='Postmarked 29 days before Election Day.', registration_online_deadline='29 days before Election Day.', check_registration_url='https://indianavoters.in.gov/', polling_location_url='https://indianavoters.in.gov/', absentee_ballot_url='https://www.in.gov/sos/elections/voter-information/ways-to-vote/absentee-voting/', local_election_url='https://indianavoters.in.gov/CountyContact/index', ballot_tracker_url='https://indianavoters.in.gov/', absentee_application_in_person_deadline='Received 12 days before Election Day.',absentee_application_mail_deadline='Received 12 days before Election Day.', absentee_application_online_deadline='Received 12 days before Election Day.')
+           elections_url='https://www.in.gov/sos/elections/voter-information/', registration_in_person_deadline='29 days before Election Day.', registration_mail_deadline='Postmarked 29 days before Election Day.', registration_online_deadline='29 days before Election Day.', check_registration_url='https://indianavoters.in.gov/', polling_location_url='https://indianavoters.in.gov/', absentee_ballot_url='https://www.in.gov/sos/elections/voter-information/ways-to-vote/absentee-voting/', local_election_url='https://indianavoters.in.gov/CountyContact/index', ballot_tracker_url='https://indianavoters.in.gov/', absentee_application_in_person_deadline='Received 12 days before Election Day.', absentee_application_mail_deadline='Received 12 days before Election Day.', absentee_application_online_deadline='Received 12 days before Election Day.')
 IA = State(id='IA', name='Iowa', capital='Des Moines', registration_url='https://sos.iowa.gov/elections/voterinformation/voterregistration.html',
            elections_url='https://sos.iowa.gov/elections/electioninfo/3yrelectioncal.html', registration_in_person_deadline='15 days before Election Day. If you miss the deadline, you can also register to vote in-person during early vote or on Election Day.', registration_mail_deadline='Postmarked 15 days before Election Day.', registration_online_deadline='15 days before Election Day.', check_registration_url='https://sos.iowa.gov/elections/VoterReg/RegToVote/search.aspx', polling_location_url='https://sos.iowa.gov/elections/voterreg/pollingplace/search.aspx', absentee_ballot_url='https://sos.iowa.gov/elections/electioninfo/absenteeinfo.html', local_election_url='https://sos.iowa.gov/elections/auditors/auditorslist.html', ballot_tracker_url='https://sos.iowa.gov/elections/absenteeballotstatus/absentee/search', absentee_application_in_person_deadline='Received 1 day before Election Day unless the polls open at noon. If the polls open at noon, you may cast an absentee ballot at the county auditor\'s office from 8am to 11am on Election Day.', absentee_application_mail_deadline='Received 15 days before Election Day.', absentee_application_online_deadline='N/A', voted_absentee_ballot_deadline='Received before close of polls on Election Day.')
 KS = State(id='KS', name='Kansas', capital='Topeka', registration_url='https://www.kdor.ks.gov/Apps/VoterReg/Default.aspx',
@@ -114,219 +114,396 @@ db.session.commit()
 
 
 r1 = RegistrationRule(rule='You must be a citizen of the United States')
-r2 = RegistrationRule(rule='You must be a resident of Alabama and your county at the time of registration')
+r2 = RegistrationRule(
+    rule='You must be a resident of Alabama and your county at the time of registration')
 r3 = RegistrationRule(rule='You must be 18 years old before any election')
-r4 = RegistrationRule(rule='You must not have been convicted of a disqualifying felony')
-r5 = RegistrationRule(rule='You must not currently be declared mentally incompetent through a competency hearing')
+r4 = RegistrationRule(
+    rule='You must not have been convicted of a disqualifying felony')
+r5 = RegistrationRule(
+    rule='You must not currently be declared mentally incompetent through a competency hearing')
 r6 = RegistrationRule(rule='You must swear or affirm to "support and defend the Constitution of the US and the State of Alabama and further disavow any belief or affiliation with any group which advocates the overthrow of the governments of the US or the State of Alabama by unlawful means and that the information contained herein is true, so help me God."')
-r7 = RegistrationRule(rule='You must be at least 18 years old within 90 days of completing your registration')
+r7 = RegistrationRule(
+    rule='You must be at least 18 years old within 90 days of completing your registration')
 r8 = RegistrationRule(rule='You must be a resident of Alaska')
-r9 = RegistrationRule(rule='You must not be a convicted felon (unless unconditionally discharged)')
-r10 = RegistrationRule(rule='You must not be registered to vote in another state')
-r11 = RegistrationRule(rule='You must be a resident of Arizona and your county at least 29 days preceeding the next election')
-r12 = RegistrationRule(rule='You must be 18 years old on or before the next general election')
-r13 = RegistrationRule(rule='You must be able to write your name or mark, unless prevented from so doing by physical disability')
-r14 = RegistrationRule(rule='You must not have been convicted of treason or a felony (or have had your civil rights restored)')
-r15 = RegistrationRule(rule='You must not currently be declared an incapacitated person by a court of law')
-r16 = RegistrationRule(rule='You must live in Arkansas at the address in Box 2 on the application')
-r17 = RegistrationRule(rule='You must be at least 18 years old before the next election')
-r18 = RegistrationRule(rule='You must not be a convicted felon (or have completely discharged your sentence or been pardoned)')
-r19 = RegistrationRule(rule='You must not claim the right to vote in any other jurisdiction')
-r20 = RegistrationRule(rule='You must not previously be adjudged mentally incompetent by a court of competent jurisdiction')
+r9 = RegistrationRule(
+    rule='You must not be a convicted felon (unless unconditionally discharged)')
+r10 = RegistrationRule(
+    rule='You must not be registered to vote in another state')
+r11 = RegistrationRule(
+    rule='You must be a resident of Arizona and your county at least 29 days preceeding the next election')
+r12 = RegistrationRule(
+    rule='You must be 18 years old on or before the next general election')
+r13 = RegistrationRule(
+    rule='You must be able to write your name or mark, unless prevented from so doing by physical disability')
+r14 = RegistrationRule(
+    rule='You must not have been convicted of treason or a felony (or have had your civil rights restored)')
+r15 = RegistrationRule(
+    rule='You must not currently be declared an incapacitated person by a court of law')
+r16 = RegistrationRule(
+    rule='You must live in Arkansas at the address in Box 2 on the application')
+r17 = RegistrationRule(
+    rule='You must be at least 18 years old before the next election')
+r18 = RegistrationRule(
+    rule='You must not be a convicted felon (or have completely discharged your sentence or been pardoned)')
+r19 = RegistrationRule(
+    rule='You must not claim the right to vote in any other jurisdiction')
+r20 = RegistrationRule(
+    rule='You must not previously be adjudged mentally incompetent by a court of competent jurisdiction')
 r21 = RegistrationRule(rule='You must be a resident of California')
-r22 = RegistrationRule(rule='You must be at least 18 years of age at the time of the next election')
-r23 = RegistrationRule(rule='You must not currently be serving a state or federal prison term for the conviction of a felony')
-r24 = RegistrationRule(rule='You must not currently be judged mentally incompetent by a court of law.')
-r25 = RegistrationRule(rule='You must be a resident of Colorado 22 days prior to Election Day')
-r26 = RegistrationRule(rule='You must be 18 years old on or before Election Day')
-r27 = RegistrationRule(rule='You must not be serving a sentence of detention, confinement, or parole for a felony conviction')
-r28 = RegistrationRule(rule='You must be a resident of Connecticut and of the town in which you wish to vote')
-r29 = RegistrationRule(rule='You must be at least 18 years old on the next election')
-r30 = RegistrationRule(rule='You must have completed confinement and parole if previously convicted of a felony')
+r22 = RegistrationRule(
+    rule='You must be at least 18 years of age at the time of the next election')
+r23 = RegistrationRule(
+    rule='You must not currently be serving a state or federal prison term for the conviction of a felony')
+r24 = RegistrationRule(
+    rule='You must not currently be judged mentally incompetent by a court of law.')
+r25 = RegistrationRule(
+    rule='You must be a resident of Colorado 22 days prior to Election Day')
+r26 = RegistrationRule(
+    rule='You must be 18 years old on or before Election Day')
+r27 = RegistrationRule(
+    rule='You must not be serving a sentence of detention, confinement, or parole for a felony conviction')
+r28 = RegistrationRule(
+    rule='You must be a resident of Connecticut and of the town in which you wish to vote')
+r29 = RegistrationRule(
+    rule='You must be at least 18 years old on the next election')
+r30 = RegistrationRule(
+    rule='You must have completed confinement and parole if previously convicted of a felony')
 r31 = RegistrationRule(rule='You must be be a permanent resident of Delaware')
-r32 = RegistrationRule(rule='You must be at least 18 years old on the date of the next general election')
+r32 = RegistrationRule(
+    rule='You must be at least 18 years old on the date of the next general election')
 r33 = RegistrationRule(rule='You must not be mentally incompetent')
 r34 = RegistrationRule(rule='If you are a felon, you are eligible to vote as long as you have served your sentence (including parole) and your convictions were not for disqualifying felonies: murder and manslaughter (except vehicular homicide), sexual offenses, or crimes against public administration involving bribery or improper influence or abuse of office')
-r35 = RegistrationRule(rule='You must be a District of Columbia resident at least 30 days preceding the next election')
-r36 = RegistrationRule(rule='You must be at least 18 years old on or preceding the next general election')
-r37 = RegistrationRule(rule='You must not be in prison for a felony conviction')
-r38 = RegistrationRule(rule='You must not have been judged legally incompetent by a court of law')
-r39 = RegistrationRule(rule='You must not claim the right to vote anywhere outside DC')
-r40 = RegistrationRule(rule='You must be a legal resident of both the State of Florida and of the county in which you seek to be registered')
-r41 = RegistrationRule(rule='You must be 18 years old (you may pre‑register if you are at least 16)')
-r42 = RegistrationRule(rule='You must not be adjudicated mentally incapacitated with respect to voting in Florida or any other State, or if you have, you must first have your voting rights restored')
-r43 = RegistrationRule(rule='You must not be a convicted felon, or if you are, you must first have your civil rights restored if they were taken away')
+r35 = RegistrationRule(
+    rule='You must be a District of Columbia resident at least 30 days preceding the next election')
+r36 = RegistrationRule(
+    rule='You must be at least 18 years old on or preceding the next general election')
+r37 = RegistrationRule(
+    rule='You must not be in prison for a felony conviction')
+r38 = RegistrationRule(
+    rule='You must not have been judged legally incompetent by a court of law')
+r39 = RegistrationRule(
+    rule='You must not claim the right to vote anywhere outside DC')
+r40 = RegistrationRule(
+    rule='You must be a legal resident of both the State of Florida and of the county in which you seek to be registered')
+r41 = RegistrationRule(
+    rule='You must be 18 years old (you may pre‑register if you are at least 16)')
+r42 = RegistrationRule(
+    rule='You must not be adjudicated mentally incapacitated with respect to voting in Florida or any other State, or if you have, you must first have your voting rights restored')
+r43 = RegistrationRule(
+    rule='You must not be a convicted felon, or if you are, you must first have your civil rights restored if they were taken away')
 r44 = RegistrationRule(rule='You must swear or affirm the following: “I do solemnly swear (or affirm) that I will protect and defend the Constitution of the United States and the Constitution of the State of Florida, that I am qualified to register as an elector under the Constitution and laws of the State of Florida, and that all information provided in this application is true.”')
-r45 = RegistrationRule(rule='You must be a legal resident of Georgia and of the county in which you want to vote')
-r46 = RegistrationRule(rule='You must be at least 18 years old within six months after the day of registration, and be 18 years old to vote')
-r47 = RegistrationRule(rule='You must not be serving a sentence for having been convicted of a felony involving moral turpitud')
-r48 = RegistrationRule(rule='You must not have been judicially determined to be mentally incompetent, unless the disability has been removed')
+r45 = RegistrationRule(
+    rule='You must be a legal resident of Georgia and of the county in which you want to vote')
+r46 = RegistrationRule(
+    rule='You must be at least 18 years old within six months after the day of registration, and be 18 years old to vote')
+r47 = RegistrationRule(
+    rule='You must not be serving a sentence for having been convicted of a felony involving moral turpitud')
+r48 = RegistrationRule(
+    rule='You must not have been judicially determined to be mentally incompetent, unless the disability has been removed')
 r49 = RegistrationRule(rule='You must be a resident of the State of Hawaii')
-r50 = RegistrationRule(rule='You must be at least 16 years old (you must be 18 years old by Election Day in order to vote)')
-r51 = RegistrationRule(rule='You must not be incarcerated for a felony conviction')
-r52 = RegistrationRule(rule='You must not be adjudicated by a court as “non compos mentis”')
+r50 = RegistrationRule(
+    rule='You must be at least 16 years old (you must be 18 years old by Election Day in order to vote)')
+r51 = RegistrationRule(
+    rule='You must not be incarcerated for a felony conviction')
+r52 = RegistrationRule(
+    rule='You must not be adjudicated by a court as “non compos mentis”')
 r53 = RegistrationRule(rule='You must be at least 18 years old')
-r54 = RegistrationRule(rule='You must have resided in Idaho and in the county for 30 days prior to the day of election')
-r55 = RegistrationRule(rule='You must not be serving a sentence of imprisonment for a felony.  Your voting rights are restored once you have completed your sentence, probation, and parole')
-r56 = RegistrationRule(rule='You must be a resident of Illinois and of your election precinct at least 30 days before the next election')
-r57 = RegistrationRule(rule='You must be at least 18 years old on or before the next election')
-r58 = RegistrationRule(rule='You must not be in jail for a felony conviction (but you can vote if you have completed your sentence)')
-r59 = RegistrationRule(rule='You must not claim the right to vote anywhere else')
-r60 = RegistrationRule(rule='You must have resided in the precinct at least 30 days before the next election')
-r61 = RegistrationRule(rule='You must be at least 18 years of age on the day of the next general election')
-r62 = RegistrationRule(rule='You must not currently be incarcerated for a criminal conviction')
+r54 = RegistrationRule(
+    rule='You must have resided in Idaho and in the county for 30 days prior to the day of election')
+r55 = RegistrationRule(
+    rule='You must not be serving a sentence of imprisonment for a felony.  Your voting rights are restored once you have completed your sentence, probation, and parole')
+r56 = RegistrationRule(
+    rule='You must be a resident of Illinois and of your election precinct at least 30 days before the next election')
+r57 = RegistrationRule(
+    rule='You must be at least 18 years old on or before the next election')
+r58 = RegistrationRule(
+    rule='You must not be in jail for a felony conviction (but you can vote if you have completed your sentence)')
+r59 = RegistrationRule(
+    rule='You must not claim the right to vote anywhere else')
+r60 = RegistrationRule(
+    rule='You must have resided in the precinct at least 30 days before the next election')
+r61 = RegistrationRule(
+    rule='You must be at least 18 years of age on the day of the next general election')
+r62 = RegistrationRule(
+    rule='You must not currently be incarcerated for a criminal conviction')
 r63 = RegistrationRule(rule='You must be a resident of Iowa')
-r64 = RegistrationRule(rule='You must be at least 17 years old (you must be 18 to vote)')
-r65 = RegistrationRule(rule='You must not have been convicted of a felony (or have had your rights restored)')
-r66 = RegistrationRule(rule='You must not currently be judged by a court to be "incompetent to vote"')
-r67 = RegistrationRule(rule='You must not claim the right to vote in more than one place')
+r64 = RegistrationRule(
+    rule='You must be at least 17 years old (you must be 18 to vote)')
+r65 = RegistrationRule(
+    rule='You must not have been convicted of a felony (or have had your rights restored)')
+r66 = RegistrationRule(
+    rule='You must not currently be judged by a court to be "incompetent to vote"')
+r67 = RegistrationRule(
+    rule='You must not claim the right to vote in more than one place')
 r68 = RegistrationRule(rule='You must be a resident of Kansas')
 r69 = RegistrationRule(rule='You must be 18 by the next election')
-r70 = RegistrationRule(rule='You must have completed the terms of your sentence if convicted of a felony and recieved a certificate of discharge; a person serving a sentence for a felony conviction is ineligible to vote')
-r71 = RegistrationRule(rule='You must not claim the right to vote in any other location or under any other name')
-r72 = RegistrationRule(rule='You must be a resident of Kentucky for at least 28 days before to Election Day')
-r73 = RegistrationRule(rule='You must be 18 years of age on or before the next general election')
-r74 = RegistrationRule(rule='You must not be a convicted felon or if you have been convicted of a felony, your civil rights must have been restored by executive pardon')
-r75 = RegistrationRule(rule='You must not have been judged “mentally incompetent” in a court of law')
-r76 = RegistrationRule(rule='You must not claim the right to vote anywhere outside Kentucky')
+r70 = RegistrationRule(
+    rule='You must have completed the terms of your sentence if convicted of a felony and recieved a certificate of discharge; a person serving a sentence for a felony conviction is ineligible to vote')
+r71 = RegistrationRule(
+    rule='You must not claim the right to vote in any other location or under any other name')
+r72 = RegistrationRule(
+    rule='You must be a resident of Kentucky for at least 28 days before to Election Day')
+r73 = RegistrationRule(
+    rule='You must be 18 years of age on or before the next general election')
+r74 = RegistrationRule(
+    rule='You must not be a convicted felon or if you have been convicted of a felony, your civil rights must have been restored by executive pardon')
+r75 = RegistrationRule(
+    rule='You must not have been judged “mentally incompetent” in a court of law')
+r76 = RegistrationRule(
+    rule='You must not claim the right to vote anywhere outside Kentucky')
 r77 = RegistrationRule(rule='You must be a resident of Louisiana (Residence address must be address where you claim homestead exemption, if any, except for a resident in a nursing home or veteran’s home who may select to use the address of the nursing home or veterans’ home or the home where he has a homestead exemption. A college student may elect to use his home address or his address while away at school.)')
 r78 = RegistrationRule(rule='You must be at least 17 years old (16 years old if registering in person at the Registrar of Voters Office or at the Louisiana Office of Motor Vehicles), and be 18 years old prior to the next election to vote')
 r79 = RegistrationRule(rule='You must not currently be under an order of imprisonment for conviction of a felony. (If you are under an order but have not been incarcerated within the last five years, you ARE eligible to vote unless your conviction was for election fraud.)')
-r80 = RegistrationRule(rule='You must not currently be under a judgment of interdiction for mental incompetence')
-r81 = RegistrationRule(rule='You must be a resident of Maine and the municipality in which you want to vote')
-r82 = RegistrationRule(rule='You must be 17 years old (you must be at least 18 years of age to vote, except that in primary elections you may vote if you are 17 but will be 18 by the general election)')
+r80 = RegistrationRule(
+    rule='You must not currently be under a judgment of interdiction for mental incompetence')
+r81 = RegistrationRule(
+    rule='You must be a resident of Maine and the municipality in which you want to vote')
+r82 = RegistrationRule(
+    rule='You must be 17 years old (you must be at least 18 years of age to vote, except that in primary elections you may vote if you are 17 but will be 18 by the general election)')
 r83 = RegistrationRule(rule='You must be a Maryland resident')
-r84 = RegistrationRule(rule='You must be at least 18 years old by the next general election')
-r85 = RegistrationRule(rule='You must not be under guardianship for mental disability')
-r86 = RegistrationRule(rule='You must not have been convicted of buying or selling votes')
-r87 = RegistrationRule(rule='You must not have been convicted of a felony, or if you have, have completed serving a court ordered sentence of imprisonment')
+r84 = RegistrationRule(
+    rule='You must be at least 18 years old by the next general election')
+r85 = RegistrationRule(
+    rule='You must not be under guardianship for mental disability')
+r86 = RegistrationRule(
+    rule='You must not have been convicted of buying or selling votes')
+r87 = RegistrationRule(
+    rule='You must not have been convicted of a felony, or if you have, have completed serving a court ordered sentence of imprisonment')
 r88 = RegistrationRule(rule='You must be a resident of Massachusetts')
-r89 = RegistrationRule(rule='You must be 18 years old on or before the next election')
-r90 = RegistrationRule(rule='You must not have been convicted of corrupt practices in respect to elections')
-r91 = RegistrationRule(rule='You must not be under guardianship with respect to voting')
-r92 = RegistrationRule(rule='You must not be currently incarcerated for a felony conviction')
+r89 = RegistrationRule(
+    rule='You must be 18 years old on or before the next election')
+r90 = RegistrationRule(
+    rule='You must not have been convicted of corrupt practices in respect to elections')
+r91 = RegistrationRule(
+    rule='You must not be under guardianship with respect to voting')
+r92 = RegistrationRule(
+    rule='You must not be currently incarcerated for a felony conviction')
 r93 = RegistrationRule(rule='You must be 18 years old by the next election')
-r94 = RegistrationRule(rule='You must be a resident of Michigan and at least a 30 day resident of your city or township by Election Day')
-r95 = RegistrationRule(rule='You must not be confined in a jail after being convicted and sentenced')
-r96 = RegistrationRule(rule='You must be a resident of Minnesota for 20 days before the next election')
-r97 = RegistrationRule(rule='You must maintain residence at the address given on the registration form')
-r98 = RegistrationRule(rule='You must be at least 18 years old on Election Day')
-r99 = RegistrationRule(rule='You must if previously convicted of a felony, have completed or been discharged from your sentence')
-r100 = RegistrationRule(rule='You must not be under a court‑ordered guardianship in which the right to vote has been revoked')
-r101 = RegistrationRule(rule='You must not be found by a court to be legally incompetent to vote')
-r102 = RegistrationRule(rule='You must have lived in Mississippi and in your county (and city, if applicable) 30 days before Election Day')
-r103 = RegistrationRule(rule='You must be 18 years old by the time of the general election in which you want to vote')
+r94 = RegistrationRule(
+    rule='You must be a resident of Michigan and at least a 30 day resident of your city or township by Election Day')
+r95 = RegistrationRule(
+    rule='You must not be confined in a jail after being convicted and sentenced')
+r96 = RegistrationRule(
+    rule='You must be a resident of Minnesota for 20 days before the next election')
+r97 = RegistrationRule(
+    rule='You must maintain residence at the address given on the registration form')
+r98 = RegistrationRule(
+    rule='You must be at least 18 years old on Election Day')
+r99 = RegistrationRule(
+    rule='You must if previously convicted of a felony, have completed or been discharged from your sentence')
+r100 = RegistrationRule(
+    rule='You must not be under a court‑ordered guardianship in which the right to vote has been revoked')
+r101 = RegistrationRule(
+    rule='You must not be found by a court to be legally incompetent to vote')
+r102 = RegistrationRule(
+    rule='You must have lived in Mississippi and in your county (and city, if applicable) 30 days before Election Day')
+r103 = RegistrationRule(
+    rule='You must be 18 years old by the time of the general election in which you want to vote')
 r104 = RegistrationRule(rule='You must have not been convicted of voter fraud, murder, rape, bribery, theft, arson, obtaining money or goods under false pretense, perjury, forgery, embezzlement, bigamy, armed robbery, extortion, felony bad check, felony shoplifting, larceny, receiving stolen property, robbery, timber larceny, unlawful taking of a motor vehicle, statutory rape, carjacking, or larceny under lease or rental agreement, or have had your rights restored as required by law')
-r105 = RegistrationRule(rule='You must not have been declared mentally incompetent by a court')
+r105 = RegistrationRule(
+    rule='You must not have been declared mentally incompetent by a court')
 r106 = RegistrationRule(rule='You must be a resident of Missouri')
-r107 = RegistrationRule(rule='You must be at least 17‑1/2 years of age (you must be 18 to vote)')
-r108 = RegistrationRule(rule='You must not be on probation or parole after conviction of a felony, until finally discharged from such probation or parole')
-r109 = RegistrationRule(rule='You must not be convicted of a felony or misdemeanor connected with the right of suffrage')
-r110 = RegistrationRule(rule='You must not be adjudged incapacitated by any court of law')
-r111 = RegistrationRule(rule='You must not be confined under a sentence of imprisonment')
-r112 = RegistrationRule(rule='You must be at least 18 years old on or before Election Day')
-r113 = RegistrationRule(rule='You must be a resident of Montana and of the county in which you want to vote for at least 30 days before the next election')
-r114 = RegistrationRule(rule='You must not be in a penal institution for a felony conviction')
-r115 = RegistrationRule(rule='You must not currently be determined by a court to be of unsound mind')
-r116 = RegistrationRule(rule='You must meet these qualifications by the next Election Day if you do not currently meet them')
+r107 = RegistrationRule(
+    rule='You must be at least 17‑1/2 years of age (you must be 18 to vote)')
+r108 = RegistrationRule(
+    rule='You must not be on probation or parole after conviction of a felony, until finally discharged from such probation or parole')
+r109 = RegistrationRule(
+    rule='You must not be convicted of a felony or misdemeanor connected with the right of suffrage')
+r110 = RegistrationRule(
+    rule='You must not be adjudged incapacitated by any court of law')
+r111 = RegistrationRule(
+    rule='You must not be confined under a sentence of imprisonment')
+r112 = RegistrationRule(
+    rule='You must be at least 18 years old on or before Election Day')
+r113 = RegistrationRule(
+    rule='You must be a resident of Montana and of the county in which you want to vote for at least 30 days before the next election')
+r114 = RegistrationRule(
+    rule='You must not be in a penal institution for a felony conviction')
+r115 = RegistrationRule(
+    rule='You must not currently be determined by a court to be of unsound mind')
+r116 = RegistrationRule(
+    rule='You must meet these qualifications by the next Election Day if you do not currently meet them')
 r117 = RegistrationRule(rule='You must be a resident of Nebraska')
-r118 = RegistrationRule(rule='You must be at least 18 years of age or will be 18 years of age on or before the first Tuesday after the first Monday of November')
-r119 = RegistrationRule(rule='You must not have been convicted of a felony, or if convicted, two years have passed since the sentence was completed (including any parole)')
-r120 = RegistrationRule(rule='You must not have been officially found to be mentally incompetent')
-r121 = RegistrationRule(rule='You must not have been convicted of treason, unless you have had your civil rights stored.')
-r122 = RegistrationRule(rule='You must have attained the age of 18 years on the date of the next election')
-r123 = RegistrationRule(rule='You must have continuously resided in the State of Nevada, in your county, at least 30 days and in your precinct at least 10 days before the next election')
-r124 = RegistrationRule(rule='You must not currently be serving a term of imprisonment for a felony conviction')
-r125 = RegistrationRule(rule='You must not be determined by a court of law to be mentally incompetent')
-r126 = RegistrationRule(rule='You must claim no other place as your legal residence')
-r127 = RegistrationRule(rule='You must be 18 years of age or older on Election Day')
-r128 = RegistrationRule(rule='You must register to vote only in the town or ward in which you actually live')
-r129 = RegistrationRule(rule='You must not have been convicted of a felony, unless you are past your final discharge')
-r130 = RegistrationRule(rule='You must not have been ever convicted of bribery or intimidation relating to elections')
-r131 = RegistrationRule(rule='You must be at least 17 years of age; you may register to vote if you are at least 17 years old but cannot vote until reaching the age of 18')
-r132 = RegistrationRule(rule='You must be a resident of New Jersey and your county and at your address at least 30 days before the next election')
-r133 = RegistrationRule(rule='You must not be serving a sentence of incarceration as the result of a conviction of any indictable offense under the laws of New Jersey or another state or of the United States')
-r134 = RegistrationRule(rule='You must not be declared mentally incompetent by a court')
-r135 = RegistrationRule(rule='You must be a resident of the State of New Mexico')
-r136 = RegistrationRule(rule='You must be 18 years of age at the time of the next election')
-r137 = RegistrationRule(rule='You must not have been denied the right to vote by a court of law by reason of mental incapacity')
+r118 = RegistrationRule(
+    rule='You must be at least 18 years of age or will be 18 years of age on or before the first Tuesday after the first Monday of November')
+r119 = RegistrationRule(
+    rule='You must not have been convicted of a felony, or if convicted, two years have passed since the sentence was completed (including any parole)')
+r120 = RegistrationRule(
+    rule='You must not have been officially found to be mentally incompetent')
+r121 = RegistrationRule(
+    rule='You must not have been convicted of treason, unless you have had your civil rights stored.')
+r122 = RegistrationRule(
+    rule='You must have attained the age of 18 years on the date of the next election')
+r123 = RegistrationRule(
+    rule='You must have continuously resided in the State of Nevada, in your county, at least 30 days and in your precinct at least 10 days before the next election')
+r124 = RegistrationRule(
+    rule='You must not currently be serving a term of imprisonment for a felony conviction')
+r125 = RegistrationRule(
+    rule='You must not be determined by a court of law to be mentally incompetent')
+r126 = RegistrationRule(
+    rule='You must claim no other place as your legal residence')
+r127 = RegistrationRule(
+    rule='You must be 18 years of age or older on Election Day')
+r128 = RegistrationRule(
+    rule='You must register to vote only in the town or ward in which you actually live')
+r129 = RegistrationRule(
+    rule='You must not have been convicted of a felony, unless you are past your final discharge')
+r130 = RegistrationRule(
+    rule='You must not have been ever convicted of bribery or intimidation relating to elections')
+r131 = RegistrationRule(
+    rule='You must be at least 17 years of age; you may register to vote if you are at least 17 years old but cannot vote until reaching the age of 18')
+r132 = RegistrationRule(
+    rule='You must be a resident of New Jersey and your county and at your address at least 30 days before the next election')
+r133 = RegistrationRule(
+    rule='You must not be serving a sentence of incarceration as the result of a conviction of any indictable offense under the laws of New Jersey or another state or of the United States')
+r134 = RegistrationRule(
+    rule='You must not be declared mentally incompetent by a court')
+r135 = RegistrationRule(
+    rule='You must be a resident of the State of New Mexico')
+r136 = RegistrationRule(
+    rule='You must be 18 years of age at the time of the next election')
+r137 = RegistrationRule(
+    rule='You must not have been denied the right to vote by a court of law by reason of mental incapacity')
 r138 = RegistrationRule(rule='You must not be currently incarcerated or serving parole or supervised probation for a felony conviction (or if you have been convicted of a felony, have completed all the terms and conditions of sentencing, have been granted a pardon by the Governor, or have had your conviction overturned on appeal)')
-r139 = RegistrationRule(rule='You must be a resident of New York and the county, city, or village for at least 30 days before Election Day')
-r140 = RegistrationRule(rule='16- and 17-year-olds may preregister to vote, but cannot vote until they are 18')
-r141 = RegistrationRule(rule='You must not be in prison or on parole for a felony conviction (unless parolee pardoned or restored rights of citizenship)')
-r142 = RegistrationRule(rule='You must not currently be judged incompetent by a court')
+r139 = RegistrationRule(
+    rule='You must be a resident of New York and the county, city, or village for at least 30 days before Election Day')
+r140 = RegistrationRule(
+    rule='16- and 17-year-olds may preregister to vote, but cannot vote until they are 18')
+r141 = RegistrationRule(
+    rule='You must not be in prison or on parole for a felony conviction (unless parolee pardoned or restored rights of citizenship)')
+r142 = RegistrationRule(
+    rule='You must not currently be judged incompetent by a court')
 r143 = RegistrationRule(rule='You must not claim the right to vote elsewhere')
-r144 = RegistrationRule(rule='You must be a resident of North Carolina and the precinct in which you live for at least 30 days prior to Election Day')
-r145 = RegistrationRule(rule='16- and 17-year-olds may preregister to vote, but cannot vote until they are 18 (17-year-olds may vote in a primary election if they will be 18 at the time of the general election)')
-r146 = RegistrationRule(rule='You must not be currently serving a felony sentence, including probation, parole, or post-release supervision')
+r144 = RegistrationRule(
+    rule='You must be a resident of North Carolina and the precinct in which you live for at least 30 days prior to Election Day')
+r145 = RegistrationRule(
+    rule='16- and 17-year-olds may preregister to vote, but cannot vote until they are 18 (17-year-olds may vote in a primary election if they will be 18 at the time of the general election)')
+r146 = RegistrationRule(
+    rule='You must not be currently serving a felony sentence, including probation, parole, or post-release supervision')
 r147 = RegistrationRule(rule='You must be a resident of North Dakota')
-r148 = RegistrationRule(rule='You must reside in the precinct for 30 days preceding Election Day')
-r149 = RegistrationRule(rule='You must be able to provide a drivers license, non-driver identification card or other approved form of identification')
-r150 = RegistrationRule(rule='You must be at least 18 years old on or before the next general election')
-r151 = RegistrationRule(rule='You must be a resident of Ohio for at least 30 days immediately before the election in which you want to vote')
-r152 = RegistrationRule(rule='You must not be currently incarcerated (in jail or prison) for a felony conviction. If you are an ex-felon and not currently incarcerated, you are eligible to vote in Ohio but you MUST re-register.')
-r153 = RegistrationRule(rule='You must not have been declared incompetent for voting purposes by a probate court')
-r154 = RegistrationRule(rule='You must not have been permanently denied the right to vote for violations of election laws.')
-r155 = RegistrationRule(rule='You must be a citizen of the United States and a resident of the State of Oklahoma')
-r156 = RegistrationRule(rule='You must be 18 years old on or before the date of the next election')
+r148 = RegistrationRule(
+    rule='You must reside in the precinct for 30 days preceding Election Day')
+r149 = RegistrationRule(
+    rule='You must be able to provide a drivers license, non-driver identification card or other approved form of identification')
+r150 = RegistrationRule(
+    rule='You must be at least 18 years old on or before the next general election')
+r151 = RegistrationRule(
+    rule='You must be a resident of Ohio for at least 30 days immediately before the election in which you want to vote')
+r152 = RegistrationRule(
+    rule='You must not be currently incarcerated (in jail or prison) for a felony conviction. If you are an ex-felon and not currently incarcerated, you are eligible to vote in Ohio but you MUST re-register.')
+r153 = RegistrationRule(
+    rule='You must not have been declared incompetent for voting purposes by a probate court')
+r154 = RegistrationRule(
+    rule='You must not have been permanently denied the right to vote for violations of election laws.')
+r155 = RegistrationRule(
+    rule='You must be a citizen of the United States and a resident of the State of Oklahoma')
+r156 = RegistrationRule(
+    rule='You must be 18 years old on or before the date of the next election')
 r157 = RegistrationRule(rule='You must be a "bona fide" resident of the State of Oklahoma (A person is a “bona fide” resident of the State of Oklahoma if he or she has an “honest intent to make a place one’s residence or domicile, a conscious decision to make a location an individual’s home.")')
-r158 = RegistrationRule(rule='You must have not been convicted of a felony and not completed the sentence including any term of incarceration, parole or supervision, or probation')
-r159 = RegistrationRule(rule='You must not now be under judgment as an incapacitated person, or a partially incapacitated person prohibited from voting')
+r158 = RegistrationRule(
+    rule='You must have not been convicted of a felony and not completed the sentence including any term of incarceration, parole or supervision, or probation')
+r159 = RegistrationRule(
+    rule='You must not now be under judgment as an incapacitated person, or a partially incapacitated person prohibited from voting')
 r160 = RegistrationRule(rule='You must be a resident of Oregon')
-r161 = RegistrationRule(rule='You must at least 16 years old (to vote, you must be 18 by Election Day)')
-r162 = RegistrationRule(rule='You must be a citizen of the United States at least one month before the next election')
-r163 = RegistrationRule(rule='You must be a resident of Pennsylvania and your election district at least 30 days before Election Day')
-r164 = RegistrationRule(rule='You must be at least 18 years of age on the day of the next election')
-r165 = RegistrationRule(rule='You must not be incarcerated after conviction for a felony (your voting rights are restored immediately after incarceration)')
-r166 = RegistrationRule(rule='You must not have been convicted of violating any provision of the Pennsylvania Election Code within the last four years')
-r167 = RegistrationRule(rule='You must be a resident of Rhode Island for 30 days preceding the next election')
-r168 = RegistrationRule(rule='You must not be currently incarcerated in a correctional facility due to a felony conviction')
-r169 = RegistrationRule(rule='You must not have been lawfully judged to be mentally incompetent')
-r170 = RegistrationRule(rule='You must be a resident of South Carolina, and live in the county and precinct where you are registering')
-r171 = RegistrationRule(rule='You must not be confined in any public prison resulting from a conviction of a crime')
+r161 = RegistrationRule(
+    rule='You must at least 16 years old (to vote, you must be 18 by Election Day)')
+r162 = RegistrationRule(
+    rule='You must be a citizen of the United States at least one month before the next election')
+r163 = RegistrationRule(
+    rule='You must be a resident of Pennsylvania and your election district at least 30 days before Election Day')
+r164 = RegistrationRule(
+    rule='You must be at least 18 years of age on the day of the next election')
+r165 = RegistrationRule(
+    rule='You must not be incarcerated after conviction for a felony (your voting rights are restored immediately after incarceration)')
+r166 = RegistrationRule(
+    rule='You must not have been convicted of violating any provision of the Pennsylvania Election Code within the last four years')
+r167 = RegistrationRule(
+    rule='You must be a resident of Rhode Island for 30 days preceding the next election')
+r168 = RegistrationRule(
+    rule='You must not be currently incarcerated in a correctional facility due to a felony conviction')
+r169 = RegistrationRule(
+    rule='You must not have been lawfully judged to be mentally incompetent')
+r170 = RegistrationRule(
+    rule='You must be a resident of South Carolina, and live in the county and precinct where you are registering')
+r171 = RegistrationRule(
+    rule='You must not be confined in any public prison resulting from a conviction of a crime')
 r172 = RegistrationRule(rule='You must never have been convicted of a felony or offense against Election Day laws, or if previously convicted, have served your entire sentence, including probation or parole, or have received a pardon for the conviction')
-r173 = RegistrationRule(rule='You must not be under a court order declaring you mentally incompetent')
+r173 = RegistrationRule(
+    rule='You must not be under a court order declaring you mentally incompetent')
 r174 = RegistrationRule(rule='You must reside in South Dakota')
-r175 = RegistrationRule(rule='You must not be currently serving a sentence for a felony conviction which included imprisonment, served or suspended, in an adult penitentiary system')
-r176 = RegistrationRule(rule='You must not have been adjudged mentally incompetent by a court')
+r175 = RegistrationRule(
+    rule='You must not be currently serving a sentence for a felony conviction which included imprisonment, served or suspended, in an adult penitentiary system')
+r176 = RegistrationRule(
+    rule='You must not have been adjudged mentally incompetent by a court')
 r177 = RegistrationRule(rule='You must be a resident of Tennessee')
-r178 = RegistrationRule(rule='not have been convicted of a felony, or if convicted, have had your full rights of citizenship restored (or have received a pardon)')
-r179 = RegistrationRule(rule='You must not be adjudicated incompetent by a court of competent jurisdiction (or have been restored to legal capacity')
-r180 = RegistrationRule(rule='You must be a resident of the county in which the application for registration is made')
-r181 = RegistrationRule(rule='You must be at least 17 years and 10 months old (you must be 18 to vote)')
-r182 = RegistrationRule(rule='You must not be convicted of a felony, or if a convicted felon,')
-r183 = RegistrationRule(rule='You must you must have fully discharged your punishment, including any incarceration, parole, supervision, period of probation, or be pardoned')
-r184 = RegistrationRule(rule='You must have not been declared mentally incompetent by final judgment of a court of law')
-r185 = RegistrationRule(rule='You must have resided in Utah for 30 days immediately before the next election')
+r178 = RegistrationRule(
+    rule='not have been convicted of a felony, or if convicted, have had your full rights of citizenship restored (or have received a pardon)')
+r179 = RegistrationRule(
+    rule='You must not be adjudicated incompetent by a court of competent jurisdiction (or have been restored to legal capacity')
+r180 = RegistrationRule(
+    rule='You must be a resident of the county in which the application for registration is made')
+r181 = RegistrationRule(
+    rule='You must be at least 17 years and 10 months old (you must be 18 to vote)')
+r182 = RegistrationRule(
+    rule='You must not be convicted of a felony, or if a convicted felon,')
+r183 = RegistrationRule(
+    rule='You must you must have fully discharged your punishment, including any incarceration, parole, supervision, period of probation, or be pardoned')
+r184 = RegistrationRule(
+    rule='You must have not been declared mentally incompetent by final judgment of a court of law')
+r185 = RegistrationRule(
+    rule='You must have resided in Utah for 30 days immediately before the next election')
 r186 = RegistrationRule(rule='16- and 17-year-olds may preregister to vote, but cannot vote until they are 18 (Individuals may vote in a primary election if they are 17 years old on or before the date of the primary election and will be 18 years old on or before the date of the corresponding general election)')
-r187 = RegistrationRule(rule='You must not be a convicted felon currently incarcerated for commission of a felony until your right to vote is restored')
-r188 = RegistrationRule(rule='You must not be convicted of treason or crime against the elective franchise, unless restored to civil rights')
-r189 = RegistrationRule(rule='You must not be found to be mentally incompetent by a court of law')
+r187 = RegistrationRule(
+    rule='You must not be a convicted felon currently incarcerated for commission of a felony until your right to vote is restored')
+r188 = RegistrationRule(
+    rule='You must not be convicted of treason or crime against the elective franchise, unless restored to civil rights')
+r189 = RegistrationRule(
+    rule='You must not be found to be mentally incompetent by a court of law')
 r190 = RegistrationRule(rule='You must be a resident of Vermont')
 r191 = RegistrationRule(rule='You must be 18 years of age on or before Election Day (17 year olds who will be 18 years of age on or before the date of a general election may register and vote in the primary election immediately preceding that general election)')
-r192 = RegistrationRule(rule='You must have taken the following Oath: You solemnly swear (or affirm) that whenever you give your vote or suffrage, touching any matter that concerns the state of Vermont, you will do it so as in your conscience you shall judge will most conduce to the best good of the same, as established by the Constitution, without fear or favor of any person [Voter’s Oath, Vermont Constitution, Chapter II, Section 42]')
-r193 = RegistrationRule(rule='You must be a resident of Virginia and of the precinct in which you want to vote')
+r192 = RegistrationRule(
+    rule='You must have taken the following Oath: You solemnly swear (or affirm) that whenever you give your vote or suffrage, touching any matter that concerns the state of Vermont, you will do it so as in your conscience you shall judge will most conduce to the best good of the same, as established by the Constitution, without fear or favor of any person [Voter’s Oath, Vermont Constitution, Chapter II, Section 42]')
+r193 = RegistrationRule(
+    rule='You must be a resident of Virginia and of the precinct in which you want to vote')
 r194 = RegistrationRule(rule='You must be 18 years old by the next general election (a person who is 17 years old may register to vote in advance of his or her 18th birthday and can vote in intervening primary or special elections if the person will turn 18 by the date of the next general election)')
-r195 = RegistrationRule(rule='You must not have been convicted of a felony, unless you have had your civil rights restored')
-r196 = RegistrationRule(rule='You must not currently be declared incapacitated by a court')
-r197 = RegistrationRule(rule='You must be at least 18 years old by Election Day')
-r198 = RegistrationRule(rule='You must be a legal resident of Washington State, your county, and precinct for 30 days immediately preceding Election Day')
-r199 = RegistrationRule(rule='You must not be disqualified from voting due to a court order')
-r200 = RegistrationRule(rule='You must not be under Department of Corrections supervision for a Washington felony conviction')
-r201 = RegistrationRule(rule='You must live in West Virginia in the county in which you are registering')
-r202 = RegistrationRule(rule='You must be at least 17 years old and turning 18 before the next general election')
-r203 = RegistrationRule(rule='You must not be under conviction, probation, or parole for a felony, treason, or election bribery')
-r204 = RegistrationRule(rule='You must not have been judged “mentally incompetent” in a court of competent jurisdiction')
-r205 = RegistrationRule(rule='You must be a resident of Wisconsin for at least 10 days')
+r195 = RegistrationRule(
+    rule='You must not have been convicted of a felony, unless you have had your civil rights restored')
+r196 = RegistrationRule(
+    rule='You must not currently be declared incapacitated by a court')
+r197 = RegistrationRule(
+    rule='You must be at least 18 years old by Election Day')
+r198 = RegistrationRule(
+    rule='You must be a legal resident of Washington State, your county, and precinct for 30 days immediately preceding Election Day')
+r199 = RegistrationRule(
+    rule='You must not be disqualified from voting due to a court order')
+r200 = RegistrationRule(
+    rule='You must not be under Department of Corrections supervision for a Washington felony conviction')
+r201 = RegistrationRule(
+    rule='You must live in West Virginia in the county in which you are registering')
+r202 = RegistrationRule(
+    rule='You must be at least 17 years old and turning 18 before the next general election')
+r203 = RegistrationRule(
+    rule='You must not be under conviction, probation, or parole for a felony, treason, or election bribery')
+r204 = RegistrationRule(
+    rule='You must not have been judged “mentally incompetent” in a court of competent jurisdiction')
+r205 = RegistrationRule(
+    rule='You must be a resident of Wisconsin for at least 10 days')
 r206 = RegistrationRule(rule='You must be 18 years old')
-r207 = RegistrationRule(rule='You must not have been convicted of treason, felony or bribery, or if you have, your civil rights have been restored')
-r208 = RegistrationRule(rule='You must not be incapable of understanding the objective of the elective process or under guardianship')
-r209 = RegistrationRule(rule='You must be 18 years old by General Election Day')
+r207 = RegistrationRule(
+    rule='You must not have been convicted of treason, felony or bribery, or if you have, your civil rights have been restored')
+r208 = RegistrationRule(
+    rule='You must not be incapable of understanding the objective of the elective process or under guardianship')
+r209 = RegistrationRule(
+    rule='You must be 18 years old by General Election Day')
 r210 = RegistrationRule(rule='You must be a resident of the State of Wyoming')
-r211 = RegistrationRule(rule='You must not be currently adjudicated mentally incompetent')
-r212 = RegistrationRule(rule='You must not have been convicted of a felony, or if convicted have had your voting rights restored')
+r211 = RegistrationRule(
+    rule='You must not be currently adjudicated mentally incompetent')
+r212 = RegistrationRule(
+    rule='You must not have been convicted of a felony, or if convicted have had your voting rights restored')
 
-db.session.add_all([r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, r39, r40, r41, r42, r43, r44, r45, r46, r47, r48, r49, r50, r51, r52, r53, r54, r55, r56, r57, r58, r59, r60, r61, r62, r63, r64, r65, r66, r67, r68, r69, r70, r71, r72, r73, r74, r75, r76, r77, r78, r79, r80, r81, r82, r83, r84, r85, r86, r87, r88, r89, r90, r91, r92, r93, r94, r95, r96, r97, r98, r99, r100, r101, r101, r102, r103, r104, r105, r106, r107, r108, r109, r110, r111, r112, r113, r114, r115, r116, r117, r118, r119, r120, r121, r122, r123, r124, r125, r126, r127, r128, r129, r130, r131, r132, r133, r134, r135, r136, r137, r138, r139, r140, r141, r142, r143, r144, r145, r146, r147, r148, r149, r150, r151, r152, r153, r154, r155, r156, r157, r158, r159, r160, r161, r162, r163, r164, r165, r166, r167, r168, r169, r170, r171, r172, r173, r174, r175, r176, r177, r178, r179, r180, r181, r182, r183, r184, r185, r186, r187, r188, r189, r190, r191, r192, r193, r194, r195, r196, r197, r198, r199, r200, r201, r202, r203, r204, r205, r206, r207, r208, r209, r210, r211, r212])
+
+db.session.add_all([r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, r39, r40, r41, r42, r43, r44, r45, r46, r47, r48, r49, r50, r51, r52, r53, r54, r55, r56, r57, r58, r59, r60, r61, r62, r63, r64, r65, r66, r67, r68, r69, r70, r71, r72, r73, r74, r75, r76, r77, r78, r79, r80, r81, r82, r83, r84, r85, r86, r87, r88, r89, r90, r91, r92, r93, r94, r95, r96, r97, r98, r99, r100, r101, r101, r102, r103, r104, r105, r106, r107, r108, r109, r110, r111, r112, r113,
+                   r114, r115, r116, r117, r118, r119, r120, r121, r122, r123, r124, r125, r126, r127, r128, r129, r130, r131, r132, r133, r134, r135, r136, r137, r138, r139, r140, r141, r142, r143, r144, r145, r146, r147, r148, r149, r150, r151, r152, r153, r154, r155, r156, r157, r158, r159, r160, r161, r162, r163, r164, r165, r166, r167, r168, r169, r170, r171, r172, r173, r174, r175, r176, r177, r178, r179, r180, r181, r182, r183, r184, r185, r186, r187, r188, r189, r190, r191, r192, r193, r194, r195, r196, r197, r198, r199, r200, r201, r202, r203, r204, r205, r206, r207, r208, r209, r210, r211, r212])
 db.session.commit()
 
 sr1 = StateRegistrationRule(state_id='AL', rule_id=1)
@@ -594,5 +771,557 @@ sr262 = StateRegistrationRule(state_id='WY', rule_id=210)
 sr263 = StateRegistrationRule(state_id='WY', rule_id=211)
 sr264 = StateRegistrationRule(state_id='WY', rule_id=212)
 
-db.session.add_all([sr1, sr2, sr3, sr4, sr5, sr6, sr7, sr8, sr9, sr10, sr11, sr12, sr13, sr14, sr15, sr16, sr17, sr18, sr19, sr20, sr21, sr22, sr23, sr24, sr25, sr26, sr27, sr28, sr29, sr30, sr31, sr32, sr33, sr34, sr35, sr36, sr37, sr38, sr39, sr40, sr41, sr42, sr43, sr44, sr45, sr46, sr47, sr48, sr49, sr50, sr51, sr52, sr53, sr54, sr55, sr56, sr57, sr58, sr59, sr60, sr61, sr62, sr63, sr64, sr65, sr66, sr67, sr68, sr69, sr70, sr71, sr72, sr73, sr74, sr75, sr76, sr77, sr78, sr79, sr80, sr81, sr82, sr83, sr84, sr85, sr86, sr87, sr88, sr89, sr90, sr91, sr92, sr93, sr94, sr95, sr96, sr97, sr98, sr99, sr100, sr101, sr101, sr102, sr103, sr104, sr105, sr106, sr107, sr108, sr109, sr110, sr111, sr112, sr113, sr114, sr115, sr116, sr117, sr118, sr119, sr120, sr121, sr122, sr123, sr124, sr125, sr126, sr127, sr128, sr129, sr130, sr131, sr132, sr133, sr134, sr135, sr136, sr137, sr138, sr139, sr140, sr141, sr142, sr143, sr144, sr145, sr146, sr147, sr148, sr149, sr150, sr151, sr152, sr153, sr154, sr155, sr156, sr157, sr158, sr159, sr160, sr161, sr162, sr163, sr164, sr165, sr166, sr167, sr168, sr169, sr170, sr171, sr172, sr173, sr174, sr175, sr176, sr177, sr178, sr179, sr180, sr181, sr182, sr183, sr184, sr185, sr186, sr187, sr188, sr189, sr190, sr191, sr192, sr193, sr194, sr195, sr196, sr197, sr198, sr199, sr200, sr201, sr202, sr203, sr204, sr205, sr206, sr207, sr208, sr209, sr210, sr211, sr212, sr213, sr214, sr215, sr216, sr217, sr218, sr219, sr220, sr221, sr222, sr223, sr224, sr225, sr226, sr227, sr228, sr229, sr230, sr231, sr232, sr233, sr234, sr235, sr236, sr237, sr238, sr239, sr240, sr241, sr242, sr243, sr244, sr245, sr246, sr247, sr248, sr249, sr250, sr251, sr252, sr253, sr254, sr255, sr256, sr257, sr258, sr259, sr260, sr261, sr262, sr263, sr264])
+db.session.add_all([sr1, sr2, sr3, sr4, sr5, sr6, sr7, sr8, sr9, sr10, sr11, sr12, sr13, sr14, sr15, sr16, sr17, sr18, sr19, sr20, sr21, sr22, sr23, sr24, sr25, sr26, sr27, sr28, sr29, sr30, sr31, sr32, sr33, sr34, sr35, sr36, sr37, sr38, sr39, sr40, sr41, sr42, sr43, sr44, sr45, sr46, sr47, sr48, sr49, sr50, sr51, sr52, sr53, sr54, sr55, sr56, sr57, sr58, sr59, sr60, sr61, sr62, sr63, sr64, sr65, sr66, sr67, sr68, sr69, sr70, sr71, sr72, sr73, sr74, sr75, sr76, sr77, sr78, sr79, sr80, sr81, sr82, sr83, sr84, sr85, sr86, sr87, sr88, sr89, sr90, sr91, sr92, sr93, sr94, sr95, sr96, sr97, sr98, sr99, sr100, sr101, sr101, sr102, sr103, sr104, sr105, sr106, sr107, sr108, sr109, sr110, sr111, sr112, sr113, sr114, sr115, sr116, sr117, sr118, sr119, sr120, sr121, sr122, sr123, sr124, sr125, sr126, sr127, sr128, sr129, sr130, sr131, sr132, sr133, sr134, sr135, sr136, sr137, sr138,
+                   sr139, sr140, sr141, sr142, sr143, sr144, sr145, sr146, sr147, sr148, sr149, sr150, sr151, sr152, sr153, sr154, sr155, sr156, sr157, sr158, sr159, sr160, sr161, sr162, sr163, sr164, sr165, sr166, sr167, sr168, sr169, sr170, sr171, sr172, sr173, sr174, sr175, sr176, sr177, sr178, sr179, sr180, sr181, sr182, sr183, sr184, sr185, sr186, sr187, sr188, sr189, sr190, sr191, sr192, sr193, sr194, sr195, sr196, sr197, sr198, sr199, sr200, sr201, sr202, sr203, sr204, sr205, sr206, sr207, sr208, sr209, sr210, sr211, sr212, sr213, sr214, sr215, sr216, sr217, sr218, sr219, sr220, sr221, sr222, sr223, sr224, sr225, sr226, sr227, sr228, sr229, sr230, sr231, sr232, sr233, sr234, sr235, sr236, sr237, sr238, sr239, sr240, sr241, sr242, sr243, sr244, sr245, sr246, sr247, sr248, sr249, sr250, sr251, sr252, sr253, sr254, sr255, sr256, sr257, sr258, sr259, sr260, sr261, sr262, sr263, sr264])
+db.session.commit()
+
+e1 = Election(name='House District 63 - Special Primary Election (will not be held but this date is deadline for submission of independent candidate and minor party ballot access petitions)', date='2021-10-19', state_id='AL')
+e2 = Election(name='State House District 76 - Special Primary Election',
+                   date='2021-11-16', state_id='AL')
+e3 = Election(name='State House District 76 - Special Primary Runoff Election (if necessary)',
+                   date='2021-12-14', state_id='AL')
+e4 = Election(name='	State House District 76 - Special General Election',
+                   date='2022-03-01', state_id='AL')
+e5 = Election(name='2022 Primary Election',
+                   date='2022-05-24', state_id='AL')
+e6 = Election(name='2022 Primary Runoff Election',
+                   date='2022-06-21', state_id='AL')
+e7 = Election(name='2022 General Election',
+                   date='2022-11-08', state_id='AL')
+
+db.session.add_all([e1, e2, e3, e4, e5, e6, e7])
+db.session.commit()
+
+e1 = Election(name='Regional Educational Attendance Area (REAA) Election - Polls open 8am to 8pm.',
+                   date='2022-10-05', state_id='AK')
+e2 = Election(name='2022 Primary Election',
+                   date='2022-08-16', state_id='AK')
+e3 = Election(name='2022 General Election',
+                   date='2022-11-08', state_id='AK')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='Election For Select Local Jurisdictions',
+                   date='2021-11-02', state_id='AZ')
+e2 = Election(name='Election For Select Local Jurisdictions',
+                   date='2022-03-08', state_id='AZ')
+e3 = Election(name='Election For Select Local Jurisdictions',
+                   date='2022-05-17', state_id='AZ')
+e4 = Election(name='State Primary Election',
+                   date='2022-08-02', state_id='AZ')
+e5 = Election(name='State General Election',
+                   date='2022-11-08', state_id='AZ')
+
+db.session.add_all([e1, e2, e3, e4, e5])
+db.session.commit()
+
+
+e1 = Election(name='State Primary Election', date='2022-05-24', state_id='AR')
+e2 = Election(name='State General Election', date='2022-11-08', state_id='AR')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='California Gubernatorial Recall Election',
+              date='2021-09-14', state_id='CA')
+e2 = Election(name='Statewide Direct Primary Election',
+              date='2022-06-07', state_id='CA')
+e3 = Election(name='State General Election', date='2022-11-08', state_id='CA')
+e4 = Election(name='Local Election - Bear Valley Water District, Kirkwood Meadows Public Utility District, Markleeville Utility District',
+              date='2021-11-02', state_id='CA')
+e5 = Election(name='Local Election - UDEL', date='2021-11-02', state_id='CA')
+e6 = Election(name='Special District Election - Colusa',
+              date='2021-11-02', state_id='CA')
+e7 = Election(name='Lassen College Trustee Area 1 Election',
+              date='2021-09-14', state_id='CA')
+e8 = Election(name='City of Vernon Special Municipal Election',
+              date='2021-09-14', state_id='CA')
+e9 = Election(name='Los Angeles Local and Municipal Election',
+              date='2021-11-02', state_id='CA')
+e10 = Election(name='Merced Special Vacancy Mail Ballot Election Los Banos Unified School District Area 1',
+               date='2021-11-02', state_id='CA')
+e11 = Election(name='Monterey - Chualar Union School District Trustee Area 1 Governing Board Member Special Election',
+               date='2021-11-02', state_id='CA')
+e12 = Election(name='Long Valley Community Services District Election',
+               date='2021-11-02', state_id='CA')
+e13 = Election(name='Sacramento - SCERS Election',
+               date='2021-10-01', state_id='CA')
+e14 = Election(name='City of Isleton Fire Protection Services Transaction and Use Tax Special Election',
+               date='2021-11-02', state_id='CA')
+e15 = Election(name='San Bernardino City Employees’ Retirement Association Election',
+               date='2021-12-07', state_id='CA')
+e16 = Election(name='San Mateo Special Election',
+               date='2021-11-02', state_id='CA')
+e17 = Election(name='City of Santa Barbara Municipal Election',
+               date='2021-11-02', state_id='CA')
+e18 = Election(name='Live Oak City Vacancy Election',
+               date='2021-12-07', state_id='CA')
+e19 = Election(name='Tulare County Employee’s Retirement Association Election',
+               date='2021-12-07', state_id='CA')
+e20 = Election(name='City of Oxnard District 2, Special Vacancy Election',
+               date='2021-11-02', state_id='CA')
+db.session.add_all([e1, e2, e3, e4, e5, e6, e7, e8, e9, e10,
+                   e11, e12, e13, e14, e15, e16, e17, e18, e19, e20])
+db.session.commit()
+
+e1 = Election(name='Statewide Election - Ballot Measures - Polls open 7:00am to 7:00pm',
+              date='2021-11-02', state_id='CO')
+e2 = Election(name='Republican Party Precinct Caucus Day',
+              date='2022-03-01', state_id='CO')
+e3 = Election(name='Democratic Party Precinct Caucus Day',
+              date='2022-03-01', state_id='CO')
+e4 = Election(name='State Primary Election', date='2022-06-08', state_id='CO')
+e5 = Election(name='State General Election', date='2022-11-08', state_id='CO')
+
+db.session.add_all([e1, e2, e3, e4, e5])
+db.session.commit()
+
+e1 = Election(name='Statewide Election', date='2021-11-02', state_id='CT')
+e2 = Election(name='State Primary Election', date='2022-08-09', state_id='CT')
+e3 = Election(name='State General Election', date='2022-11-08', state_id='CT')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='Election - Town of Dewey Beach',
+              date='2021-09-18', state_id='DE')
+e2 = Election(name='Election - Town of Dagsboro',
+              date='2021-12-04', state_id='DE')
+e3 = Election(name='State Primary Election', date='2022-09-08', state_id='DE')
+e4 = Election(name='State General Election', date='2022-11-08', state_id='DE')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='District of Columbia - General Election',
+              date='2022-11-08', state_id='DC')
+db.session.add(e1)
+db.session.commit()
+
+e1 = Election(name='Florida - City of Ocala Election',
+              date='2021-09-21', state_id='FL')
+e2 = Election(name='Special Primary Election - U.S. House of Representatives District 20',
+              date='2021-11-02', state_id='FL')
+e3 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='FL')
+e4 = Election(name='Special General Election - U.S. House of Representatives District 20',
+              date='2022-01-11', state_id='FL')
+e5 = Election(name='State Primary Election', date='2022-08-23', state_id='FL')
+e6 = Election(name='State General Election', date='2022-11-08', state_id='FL')
+db.session.add_all([e1, e2, e3, e4, e5, e6])
+db.session.commit()
+
+e1 = Election(name='Special Election', date='2021-09-21', state_id='GA')
+e2 = Election(name='Special Election Runoff', date='2021-10-19', state_id='GA')
+e3 = Election(name='General Election/Special Election',
+              date='2021-11-02', state_id='GA')
+e4 = Election(name='General Election/Special Election Runoff',
+              date='2021-11-30', state_id='GA')
+e5 = Election(name='State Primary Election', date='2022-05-24', state_id='GA')
+e6 = Election(name='State Primary Runoff', date='2022-06-26', state_id='GA')
+e7 = Election(name='State General Election', date='2022-11-08', state_id='GA')
+e8 = Election(name='State Runoff Election', date='2022-12-06', state_id='GA')
+e9 = Election(name='Federal Runoff Election', date='2023-01-10', state_id='GA')
+db.session.add_all([e1, e2, e3, e4, e5, e6, e7, e8, e9])
+db.session.commit()
+
+e1 = Election(name='State Primary Election', date='2022-08-13', state_id='HI')
+e2 = Election(name='State General Election', date='2022-11-08', state_id='HI')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='ID')
+e2 = Election(name='City Runoff Elections', date='2021-12-02', state_id='ID')
+e3 = Election(name='State Primary Election',
+              date='2022-05-19', state_id='ID')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='ID')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='State Primary Election', date='2022-06-28', state_id='IL')
+e2 = Election(name='State General Election', date='2022-11-08', state_id='IL')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='IN')
+e2 = Election(name='State Primary Election', date='2022-05-03', state_id='IN')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='IN')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='City Primary Elections', date='2021-10-05', state_id='IA')
+e2 = Election(name='Regular City and Regular School Election',
+              date='2021-11-02', state_id='IA')
+e3 = Election(name='City Runoff Elections',
+              date='2021-11-30', state_id='IA')
+e4 = Election(name='State Primary Election',
+              date='2022-06-07', state_id='IA')
+e5 = Election(name='State General Election', date='2022-11-08', state_id='IA')
+db.session.add_all([e1, e2, e3, e4, e5])
+db.session.commit()
+
+e1 = Election(name='Kansas Municipal General Election',
+              date='2021-11-02', state_id='KS')
+e2 = Election(name='State Primary Election',
+              date='2022-08-02', state_id='KS')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='KS')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='State Primary Election',
+              date='2022-05-17', state_id='KY')
+e2 = Election(name='State General Election',
+              date='2022-11-08', state_id='KY')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Open Primary/Orleans Municipal Parochial Primary Election',
+              date='2021-11-13', state_id='LA')
+e2 = Election(name='Open Primary/Orleans Municipal Parochial General Election',
+              date='2021-12-11', state_id='LA')
+e3 = Election(name='Municipal Primary Election',
+              date='2022-03-26', state_id='LA')
+e4 = Election(name='Municipal General Election',
+              date='2022-04-30', state_id='LA')
+e5 = Election(name='State Primary Election',
+              date='2022-11-08', state_id='LA')
+e6 = Election(name='State General Election',
+              date='2022-12-10', state_id='LA')
+db.session.add_all([e1, e2, e3, e4, e5, e6])
+db.session.commit()
+
+e1 = Election(name='Maine Referendum Election',
+              date='2021-11-02', state_id='ME')
+e2 = Election(name='Maine Special Election for State Representative District 86',
+              date='2021-11-02', state_id='ME')
+e3 = Election(name='State Primary Election',
+              date='2022-06-14', state_id='ME')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='ME')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='Maryland Municipal General Election',
+              date='2021-11-02', state_id='MD')
+e2 = Election(name='State Primary Election',
+              date='2022-06-28', state_id='MD')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='MD')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='Massachusetts Preliminary Municipal Election',
+              date='2021-09-14', state_id='MA')
+e2 = Election(name='Massachusetts Municipal Election',
+              date='2021-11-02', state_id='MA')
+e3 = Election(name='State Primary Election',
+              date='2022-09-20', state_id='MA')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='MA')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='MI')
+e2 = Election(name='State Primary Election',
+              date='2022-08-02', state_id='MI')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='MI')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='MN')
+e2 = Election(name='Minnesota Precinct Caucus',
+              date='2022-02-01', state_id='MN')
+e3 = Election(name='Minnesota March Township Election',
+              date='2021-03-08', state_id='MN')
+e4 = Election(name='State Primary Election',
+              date='2022-08-09', state_id='MN')
+e5 = Election(name='State General Election',
+              date='2022-11-08', state_id='MN')
+db.session.add_all([e1, e2, e3, e4, e5])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='MS')
+e2 = Election(name='Statewide General/Special Runoff Election',
+              date='2021-12-23', state_id='MS')
+e3 = Election(name='State Primary Election',
+              date='2022-06-07', state_id='MS')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='MS')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='MO')
+e2 = Election(name='Bond Elections',
+              date='2022-02-08', state_id='MO')
+e3 = Election(name='Charter City and Charter Counties Elections',
+              date='2022-03-08', state_id='MO')
+e4 = Election(name='General Municipal Election Day',
+              date='2022-04-05', state_id='MO')
+e5 = Election(name='State Primary Election',
+              date='2022-07-06', state_id='MO')
+e6 = Election(name='State General Election',
+              date='2022-11-08', state_id='MO')
+db.session.add_all([e1, e2, e3, e4, e5, e6])
+db.session.commit()
+
+e1 = Election(name='Municipal General Election',
+              date='2021-11-02', state_id='MT')
+e2 = Election(name='State Primary Election',
+              date='2022-06-07', state_id='MT')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='MT')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='State Primary Election',
+              date='2022-05-10', state_id='NE')
+e2 = Election(name='State General Election',
+              date='2022-11-08', state_id='NE')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='State Primary Election',
+              date='2022-06-14', state_id='NV')
+e2 = Election(name='State General Election',
+              date='2022-11-08', state_id='NV')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Rockingham County District 6 (Derry) Primary Election',
+              date='2021-10-19', state_id='NH')
+e2 = Election(name='Cheshire County District 9 Special Election',
+              date='2021-10-26', state_id='NH')
+e3 = Election(name='Rockingham County District 6 (Derry) Special Election',
+              date='2021-12-07', state_id='NH')
+e4 = Election(name='State Primary Election',
+              date='2022-09-13', state_id='NH')
+e5 = Election(name='State General Election',
+              date='2022-11-08', state_id='NH')
+db.session.add_all([e1, e2, e3, e4, e5])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='NJ')
+e2 = Election(name='State Primary Election',
+              date='2022-06-07', state_id='NJ')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='NJ')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+
+e1 = Election(name='New Mexico Regular Local Elections',
+              date='2021-11-02', state_id='NM')
+e2 = Election(name='New Mexico Municipal Officer Election',
+              date='2022-03-01', state_id='NM')
+e3 = Election(name='State Primary Election',
+              date='2022-06-07', state_id='NM')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='NM')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='NY')
+e2 = Election(name='State Primary Election',
+              date='2022-06-28', state_id='NY')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='NY')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='North Carolina October Municipal Election',
+              date='2021-10-05', state_id='NC')
+e2 = Election(name='North Carolina November Municipal Election',
+              date='2021-11-02', state_id='NC')
+e3 = Election(name='State Primary Election',
+              date='2022-03-08', state_id='NC')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='NC')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='North Dakota Township Elections',
+              date='2022-03-15', state_id='ND')
+e2 = Election(name='North Dakota City Elections',
+              date='2022-06-14', state_id='ND')
+e3 = Election(name='State Primary Election',
+              date='2022-06-14', state_id='ND')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='ND')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='OH')
+e2 = Election(name='State Primary Election',
+              date='2022-05-03', state_id='OH')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='OH')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='Oklahoma Special Election - Special Candidate and Propositions',
+              date='2021-09-14', state_id='OK')
+e2 = Election(name='Oklahoma Special Election - Special Proposition Election',
+              date='2021-10-12', state_id='OK')
+e3 = Election(name='Oklahoma Special Election - Special Candidate and Propositions',
+              date='2021-11-09', state_id='OK')
+e4 = Election(name='Oklahoma Special Election - Spcial Proposition',
+              date='2021-12-14', state_id='OK')
+e5 = Election(name='Oklahoma Board of Education Primary Special Elections',
+              date='2022-02-08', state_id='OK')
+e6 = Election(name='Oklahoma Board of Education General Special Elections',
+              date='2022-04-05', state_id='OK')
+e7 = Election(name='State Primary Election',
+              date='2022-06-28', state_id='OK')
+e8 = Election(name='State Primary Runoff',
+              date='2022-08-23', state_id='OK')
+e9 = Election(name='State General Election',
+              date='2022-11-08', state_id='OK')
+db.session.add_all([e1, e2, e3, e4, e5, e6, e7, e8, e9])
+db.session.commit()
+
+e1 = Election(name='Statewide Municipal Election',
+              date='2021-09-21', state_id='OR')
+e2 = Election(name='Statewide Municipal Election',
+              date='2021-11-02', state_id='OR')
+e3 = Election(name='State Primary Election',
+              date='2022-05-17', state_id='OR')
+e4 = Election(name='State General Election',
+              date='2022-11-08', state_id='OR')
+
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='PA')
+e2 = Election(name='State Primary Election',
+              date='2022-05-17', state_id='PA')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='PA')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='State Primary Election',
+              date='2022-09-13', state_id='RI')
+e2 = Election(name='State Primary Runoff',
+              date='2022-09-24', state_id='RI')
+e3 = Election(name='State General Election',
+              date='2022-11-08', state_id='RI')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='South Carolina - City of Orangeburg General Election',
+              date='2021-09-14', state_id='SC')
+e2 = Election(name='South Carolina - Laurens County Council District 3 Election',
+              date='2021-09-21', state_id='SC')
+e3 = Election(name='South Carolina - Town of Blenheim Special Election',
+              date='2021-10-05', state_id='SC')
+e4 = Election(name='South Carolina - Rich/Lex School Board District 5 Special Election',
+              date='2021-10-12', state_id='SC')
+e5 = Election(name='South Carolina - City of Rock Hill General Election',
+              date='2021-10-19', state_id='SC')
+e6 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='SC')
+e7 = Election(name='South Carolina - Greenwood County Council Spec Election',
+              date='2021-12-28', state_id='SC')
+e8 = Election(name='State Primary Election', date='2022-06-14', state_id='SC')
+e9 = Election(name='State Primary Runoff', date='2022-06-28', state_id='SC')
+e10 = Election(name='State General Election', date='2022-11-08', state_id='SC')
+db.session.add_all([e1, e2, e3, e4, e5, e6, e7, e8, e9, e10])
+db.session.commit()
+
+e1 = Election(name='State Primary Election',
+              date='2022-06-07', state_id='SD')
+e2 = Election(name='State General Election',
+              date='2022-11-08', state_id='SD')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Tennessee - City of Dickson Election',
+              date='2021-09-23', state_id='TN')
+e2 = Election(name='Tennessee - Town of Centerville Election',
+              date='2021-10-02', state_id='TN')
+e3 = Election(name='Tennessee - City of Franklin Election',
+              date='2021-10-26', state_id='TN')
+e4 = Election(name='Statewide Municipal Elections',
+              date='2021-11-02', state_id='TN')
+e5 = Election(name='Tennessee - Town of Ashland City Election',
+              date='2021-12-04', state_id='TN')
+e6 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='TN')
+e7 = Election(name='State and County Primary Election',
+              date='2022-05-03', state_id='TN')
+e8 = Election(name='State Primary Election', date='2022-08-04', state_id='TN')
+e9 = Election(name='State General Election', date='2022-11-08', state_id='TN')
+db.session.add_all([e1, e2, e3, e4, e5, e6, e7, e8, e9])
+db.session.commit()
+
+e1 = Election(name='Texas - Uniform Election',
+              date='2021-11-02', state_id='TX')
+e2 = Election(name='State Primary Election', date='2022-03-01', state_id='TX')
+e3 = Election(name='Texas - Uniform Election',
+              date='2022-05-07', state_id='TX')
+e4 = Election(name='Texas - Runoff Election',
+              date='2022-05-24', state_id='TX')
+e5 = Election(name='State General Election', date='2022-11-08', state_id='TX')
+db.session.add_all([e1, e2, e3, e4, e5])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='UT')
+e2 = Election(name='State Primary Election', date='2022-06-28', state_id='UT')
+e3 = Election(name='State General Election', date='2022-11-08', state_id='UT')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='State Primary Election', date='2022-08-09', state_id='VT')
+e2 = Election(name='State General Election', date='2022-11-08', state_id='VT')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='VA')
+e3 = Election(name='Statewide General Election',
+              date='2022-05-03', state_id='VA')
+e3 = Election(name='State Primary Election', date='2022-06-21', state_id='VA')
+e4 = Election(name='State General Election', date='2022-11-08', state_id='VA')
+db.session.add_all([e1, e2, e3, e4])
+db.session.commit()
+
+e1 = Election(name='Statewide General Election',
+              date='2021-11-02', state_id='WA')
+e2 = Election(name='State Primary Election', date='2022-08-02', state_id='WA')
+e3 = Election(name='State General Election', date='2022-11-08', state_id='WA')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='State Primary Election', date='2022-05-10', state_id='WV')
+e2 = Election(name='State General Election', date='2022-11-08', state_id='WV')
+db.session.add_all([e1, e2])
+db.session.commit()
+
+e1 = Election(name='Wisconsin - Spring Election',
+              date='2022-04-05', state_id='WI')
+e2 = Election(name='State Primary Election', date='2022-08-09', state_id='WI')
+e3 = Election(name='State General Election', date='2022-11-08', state_id='WI')
+db.session.add_all([e1, e2, e3])
+db.session.commit()
+
+e1 = Election(name='Wyoming - Special Election',
+              date='2022-03-22', state_id='WY')
+e2 = Election(name='Wyoming - Town Elections',
+              date='2022-05-03', state_id='WY')
+e3 = Election(name='State Primary Election', date='2022-08-16', state_id='WY')
+e4 = Election(name='State General Election', date='2022-11-08', state_id='WY')
+db.session.add_all([e1, e2, e3, e4])
 db.session.commit()

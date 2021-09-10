@@ -6,7 +6,7 @@ import requests
 from states import US_STATES
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
-from models import connect_db, db, User, State, RegistrationRule, StateRegistrationRule
+from models import connect_db, db, User, State, Election, RegistrationRule, StateRegistrationRule
 
 from sqlalchemy.exc import IntegrityError
 import os

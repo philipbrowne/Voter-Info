@@ -84,6 +84,20 @@ class User(db.Model):
         return self.created_at.strftime("%B %-d, %Y")
 
 
+class Election(db.Model):
+    """State Election model"""
+    __tablename__ = 'elections'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    state_id = db.Column(db.String(20), db.ForeignKey(
+        'states.id', onupdate='CASCADE', ondelete='CASCADE'))
+
+    @property
+    def full_date(self):
+        self.date.strftime('%A, %B %-d, %Y')
+
+
 class RegistrationRule(db.Model):
     """Voter registration rule model"""
     __tablename__ = 'registration_rules'
@@ -98,17 +112,3 @@ class StateRegistrationRule(db.Model):
         'states.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
     rule_id = db.Column(db.Integer, db.ForeignKey(
         'registration_rules.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-
-
-class Election(db.Model):
-    """Election model"""
-    __tablename__ = 'elections'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    state_id = db.Column(db.String(20), db.ForeignKey(
-        'states.id', onupdate='CASCADE', ondelete='CASCADE'))
-
-    @property
-    def full_date(self):
-        self.date.strftime('%A, %B %-d, %Y')
