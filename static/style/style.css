@@ -4,6 +4,13 @@ body{
   font-family: 'Poppins', sans-serif !important;
 }
 
+#img-preload {
+  visibility: hidden;
+  position: absolute;
+  left: -999em;
+  top: -999em;
+}
+
 #navbarcontainer {
   background-color: #01013a;
 }

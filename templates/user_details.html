@@ -1,102 +1,104 @@
-{% extends 'base.html' %} {% block content %} 
-<div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/user-profile-v3.png" alt="" class="img-fluid"></div>
-
-<table class="table table-sm table-hover table-responsive user-table">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">Name</th>
-            <td>{{user.first_name}} {{user.last_name}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Username</th>
-            <td>{{user.username}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Email Address</th>
-            <td>{{user.email}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Street Address</th>
-            <td>{{user.street_address}}</td>
-        </tr>
-        <tr>
-            <th scope="row">City</th>
-            <td>{{user.city.title()}}</td>
-        </tr>
-        <tr>
-            <th scope="row">State</th>
-            <td>{{user.state.name.title()}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Postal Code</th>
-            <td>{{user.zip_code}}</td>
-        </tr>
-        <tr>
-            <th scope="row">County/District</th>
-            <td>{{user.county.title()}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Public Officials</th>
-            <td><a href="/officials" target="_blank">Public Officials for Your Area</a></td>
-        </tr>
-        <tr>
-            <th scope="row">State Information</th>
-            <td><a href="/state-information">Voter Information for {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Voter Registration</th>
-            <td><a href="{{user.state.registration_url}}" target="_blank">Register to Vote in {{user.state.name}}</a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Upcoming Elections</th>
-            <td>
-                <a href="{{user.state.elections_url}}" target="_blank">Upcoming Elections in {{user.state.name}}</a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Check Your Registration</th>
-            <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
-                    {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Vote by Mail & Absentee Ballot</th>
-            <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
-            </td>
-        </tr> {% if user.state.ballot_tracker_url %} <tr>
-            <th scope="row">Mail/Absentee Vote Tracker</th>
-            <td><a href="{{user.state.ballot_tracker_url}}" target="_blank">Track Your {{user.state.name}} ballot</a>
-            </td>
-        </tr> {% endif %} <tr>
-            <th scope="row">Find Your Polling Location</th>
-            <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
-                    {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Local Election Office or Clerk Information</th>
-            <td><a href="{{user.state.local_election_url}}" target="_blank">Find local election office information in
-                    {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Convicted of a Felony? Visit this Website to Restore your Vote. </th>
-            <td><a href="https://campaignlegal.org/restoreyourvote" target="_blank">Restore your vote in
-                    {{user.state.name}}</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+{% extends 'base.html' %} {% block content %} <div class="container p-1 d-flex flex-column align-items-center"><img
+        src="/assets/images/user-profile-v4.gif" alt="" class="img-fluid"></div>
+<div class="my-4">
+    <table class="table table-sm table-hover table-responsive user-table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{user.first_name}} {{user.last_name}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Username</th>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Email Address</th>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Street Address</th>
+                <td>{{user.street_address}}</td>
+            </tr>
+            <tr>
+                <th scope="row">City</th>
+                <td>{{user.city.title()}}</td>
+            </tr>
+            <tr>
+                <th scope="row">State</th>
+                <td>{{user.state.name.title()}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Postal Code</th>
+                <td>{{user.zip_code}}</td>
+            </tr>
+            <tr>
+                <th scope="row">County/District</th>
+                <td>{{user.county.title()}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Public Officials</th>
+                <td><a href="/officials" target="_blank">Public Officials for Your Area</a></td>
+            </tr>
+            <tr>
+                <th scope="row">State Information</th>
+                <td><a href="/state-information">Voter Information for {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Voter Registration</th>
+                <td><a href="{{user.state.registration_url}}" target="_blank">Register to Vote in
+                        {{user.state.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Upcoming Elections</th>
+                <td>
+                    <a href="{{user.state.elections_url}}" target="_blank">Upcoming Elections in {{user.state.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Check Your Registration</th>
+                <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
+                        {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Vote by Mail & Absentee Ballot</th>
+                <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
+                </td>
+            </tr> {% if user.state.ballot_tracker_url %} <tr>
+                <th scope="row">Mail/Absentee Vote Tracker</th>
+                <td><a href="{{user.state.ballot_tracker_url}}" target="_blank">Track Your {{user.state.name}}
+                        ballot</a>
+                </td>
+            </tr> {% endif %} <tr>
+                <th scope="row">Find Your Polling Location</th>
+                <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
+                        {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Local Election Office or Clerk Information</th>
+                <td><a href="{{user.state.local_election_url}}" target="_blank">Find local election office information
+                        in {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Convicted of a Felony? Visit this Website to Restore your Vote. </th>
+                <td><a href="https://campaignlegal.org/restoreyourvote" target="_blank">Restore your vote in
+                        {{user.state.name}}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<div class="my-2 d-flex flex-column align-items-center"><a href="/users/{{user.username}}/edit"><button class="btn btn-primary mx-1 btn-lg">Edit</button></a>
+<div class="my-2 d-flex flex-column align-items-center"><a href="/users/{{user.username}}/edit"><button
+            class="btn btn-primary mx-1 btn-lg">Edit</button></a>
     <form action="/users/{{user.username}}/delete" method="POST" class="d-inline mt-2"><button
             class="btn btn-danger mx-1 btn-lg">Delete</button></form>
 </div>
-
 <script>
     const data = {{ data | tojson | safe}}
 </script> {% endblock %}

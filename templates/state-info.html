@@ -1,84 +1,87 @@
 {% extends 'index.html' %} {% block content %} <div class="container d-flex flex-column align-items-center">
-    <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/state-voting-info-v5.png" alt="" class="img-fluid"></div>
-    
-        <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
+    <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/state-voting-info-v6.gif"
+            alt="" class="img-fluid"></div>
+    <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
 </div>
 <div class="my-2 card p-2 d-flex flex-column align-items-center">
     <h5 class="dark-blue text-center">Information and Links for {{user.state.name}}</h5>
-<table class="table table-sm table-hover table-responsive">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">Name</th>
-            <td><h5>{{user.state.name}} ({{user.state.id}})</h5></td>
-        </tr>
-        <tr>
-            <th scope="row">Capital</th>
-            <td>{{user.state.capital}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Voter Registration</th>
-            <td><a href="{{user.state.registration_url}}" target="_blank">Register to Vote in {{user.state.name}}</a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Upcoming Elections</th>
-            <td>
-                <a href="{{user.state.elections_url}}" target="_blank">Upcoming Elections in {{user.state.name}}</a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Check Your Registration</th>
-            <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
-                    {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Vote by Mail & Absentee Ballot</th>
-            <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
-            </td>
-        </tr> {% if user.state.ballot_tracker_url %} <tr>
-            <th scope="row">Mail/Absentee Vote Tracker</th>
-            <td><a href="{{user.state.ballot_tracker_url}}" target="_blank">Track Your {{user.state.name}}
-                    Absentee/Mail-In Ballot</a>
-            </td>
-        </tr> {% endif %} <tr>
-            <th scope="row">Find Your Polling Location</th>
-            <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
-                    {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Local Election Office or Clerk Information</th>
-            <td><a href="{{user.state.local_election_url}}" target="_blank">Find local election office information in
-                    {{user.state.name}}</a></td>
-        </tr>
-        <tr>
-            <th scope="row">Convicted of a Felony? Visit this Website to Restore your Vote. </th>
-            <td><a href="https://campaignlegal.org/restoreyourvote" target="_blank">Restore your vote in
-                    {{user.state.name}}</a></td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-sm table-hover table-responsive">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td>
+                    <h5>{{user.state.name}} ({{user.state.id}})</h5>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Capital</th>
+                <td>{{user.state.capital}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Voter Registration</th>
+                <td><a href="{{user.state.registration_url}}" target="_blank">Register to Vote in
+                        {{user.state.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Upcoming Elections</th>
+                <td>
+                    <a href="{{user.state.elections_url}}" target="_blank">Upcoming Elections in {{user.state.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Check Your Registration</th>
+                <td><a href="{{user.state.check_registration_url}}" target="_blank">Check Your Voter Registration in
+                        {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Vote by Mail & Absentee Ballot</th>
+                <td><a href="{{user.state.absentee_ballot_url}}" target="_blank">Vote by Mail in {{user.state.name}}</a>
+                </td>
+            </tr> {% if user.state.ballot_tracker_url %} <tr>
+                <th scope="row">Mail/Absentee Vote Tracker</th>
+                <td><a href="{{user.state.ballot_tracker_url}}" target="_blank">Track Your {{user.state.name}}
+                        Absentee/Mail-In Ballot</a>
+                </td>
+            </tr> {% endif %} <tr>
+                <th scope="row">Find Your Polling Location</th>
+                <td><a href="{{user.state.polling_location_url}}" target="_blank">Find Your Polling Location in
+                        {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Local Election Office or Clerk Information</th>
+                <td><a href="{{user.state.local_election_url}}" target="_blank">Find local election office information
+                        in {{user.state.name}}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Convicted of a Felony? Visit this Website to Restore your Vote. </th>
+                <td><a href="https://campaignlegal.org/restoreyourvote" target="_blank">Restore your vote in
+                        {{user.state.name}}</a></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
 <div class="card my-3 d-flex flex-column align-items-center justify-content-center">
-    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/state-voter-registration-rules-200x200.png" alt="Registration Rules"></div>
-        <h4 class="dark-blue text-center">Registration Rules for {{user.state.name}}</h4>
-<ul class="list-group">
-        <li class="list-group-item list-group-item-action"><h5 class="my-1 dark-blue">In order to vote in {{user.state.name}}..</h5></li>
-        {% for rule in user.state.registration_rules %}
-        <li class="list-group-item list-group-item-action fs-6">{{rule.rule}}</li>
-        {% endfor %}
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2"
+            src="/assets/images/state-voter-registration-rules-gif.gif" alt="Registration Rules"></div>
+    <h4 class="dark-blue text-center">Registration Rules for {{user.state.name}}</h4>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-action">
+            <h5 class="my-1 dark-blue">In order to vote in {{user.state.name}}..</h5>
+        </li> {% for rule in user.state.registration_rules %} <li class="list-group-item list-group-item-action fs-6">
+            {{rule.rule}}</li> {% endfor %}
     </ul>
 </div>
 <div class="my-2 card p-2 d-flex flex-column align-items-center">
-    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/voter-registration-deadlines-200x200.png" alt="Voter Registration Deadlines"></div>
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2"
+            src="/assets/images/voter-registration-deadlines-gif.gif" alt="Voter Registration Deadlines"></div>
     <h5 class="my-1 dark-blue">{{user.state.name}} Voter Registration Deadlines</h5>
-    
     <table class="table table-sm table-hover table-responsive">
         <thead>
             <tr>
@@ -102,9 +105,9 @@
         </tbody>
     </table>
 </div>
-
 <div class="my-2 card p-2 d-flex flex-column align-items-center">
-    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/absentee-ballot-deadlines-200x200.png" alt="Absentee Ballot Deadlines"></div>
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2"
+            src="/assets/images/absentee-ballot-deadlines-gif.gif" alt="Absentee Ballot Deadlines"></div>
     <h5 class="my-1 dark-blue">{{user.state.name}} Absentee Ballot Deadlines</h5>
     <table class="table table-sm table-hover table-responsive">
         <thead>
@@ -134,7 +137,8 @@
     </table>
 </div>
 <div class="my-2 card p-2 d-flex flex-column align-items-center">
-    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2" src="/assets/images/public-officials-state-200x200.png" alt="Public Officials"></div>
+    <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2"
+            src="/assets/images/state-public-officials-gif.gif" alt="Public Officials"></div>
     <h5 class="my-1 dark-blue">Public Officials in {{user.state.name}}</h5>
     <table class="table table-sm table-hover table-responsive">
         <thead>
