@@ -1,9 +1,33 @@
-{% extends 'base.html' %} {% block content %} <h1>Upcoming Elections in {{user.state.name}}</h1>
-<div class="text-success fs-4">
-    <div><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag"></div>
-    <div class="fs-3 my-2">More info on elections in {{user.state.name}} can be found <a
-            href="{{user.state.elections_url}}" target="_blank">here</a>.</div>
-</div> {% if data['election'] %} <div class="container mt-4">
+{% extends 'base.html' %} {% block content %} <div class="container d-flex flex-column align-items-center text-center">
+    <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/elections-gif.gif"
+        alt="" class="img-fluid">
+        
+    </div>
+<div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag">
+</div>
+</div>
+<div class="my-2 card p-2 d-flex flex-column align-items-center">
+    <div><h6 class="text-center dark-blue">Elections in {{user.state.name}}</h6></div>
+<table class="table table-sm table-hover table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">Election</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for election in user.state.elections  %}
+        <tr>
+            <th scope="row">{{election.name}}</th>
+            <td>{{election.full_date}}</td>
+        </tr>
+        {% endfor %} 
+    </tbody>
+</table>
+<div class="my-2"><small>More info on elections in {{user.state.name}} can be found on <a
+    href="{{user.state.elections_url}}" target="_blank">the official website</a>.</small></div>
+</div>
+{% if data['election'] %} <div class="container mt-4">
     <div class="card">
         <h3>{{data['election']['name']}}</h3>
         <h5>{{data['election']['electionDay']}}</h5> {% if data['contests'] %} {% for contest in data['contests'] %}

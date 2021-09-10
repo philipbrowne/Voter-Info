@@ -171,7 +171,6 @@ def log_out_user():
 @app.route('/users/<username>')
 def show_user_profile(username):
     """Shows profile of current user"""
-    print(session['username'])
     if 'username' not in session:
         flash('Please sign in first', 'danger')
         return redirect('/')
@@ -183,7 +182,6 @@ def show_user_profile(username):
     resp = requests.get(
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
-
     return render_template('user_details.html', user=curr_user, data=response_info)
 
 

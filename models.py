@@ -96,7 +96,7 @@ class Election(db.Model):
 
     @property
     def full_date(self):
-        self.date.strftime('%A, %B %-d, %Y')
+        return self.date.strftime('%A, %B %-d, %Y')
 
 
 class RegistrationRule(db.Model):
