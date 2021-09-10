@@ -33,8 +33,8 @@ class State(db.Model):
     absentee_ballot_url = db.Column(db.Text)
     local_election_url = db.Column(db.Text)
     ballot_tracker_url = db.Column(db.Text)
-    registration_rules = db.relationship('RegistrationRule', secondary='state_registration_rules', backref='states')
-    
+    registration_rules = db.relationship(
+        'RegistrationRule', secondary='state_registration_rules', backref='states')
 
 
 class User(db.Model):
@@ -52,6 +52,8 @@ class User(db.Model):
     zip_code = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     state = db.relationship('State', backref='users')
+    created_at = db.Column(db.DateTime(timezone=True),
+                           default=datetime.now)
 
     @ classmethod
     def register(cls, username, password):
@@ -77,15 +79,36 @@ class User(db.Model):
         else:
             return False
 
+    @property
+    def registration_date(self):
+        return self.created_at.strftime("%B %-d, %Y")
+
+
 class RegistrationRule(db.Model):
     """Voter registration rule model"""
     __tablename__ = 'registration_rules'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     rule = db.Column(db.Text, nullable=False, unique=True)
-    
+
+
 class StateRegistrationRule(db.Model):
-    """Table linking Voter Registration Rule to State""" 
+    """Table linking Voter Registration Rule to State"""
     __tablename__ = 'state_registration_rules'
     state_id = db.Column(db.String(2), db.ForeignKey(
         'states.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-    rule_id = db.Column(db.Integer, db.ForeignKey('registration_rules.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
+    rule_id = db.Column(db.Integer, db.ForeignKey(
+        'registration_rules.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
+
+
+class Election(db.Model):
+    """Election model"""
+    __tablename__ = 'elections'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(255), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    state_id = db.Column(db.String(20), db.ForeignKey(
+        'states.id', onupdate='CASCADE', ondelete='CASCADE'))
+
+    @property
+    def full_date(self):
+        self.date.strftime('%A, %B %-d, %Y')
