@@ -163,8 +163,9 @@ def log_in():
 @app.route('/logout')
 def log_out_user():
     """Logs user out of site"""
+    username = session['username']
     session.pop('username')
-    flash('User logged out!', 'success')
+    flash(f'{username} has logged out.', 'success')
     return redirect('/')
 
 
