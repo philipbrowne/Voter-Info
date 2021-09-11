@@ -35,8 +35,10 @@ class State(db.Model):
     ballot_tracker_url = db.Column(db.Text)
     registration_rules = db.relationship(
         'RegistrationRule', secondary='state_registration_rules', backref='states')
+
     def __repr__(self):
         return f'<State {self.id} {self.name}>'
+
 
 class User(db.Model):
     """User Model"""
@@ -55,9 +57,10 @@ class User(db.Model):
     state = db.relationship('State', backref='users')
     created_at = db.Column(db.DateTime(timezone=True),
                            default=datetime.now)
+
     def __repr__(self):
         return f'<User {self.username} {self.first_name} {self.last_name}>'
-    
+
     @ classmethod
     def register(cls, username, password, first_name, last_name, street_address, city, county, state_id, zip_code, email):
         """Register usedr with hashed password and return user"""
@@ -88,7 +91,7 @@ class User(db.Model):
     @property
     def registration_date(self):
         return self.created_at.strftime("%B %-d, %Y")
-    
+
     @property
     def full_address(self):
         return f'{self.street_address} {self.city}, {self.state_id} {self.zip_code}'

@@ -1,4 +1,3 @@
-from app import app
 import os
 from unittest import TestCase
 from sqlalchemy.exc import IntegrityError
@@ -6,8 +5,8 @@ from sqlalchemy.exc import IntegrityError
 from models import db, User, State, Election, RegistrationRule, StateRegistrationRule
 
 os.environ['DATABASE_URL'] = 'postgresql://voter-test'
+from app import app
 
-db.drop_all()
 db.create_all()
 
 class UserModelTestCase(TestCase):
@@ -43,8 +42,8 @@ class UserModelTestCase(TestCase):
         california = State(id='CA', name='California', capital='Sacramento')
         db.session.add(california)
         db.session.commit()
-        u1 = User(username='TEST_USER', password='TEST_HASHED_PW', first_name='TEST_FIRST', last_name='TEST_LAST', street_address='TEST_STREET_ADDRESS', city='TEST_CITY', state_id='CA', zip_code='21046', email='TESTEMAIL@test.com')
-        u3 = u1.register(u1.username, u1.password)
+        u1 = User(username='TEST_USER', password='TEST_HASHED_PW', first_name='TEST_FIRST', last_name='TEST_LAST', street_address='TEST_STREET_ADDRESS', city='TEST_CITY', county='TEST_COUNTY', state_id='CA', zip_code='21046', email='TESTEMAIL@test.com')
+        u3 = u1.register(u1.username, u1.password, u1.first_name, u1.last_name, u1.street_address, u1.city, u1.county, u1.state_id, u1.zip_code, u1.email)
         db.session.commit()
         self.assertNotEqual(u1.password, u3.password)
     
@@ -53,16 +52,14 @@ class UserModelTestCase(TestCase):
         db.session.add(california)
         db.session.commit()
         u1 = User(username='TEST_USER', password='TEST_HASHED_PW', first_name='TEST_FIRST', last_name='TEST_LAST', street_address='TEST_STREET_ADDRESS', city='TEST_CITY', state_id='CA', zip_code='21046', email='TESTEMAIL@test.com')
-        u1.register(u1.username, u1.password)
+        u1 = u1.register(u1.username, u1.password, u1.first_name, u1.last_name, u1.street_address, u1.city, u1.county, u1.state_id, u1.zip_code, u1.email)
         db.session.add(u1)
         db.session.commit()
         dupe1 = User(username='TEST_USER', password='DUPE_HASHED_PW', first_name='DUPE_FIRST', last_name='DUPE_LAST', street_address='DUPE_STREET_ADDRESS', city='DUPE_CITY', state_id='CA', zip_code='21046', email='DUPEEMAIL@test.com')
-        dupe1.register(dupe1.username, dupe1.password)
         db.session.add(dupe1)
         self.assertRaises(IntegrityError, db.session.commit)
         db.session.rollback()
         dupe2 = User(username='UNIQUE_USER', password='UNIQUE_HASHED_PW', first_name='UNIQUE_FIRST', last_name='UNIQUE_LAST', street_address='UNIQUE_STREET_ADDRESS', city='UNIQUE_CITY', state_id='CA', zip_code='21046', email='TESTEMAIL@test.com')
-        dupe2.register(dupe2.username, dupe2.password)
         db.session.add(dupe2)
         self.assertRaises(IntegrityError, db.session.commit)
         db.session.rollback()
@@ -71,15 +68,15 @@ class UserModelTestCase(TestCase):
         california = State(id='CA', name='California', capital='Sacramento')
         db.session.add(california)
         db.session.commit()
-        u1 = User(username='TEST_USER', password='TEST_HASHED_PW', first_name='TEST_FIRST', last_name='TEST_LAST', street_address='TEST_STREET_ADDRESS', city='TEST_CITY', state_id='CA', zip_code='21046', email='TESTEMAIL@test.com')
+        u1 = User(username='TEST_USER', password='TEST_HASHED_PW', first_name='TEST_FIRST', last_name='TEST_LAST', street_address='TEST_STREET_ADDRESS', city='TEST_CITY', county='TEST_COUNTY', state_id='CA', zip_code='21046', email='TESTEMAIL@test.com')
         db.session.add(u1)
         db.session.commit()
         db.session.delete(u1)
         db.session.commit()
-        u2 = u1.register(u1.username, u1.password)
+        u2 = u1.register(u1.username, u1.password, u1.first_name, u1.last_name, u1.street_address, u1.city, u1.county, u1.state_id, u1.zip_code, u1.email)
         db.session.commit()
         self.assertEqual(u2.authenticate(u2.username, u1.password), u2)
-        # self.assertFalse(u3.authenticate(u3.username, 'WRONG_PASSWORD'))
+        self.assertFalse(u2.authenticate(u2.username, 'WRONG_PASSWORD'))
 
         
         
