@@ -4,6 +4,7 @@ import easypost
 from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
 import requests
 from states import US_STATES
+import geocoder
 
 from forms import NewUserForm, UserLoginForm, EditUserForm
 from models import connect_db, db, User, State, Election, RegistrationRule, StateRegistrationRule
@@ -38,14 +39,17 @@ def index():
         return render_template('index.html')
     return render_template('index.html')
 
-
+@app.route('/test-address')
+def test_geocoder():
+    curr_user = User.query.get_or_404(session['username'])
+    
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """User Registration Page"""
     form = NewUserForm()
     if form.validate_on_submit():
         username = form.username.data
-        password = User.register(username, form.password.data).password
+        password = form.password.data
         email = form.email.data
         first_name = form.first_name.data
         last_name = form.last_name.data
@@ -55,17 +59,17 @@ def register():
         zip_code = form.zip_code.data
         new_user = User(username=username, password=password,
                         email=email, first_name=first_name, last_name=last_name, street_address=street_address, city=city, state_id=state_id, zip_code=zip_code)
-        resp = lob.USVerification.create(
-            address=f'{street_address} {city} {state_id} {zip_code}')
-        if resp['components'].get('county'):
-            county = resp['components']['county']
+        full_address = f'{street_address} {city} {state_id} {zip_code}'
+        g = geocoder.mapquest(full_address, key=MAPQUEST_API_KEY)
+        if g.geojson['features'][0]['properties'].get('county'):
+            county = g.geojson['features'][0]['properties'].get('county')
             new_user.county = county
-        db.session.add(new_user)
         try:
+            new_user = User.register(username, password, first_name, last_name, street_address, city, county, state_id, zip_code, email)
             db.session.commit()
         except IntegrityError:
             form.username.errors = [
-                'Sorry - this username or email is already registered']
+                'Sorry - this username or email address is already registered']
             form.email.errors = [
                 'Sorry - this username or email address is already registered']
             return render_template('register.html', form=form)
@@ -88,7 +92,6 @@ def verify_user_address():
     resp = easypost.Address.create(
         verify=['delivery'], street1=street_address, city=city, state=state_id, zip=zip_code)
     success_status = resp['verifications']['delivery']['success']
-    print(success_status)
     if success_status == False:
         verify_response['errors']['error'] = 'Invalid address'
         return jsonify(verify_response)
@@ -123,23 +126,44 @@ def verify_user_address():
 @app.route('/verify-random-address', methods=['POST'])
 def verify_random_address():
     verify_response = {'response': {}, 'errors': {}}
-    address = request.json['full_address']
-    resp = lob.USVerification.create(
-        address=address)
-    if resp['deliverability'] == 'undeliverable':
+    street1 = request.json['street1']
+    city = request.json['city']
+    state = request.json['state']
+    zip = request.json['zip']
+    resp = easypost.Address.create(
+        verify=['delivery'], street1=street1, city=city, state=state, zip=zip)
+    success_status = resp['verifications']['delivery']['success']
+    if success_status == False:
         verify_response['errors']['error'] = 'Invalid address'
-        print('INVALID ADDRESS!')
         return jsonify(verify_response)
-    verified_first_line = resp['primary_line']
-    if resp['secondary_line']:
-        verified_second_line = resp['secondary_line']
-        verify_response['response'][
-            'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
-    else:
-        verify_response['response']['verified_street_address'] = verified_first_line
-    verify_response['response']['verified_city'] = resp['components']['city']
-    verify_response['response']['verified_state'] = resp['components']['state']
-    verify_response['response']['verified_zip_code'] = resp['components']['zip_code']
+    if success_status == True:
+        verified_first_line = resp['street1']
+        if resp['street2']:
+            verified_second_line = resp['street2']
+            verify_response['response'][
+                'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
+        else:
+            verify_response['response']['verified_street_address'] = verified_first_line
+        verify_response['response']['verified_city'] = resp['city']
+        verify_response['response']['verified_state'] = resp['state']
+        verify_response['response']['verified_zip_code'] = resp['zip'][0:5]
+        return jsonify(verify_response)
+    # resp = lob.USVerification.create(
+    #     address=address)
+    # if resp['deliverability'] == 'undeliverable':
+    #     verify_response['errors']['error'] = 'Invalid address'
+    #     print('INVALID ADDRESS!')
+    #     return jsonify(verify_response)
+    # verified_first_line = resp['primary_line']
+    # if resp['secondary_line']:
+    #     verified_second_line = resp['secondary_line']
+    #     verify_response['response'][
+    #         'verified_street_address'] = f'{verified_first_line} {verified_second_line}'
+    # else:
+    #     verify_response['response']['verified_street_address'] = verified_first_line
+    # verify_response['response']['verified_city'] = resp['components']['city']
+    # verify_response['response']['verified_state'] = resp['components']['state']
+    # verify_response['response']['verified_zip_code'] = resp['components']['zip_code']
     return jsonify(verify_response)
 
 

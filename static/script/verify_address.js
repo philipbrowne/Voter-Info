@@ -52,9 +52,11 @@ async function verifyUserAddress(evt) {
 async function generateRandomAddress() {
   const addresses = randAddressData.addresses;
   const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
-  const fullAddress = `${randomAddress.address1} ${randomAddress.city} ${randomAddress.state} ${randomAddress.postalCode}`;
   const res = await axios.post('/verify-random-address', {
-    full_address: fullAddress,
+    street1: randomAddress.address1,
+    city: randomAddress.city,
+    state: randomAddress.state,
+    zip: randomAddress.postalCode
   });
   data = res.data;
   if (data.errors.error) {
