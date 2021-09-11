@@ -79,7 +79,29 @@ CivicEngine API: https://developers.civicengine.com/docs/api/v1
 
 ## Project Screenshots
 
-**Representatives Page for User based on their Address**
+**Landing Page**
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/representatives-v1.png)
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/landing-page-1.png)
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/landing-page-2.png)
+
+**Election Information**
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/elections-page.png)
+
+**State Voting Information**
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/voting-info-page-1.png)
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/voting-info-page-2.png)
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/voting-info-page-3.png)
+
+**Public Officials**
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/public-officials-v2.png)
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/public-officials-v2-2.png)
+
+![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/public-officials-v2-3.png)
 
