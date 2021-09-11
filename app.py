@@ -39,10 +39,7 @@ def index():
         return render_template('index.html')
     return render_template('index.html')
 
-@app.route('/test-address')
-def test_geocoder():
-    curr_user = User.query.get_or_404(session['username'])
-    
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """User Registration Page"""
@@ -65,7 +62,8 @@ def register():
             county = g.geojson['features'][0]['properties'].get('county')
             new_user.county = county
         try:
-            new_user = User.register(username, password, first_name, last_name, street_address, city, county, state_id, zip_code, email)
+            new_user = User.register(username, password, first_name, last_name,
+                                     street_address, city, county, state_id, zip_code, email)
             db.session.commit()
         except IntegrityError:
             form.username.errors = [
