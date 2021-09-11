@@ -185,6 +185,9 @@ def log_in():
 @app.route('/logout')
 def log_out_user():
     """Logs user out of site"""
+    if 'username' not in session:
+        flash('Please sign in first', 'danger')
+        return redirect('/')
     username = session['username']
     session.pop('username')
     flash(f'{username} has logged out.', 'success')
