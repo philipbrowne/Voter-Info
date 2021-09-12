@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %} <div class="container">
+    <h1 class="dark-blue text-center">Edit User {{user.username}}</h1>
+    <form id="user-form" method="POST"> {{ form.hidden_tag() }} <div class="row">
+            <div class="col-12 col-md-4"> {{form.username.label}} {{form.username(class_="form-control")}} {% for error
+                in form.username.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small></div>
+            <div class="col-12 col-md-4"> {{form.password.label}} {{form.password(class_="form-control")}} {% for error
+                in form.password.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-4"> {{form.email.label}} {{form.email(class_="form-control")}} {% for error in
+                form.email.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6"> {{form.first_name.label}} {{form.first_name(class_="form-control")}} {% for
+                error in form.first_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
+                %}<small class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-6"> {{form.last_name.label}} {{form.last_name(class_="form-control")}} {% for
+                error in form.last_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
+                %}<small class="form-text text-muted">Required</small> </div>
+        </div>
+        <div class="row">
+            <div class="col-12"> {{form.street_address.label}} {{form.street_address(class_=" form-control")}} {% for
+                error in form.street_address.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
+                %}<small class="form-text text-muted">Required</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
+                form.city.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-4"> {{form.state_id.label}} {{form.state_id(class_="form-control")}} {% for error
+                in form.state_id.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-4"> {{form.zip_code.label}} {{form.zip_code(class_="form-control")}} {% for error
+                in form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+        </div>
+        <div id="verify-btn" class="d-flex flex-column align-items-center"><a class="btn btn-primary btn-large mt-2"
+                id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2"
+                id="random-address">Generate Random Address</a></div>
+        <div id="verify-user-address" class="mt-2"></div>
+</div> {% include 'admin-nav.j2' %} {% endblock %}

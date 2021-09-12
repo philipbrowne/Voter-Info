@@ -133,4 +133,6 @@ resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] 
     address. Please update your profile.</div> {% endif %}
 <script>
     const data = {{ resp | tojson | safe}}
-</script> {% endblock %}
+</script> 
+{% include 'admin-nav.j2' %} 
+{% endblock %}

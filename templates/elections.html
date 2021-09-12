@@ -42,4 +42,6 @@
 </div> {% endif %}
 <script>
     const data = {{ data | tojson | safe }}
-</script> {% endblock %}
+</script> 
+{% include 'admin-nav.j2' %} 
+{% endblock %}

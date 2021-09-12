@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from datetime import datetime
+import jwt
+from time import time
 
 
 db = SQLAlchemy()
@@ -19,8 +21,8 @@ class State(db.Model):
     id = db.Column(db.String(2), primary_key=True, unique=True)
     name = db.Column(db.String(255), nullable=False, unique=True)
     capital = db.Column(db.String(255), nullable=False)
-    registration_url = db.Column(db.String(255))
-    elections_url = db.Column(db.String(255))
+    registration_url = db.Column(db.Text)
+    elections_url = db.Column(db.Text)
     registration_in_person_deadline = db.Column(db.Text)
     registration_mail_deadline = db.Column(db.Text)
     registration_online_deadline = db.Column(db.Text)
@@ -57,11 +59,19 @@ class User(db.Model):
     state = db.relationship('State', backref='users')
     created_at = db.Column(db.DateTime(timezone=True),
                            default=datetime.now)
+    is_admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'<User {self.username} {self.first_name} {self.last_name}>'
 
-    @ classmethod
+    def change_password(self, password):
+        """Changes user password"""
+        hashed = bcrypt.generate_password_hash(password)
+        hashed_utf8 = hashed.decode('utf8')
+        self.password = hashed_utf8
+        db.session.commit()
+
+    @classmethod
     def register(cls, username, password, first_name, last_name, street_address, city, county, state_id, zip_code, email):
         """Register usedr with hashed password and return user"""
         hashed = bcrypt.generate_password_hash(password)
@@ -73,7 +83,29 @@ class User(db.Model):
         db.session.add(user)
         return user
 
-    @ classmethod
+    # Source: https://github.com/smonagh/flask-password-reset
+
+    def get_reset_token(self, SECRET_KEY, expires=500):
+        return jwt.encode({'reset_password': self.username, 'exp': time() + expires},
+                          key=SECRET_KEY, algorithm="HS256")
+
+    @staticmethod
+    def verify_reset_token(token, SECRET_KEY):
+        try:
+            username = jwt.decode(token, key=SECRET_KEY, algorithms="HS256")[
+                'reset_password']
+            print(username)
+        except Exception as e:
+            print(e)
+            return
+        return User.query.filter_by(username=username).first()
+
+    @staticmethod
+    def verify_email(email):
+        user = User.query.filter_by(email=email).first()
+        return user
+
+    @classmethod
     def authenticate(cls, username, password):
         """Validate that user exists and password is correct
 

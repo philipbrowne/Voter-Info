@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block content %} <div class="container">
+    <h1>State Info for {{state.name}}</h1>
+    <div class="my-4">
+        <table class="table table-sm table-responsive user-table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">State Name</th>
+                    <td><b>{{state.name}}</b></td>
+                </tr>
+                <tr>
+                    <th scope="row">State Abbreviation</th>
+                    <td>{{state.id}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Capital</th>
+                    <td>{{state.capital}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Registration URL</th>
+                    <td>{{state.registration_url}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Elections URL</th>
+                    <td>{{state.name}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Registration In-Person Deadline</th>
+                    <td>{{state.registration_in_person_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Registration Mail Deadline</th>
+                    <td>{{state.registration_mail_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Registration Online Deadline</th>
+                    <td>{{state.registration_online_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Absentee Application In-Person Deadline</th>
+                    <td>{{state.absentee_application_in_person_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Absentee Application Mail Deadline</th>
+                    <td>{{state.absentee_application_mail_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Absentee Application Online Deadline</th>
+                    <td>{{state.absentee_application_online_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Absentee Vote Deadline</th>
+                    <td>{{state.voted_absentee_ballot_deadline}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Check Registration URL</th>
+                    <td>{{state.check_registration_url}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Polling Location URL</th>
+                    <td>{{state.polling_location_url}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Absentee Ballot URL</th>
+                    <td>{{state.absentee_ballot_url}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Local Election URL</th>
+                    <td>{{state.local_election_url}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ballot Tracker URL</th>
+                    <td>{{state.ballot_tracker_url}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Registration Rules for {{state.name}}</th>
+                    <td>
+                        <ul class="list-group">{% for rule in state.registration_rules %} <li
+                                class="list-group-item my-1"> {{rule.rule}}</li> {% endfor %}</ul>
+                        <div class="container my-2"><a href="/admin/states/{{state.id}}/rules/new"
+                                class="btn btn-outline-primary btn-lg">Add New Rule</a></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="my-2 d-flex flex-column align-items-center" id="user-buttons">
+            <a href="/admin/{{state.id}}/edit"><button class="btn btn-primary mx-1 btn-lg d-inline">Edit</button></a>
+        </div>
+    </div>{% include 'admin-nav.j2' %} {% endblock %}

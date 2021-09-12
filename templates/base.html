@@ -70,18 +70,17 @@
         </nav>
         <div class="container" style="margin-top: 2em"> {% for category, msg in
             get_flashed_messages(with_categories=True) %} <div class="alert alert-{{category}}">{{ msg }}</div> {%
-            endfor %} {% block content %} {% endblock %}
-            <!-- Preloading GIFs -->
-            <div id="img-preload">
-                <img src="/assets/images/public-officials-v5.gif">
-                <img src="/assets/images/edit-user-v3.gif">
-                <img src="/assets/images/user-profile-v5.gif">
-                <img src="/assets/images/state-voting-info-v6.gif">
-                <img src="/assets/images/elections-gif.gif">
-            </div>
+            endfor %} </div>{% block content %} {% endblock %}
+        <!-- Preloading GIFs -->
+        <div id="img-preload">
+            <img src="/assets/images/public-officials-v5.gif">
+            <img src="/assets/images/edit-user-v3.gif">
+            <img src="/assets/images/user-profile-v5.gif">
+            <img src="/assets/images/state-voting-info-v6.gif">
+            <img src="/assets/images/elections-gif.gif">
         </div>
         <script src="/data/random-address-data.js"></script>
-        <script src="/script/verify_address.js"></script>
+        <script src="/script/script.js"></script>
     </body>
 
 </html>
