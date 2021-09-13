@@ -24,8 +24,8 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
 
-    <body> {% if 'username' in session %} {% if user.is_admin == True %} <nav
-            class="navbar navbar-expand-lg navbar-dark">
+    <body> {% if 'username' in session %} {% if user.is_admin == True %} 
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="navbar">
             <div class="container-fluid" id="navbarcontainer">
                 <a class="navbar-brand brand-text" href="/admin"><img src="/assets/images/admin-brand-img.png" alt=""
                         id="navbar-brand"></a>
