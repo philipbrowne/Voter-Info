@@ -79,6 +79,9 @@ h6 {
   state-flag {
     max-width: 250px;
   }
+  video {
+    max-width: 550px !important;
+  }
 }
 
 @media (max-width: 750px) {
@@ -88,11 +91,23 @@ h6 {
   .blank-photo {
     display: none !important;
   }
+  video {
+    max-width: 400px !important;
+  }
 }
 
 @media (max-width: 600px) {
   #state-flag {
     max-width: 150px;
+  }
+  video {
+    max-width: 350px !important;
+  }
+}
+
+@media (max-width: 450px) {
+  video {
+    max-width: 300px !important;
   }
 }
 
@@ -106,6 +121,9 @@ h6 {
   .user-table {
     font-size: 0.7rem !important;
   }
+  video {
+    max-width: 250px !important;
+  }
 }
 
 @media (max-width: 350px) {
@@ -113,11 +131,15 @@ h6 {
     font-size: 0.6rem !important;
   }
 }
+
 @media (max-width: 300px) {
   .rep-photo {
     width: 80px;
   }
   #state-flag {
     max-width: 100px;
+  }
+  video {
+    max-width: 200px !important;
   }
 }
