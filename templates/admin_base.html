@@ -8,7 +8,8 @@
         <title>{% block title %} {% endblock %}</title>
         <meta property="og:title" content="Voter Info">
         <meta property="og:image" content="/assets/promo-img/site-promo-img.png">
-        <meta property="og:description" content="Full-Stack Voter Information Application">
+        <meta property="og:description"
+            content="Full-Stack Voter Information Application - Created by Phil Browne using JavaScript, Bootstrap, Python, Flask, and PostgreSQL - Uses Google Civic Information, Mapquest, and EasyPost APIs">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -24,8 +25,8 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
 
-    <body> {% if 'username' in session %} {% if user.is_admin == True %} 
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="navbar">
+    <body> {% if 'username' in session %} {% if user.is_admin == True %} <nav
+            class="navbar navbar-expand-lg navbar-dark sticky-top" id="navbar">
             <div class="container-fluid" id="navbarcontainer">
                 <a class="navbar-brand brand-text" href="/admin"><img src="/assets/images/admin-brand-img.png" alt=""
                         id="navbar-brand"></a>
