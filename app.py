@@ -31,7 +31,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = os.environ.get(
-    'SECRET_KEY', SECRET_KEY)
+    'SECRET_KEY', 'temp-secret-key')
 SECRET_KEY = app.config['SECRET_KEY']
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
