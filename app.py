@@ -25,6 +25,14 @@ is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod == None:
     from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
     from secret_keys import MAIL_USERNAME, MAIL_PASSWORD, SECRET_KEY
+if is_prod:
+    LOB_API_KEY = os.environ.get('LOB_API_KEY')
+    EASYPOST_API_KEY = os.environ.get('EASYPOST_API_KEY')
+    GOOGLE_CIVIC_API_KEY = os.environ.get('GOOGLE_CIVIC_API_KEY')
+    MAPQUEST_API_KEY = os.environ.get('MAPQUEST_API_KEY')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 URI = os.environ.get('DATABASE_URL', 'postgresql:///voter-db')
 if URI.startswith("postgres://"):
@@ -33,20 +41,17 @@ app.config["SQLALCHEMY_DATABASE_URI"] = URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = os.environ.get(
-    'SECRET_KEY', 'temp-secret-key')
+    'SECRET_KEY', SECRET_KEY)
 SECRET_KEY = app.config['SECRET_KEY']
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'TEMP_USERNAME'
-app.config['MAIL_PASSWORD'] = 'TEMP_PASSWORD'
+app.config['MAIL_USERNAME'] = MAIL_USERNAME
+app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
 mail = Mail(app)
 
 connect_db(app)
-
-if os.environ.get('MAIL_USERNAME'):
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 
 
 @app.route('/favicon.ico')
