@@ -151,10 +151,11 @@ class RegistrationRule(db.Model):
     rule = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),
                            default=datetime.now)
+
     @property
     def creation_date(self):
         return self.created_at.strftime("%B %-d, %Y")
-    
+
 
 class StateRegistrationRule(db.Model):
     """Table linking Voter Registration Rule to State"""

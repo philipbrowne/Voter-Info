@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 from flask_mail import Mail, Message
 import json
 import easypost
-
 import requests
 import geocoder
 
