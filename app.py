@@ -463,7 +463,6 @@ def admin_edit_user(username):
     if request.method == 'GET':
         form.username.data = user.username
         form.email.data = user.email
-        form.password.data = user.password
         form.first_name.data = user.first_name
         form.last_name.data = user.last_name
         form.street_address.data = user.street_address
@@ -476,7 +475,6 @@ def admin_edit_user(username):
         if form.validate_on_submit():
             user.first_name = form.first_name.data
             user.last_name = form.last_name.data
-            password = form.password.data
             user.username = form.username.data
             user.street_address = form.street_address.data
             user.city = form.city.data
@@ -488,8 +486,6 @@ def admin_edit_user(username):
             if g.geojson['features'][0]['properties'].get('county'):
                 county = g.geojson['features'][0]['properties'].get('county')
                 user.county = county
-            if password:
-                user.change_password(password)
             flash(f'Changed information for {user.username}', 'success')
             return redirect('/admin/users')
 
