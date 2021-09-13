@@ -38,7 +38,7 @@ async function verifyUserAddress(evt) {
     $('#state_id').prop('disabled', true);
     $('#zip_code').attr('readonly', 'readonly');
     $('#verify-user-address').html(
-      `<div class="d-flex flex-column align-items-center text-center"><b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}</div>`
+      `<div class="d-flex flex-column align-items-center text-center"><b><span class="text-primary">Please confirm that verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}</div>`
     );
     $('#verify-btn').html(
       '<div class="d-flex flex-column align-items-center"><button id="submit-form" class="btn btn-success btn-large mt-2">Confirm and Submit</button><a class="btn btn-danger btn-large mt-2" id="cancel-verify">Cancel and Make Changes</a></div>'
@@ -84,7 +84,7 @@ async function generateRandomAddress() {
     $('#state_id').prop('disabled', true);
     $('#zip_code').attr('readonly', 'readonly');
     $('#verify-user-address').html(
-      `<div class="d-flex flex-column align-items-center text-center"><b><span class="text-primary">Please confirm if verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}</div>`
+      `<div class="d-flex flex-column align-items-center text-center"><b><span class="text-primary">Please confirm that verified address in form is correct</span></b><div class="mt-1">Street Address: ${verifiedStreetAddress}<br>City: ${verifiedCity} State: ${verifiedState} Zip: ${verifiedZipCode}</div>`
     );
     $('#verify-btn').html(
       '<div class="d-flex flex-column align-items-center"><button id="submit-form" class="btn btn-success btn-large mt-2">Confirm and Submit</button><a class="btn btn-danger btn-large mt-2" id="cancel-verify">Cancel and Make Changes</a></div>'
