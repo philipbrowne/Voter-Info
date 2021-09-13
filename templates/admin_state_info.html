@@ -5,6 +5,7 @@ Admin - State Info for {{state.name}}
 {% block content %} 
 <div class="container">
     <h1>State Info for {{state.name}}</h1>
+    <div class="container">
     <div class="my-4">
         <table class="table table-sm table-responsive user-table">
             <thead>
@@ -109,6 +110,7 @@ Admin - State Info for {{state.name}}
                 </tr>
             </tbody>
         </table>
+        </div>
         <div class="my-2 d-flex flex-column align-items-center" id="user-buttons">
             <a href="/admin/{{state.id}}/edit"><button class="btn btn-primary mx-1 btn-lg d-inline">Edit</button></a>
         </div>
