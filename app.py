@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 from flask_mail import Mail, Message
 import json
 import easypost
-# from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
-# from secret_keys import MAIL_USERNAME, MAIL_PASSWORD, SECRET_KEY
+
 import requests
 import geocoder
 
@@ -23,6 +22,9 @@ app = Flask(__name__, static_url_path='',
             template_folder='templates')
 
 is_prod = os.environ.get('IS_HEROKU', None)
+if is_prod == None:
+    from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
+    from secret_keys import MAIL_USERNAME, MAIL_PASSWORD, SECRET_KEY
 
 URI = os.environ.get('DATABASE_URL', 'postgresql:///voter-db')
 if URI.startswith("postgres://"):
@@ -37,8 +39,8 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = MAIL_USERNAME
-app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
+app.config['MAIL_USERNAME'] = 'TEMP_USERNAME'
+app.config['MAIL_PASSWORD'] = 'TEMP_PASSWORD'
 mail = Mail(app)
 
 connect_db(app)
