@@ -1,0 +1,23 @@
+{% extends 'admin_base.html' %} 
+{% block title %}
+Admin - Edit Registration Rule
+{% endblock  %}
+{% block content %}
+<div class="container">
+    <h1>Edit Registration Rule</h1>{% include 'form.j2' %} 
+    <div>
+        {% for state in states %}
+        {% if state in rule.states %}
+        <input type="checkbox" id="{{state.id}}" name="{{state.id}}" value="{{state.id}}" checked>
+        <label for="{{state.id}}">{{state.name}}</label><br>           
+        {% else %}
+        <input type="checkbox" id="{{state.id}}" name="{{state.id}}" value="{{state.id}}">
+        <label for="{{state.id}}">{{state.name}}</label><br>           
+        {% endif %}
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-success">Submit Changes</button>
+    <a class="btn btn-danger text-light" href="/admin/rules" role="button">Cancel</a>
+    </form>
+</div>
+{% endblock %}

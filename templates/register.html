@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block content %} <h1 class="dark-blue fs-2">Registration</h1>
+{% extends 'base.html' %}
+{% block title %}
+Sign Up
+{% endblock  %} 
+{% block content %} 
+<div class="container">
+<h1 class="dark-blue fs-2">Registration</h1>
 <div class="my-3"><small>Already a member? <a href="/login">Log in</a></small></div>
 <form id="user-form" action="/register" method="POST"> {{ form.hidden_tag() }} <div class="row">
         <div class="col-12 col-md-4"> {{form.username.label}} {{form.username(class_="form-control")}} {% for error in
@@ -41,5 +47,5 @@
             Random Address</a></div>
     <div id="verify-user-address" class="mt-2"></div>
 </form> 
-{% include 'admin-nav.j2' %} 
+</div>
 {% endblock %}

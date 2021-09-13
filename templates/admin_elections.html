@@ -1,0 +1,28 @@
+{% extends 'admin_base.html' %} 
+{% block title %}
+Admin - Elections
+{% endblock  %}
+{% block content %} <div class="container">
+    <h1>Elections</h1>
+    <div><a href="/admin/elections/new">Add New Election Here</a></div>
+    <div class="my-4">
+        <table class="table table-sm table-responsive user-table">
+            <thead>
+                <tr>
+                    <th scope="col">State</th>
+                    <th scope="col">Election Name</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody> {% for election in elections %} <tr>
+                    <td><b><a href="/admin/states/{{election.state_id}}">{{election.state.name}}</a></b> 
+                    </td>
+                    <td>{{election.name}}<a href="/admin/elections/{{election.id}}/edit"
+                        class="btn btn-outline-primary btn-sm m-1 px-2">Edit Election</a>
+                    <form action="/admin/elections/{{election.id}}/delete" class="form-inline d-inline" method="POST">
+                        <button class="btn btn-outline-danger btn-sm m-1 px-2">Delete Election</button></form></td>
+                    <td>{{election.full_date}}</td>
+                </tr> {% endfor %} </tbody>
+        </table>
+    </div>
+{% endblock %}

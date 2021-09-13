@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% block content %} <div class="container">
+{% extends 'admin_base.html' %} 
+{% block title %}
+Admin - State Info for {{state.name}}
+{% endblock  %}
+{% block content %} 
+<div class="container">
     <h1>State Info for {{state.name}}</h1>
     <div class="my-4">
         <table class="table table-sm table-responsive user-table">
@@ -80,10 +85,26 @@
                 <tr>
                     <th scope="row">Registration Rules for {{state.name}}</th>
                     <td>
-                        <ul class="list-group">{% for rule in state.registration_rules %} <li
-                                class="list-group-item my-1"> {{rule.rule}}</li> {% endfor %}</ul>
-                        <div class="container my-2"><a href="/admin/states/{{state.id}}/rules/new"
-                                class="btn btn-outline-primary btn-lg">Add New Rule</a></div>
+                        <ul class="list-group">
+                            {% for rule in state.registration_rules %} 
+                            <li class="list-group-item py-1"> {{rule.rule}}<br><a href="/admin/rules/{{rule.id}}/edit"
+                                class="btn btn-outline-primary btn-sm m-1 px-2">Edit Rule</a>
+                            <form action="/admin/state/{{state.id}}/rules/{{rule.id}}/delete" class="form-inline d-inline" method="POST">
+                                <button class="btn btn-outline-danger btn-sm m-1 px-2">Delete Rule From State</button></form></li> 
+                            {% endfor %}
+                        </ul>
+                        <div class="container my-2"><a href="/admin/rules/new" class="btn btn-outline-primary btn-lg">Add New Rule</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Elections in {{state.name}}</th>
+                    <td>
+                        <ul class="list-group">
+                        {% for election in state.elections %} 
+                            <li class="list-group-item py-1"><b>Election: </b>{{election.name}}<br><b>Date: </b>{{election.full_date}}</li> 
+                        {% endfor %}
+                        </ul>
+                        <div class="container my-2"><a href="/admin/elections/new" class="btn btn-outline-primary btn-lg">Add New Election</a></div>
                     </td>
                 </tr>
             </tbody>
@@ -91,4 +112,5 @@
         <div class="my-2 d-flex flex-column align-items-center" id="user-buttons">
             <a href="/admin/{{state.id}}/edit"><button class="btn btn-primary mx-1 btn-lg d-inline">Edit</button></a>
         </div>
-    </div>{% include 'admin-nav.j2' %} {% endblock %}
+    </div> 
+{% endblock %}

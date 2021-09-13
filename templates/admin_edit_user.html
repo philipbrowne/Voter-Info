@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block content %} <div class="container">
+{% extends 'admin_base.html' %} 
+{% block title %}
+Edit User
+{% endblock  %}
+{% block content %} <div class="container">
     <h1 class="dark-blue text-center">Edit User {{user.username}}</h1>
     <form id="user-form" method="POST"> {{ form.hidden_tag() }} <div class="row">
             <div class="col-12 col-md-4"> {{form.username.label}} {{form.username(class_="form-control")}} {% for error
@@ -26,18 +30,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-4"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
+            <div class="col-12 col-md-5"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
                 form.city.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                     class="form-text text-muted">Required</small> </div>
-            <div class="col-12 col-md-4"> {{form.state_id.label}} {{form.state_id(class_="form-control")}} {% for error
+            <div class="col-12 col-md-2"> {{form.state_id.label}} {{form.state_id(class_="form-control")}} {% for error
                 in form.state_id.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                     class="form-text text-muted">Required</small> </div>
             <div class="col-12 col-md-4"> {{form.zip_code.label}} {{form.zip_code(class_="form-control")}} {% for error
                 in form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-1 d-flex flex-column align-items-center"> {{form.is_admin.label(class_="form-check-label")}} {{form.is_admin(class_="form-check")}} {% for error
+                in form.is_admin.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
                     class="form-text text-muted">Required</small> </div>
         </div>
         <div id="verify-btn" class="d-flex flex-column align-items-center"><a class="btn btn-primary btn-large mt-2"
                 id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2"
                 id="random-address">Generate Random Address</a></div>
         <div id="verify-user-address" class="mt-2"></div>
-</div> {% include 'admin-nav.j2' %} {% endblock %}
+</div>{% endblock %}

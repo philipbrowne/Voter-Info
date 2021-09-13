@@ -1,5 +1,12 @@
-{% extends 'base.html' %} {% block content %} <div class="container p-1 d-flex flex-column align-items-center"><img
-        src="/assets/images/user-profile-v5.gif" alt="" class="img-fluid"></div>
+{% extends 'base.html' %} 
+{% block title %}
+User Profile
+{% endblock  %}
+{% block content %}
+<div class="container"> 
+<div class="container p-1 d-flex flex-column align-items-center">
+    <img src="/assets/images/user-profile-v5.gif" alt="" class="img-fluid">
+</div>
 <div class="my-4">
     <table class="table table-sm table-hover table-responsive user-table">
         <thead>
@@ -95,6 +102,12 @@
                         {{user.state.name}}</a>
                 </td>
             </tr>
+            {% if user.is_admin == True %}
+            <tr>
+                <th scope="row">Admin Page</th>
+                <td><a href="/admin">Admin Page</td>
+            </tr>    
+            {% endif %}
         </tbody>
     </table>
 </div>
@@ -103,6 +116,5 @@
     <button class="btn btn-danger mt-2 btn-lg d-inline" id="delete-btn">Delete</button>
 </div>
 <form action="/users/{{user.username}}/delete" method="POST" id="delete-form"></form>
-<script>
-    const data = {{ data | tojson | safe}}
-</script> {% include 'admin-nav.j2' %} {% endblock %}
+</div>
+{% endblock %}

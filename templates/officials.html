@@ -1,138 +1,145 @@
-{% extends 'base.html' %} {% block content %} <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/public-officials-v5.gif" alt="" class="img-fluid"></div> {% if
-resp['offices'] %} <div class="container mt-4">{% for office in resp['offices'] %} <div class="card d-flex flex-column my-4 py-3">
-    <div class="container d-flex flex-column align-items-center mt-1">
-        {% if office['name'] == 'President of the United States' %}
-        <img class="img-fluid py-2" src="/assets/images/offices/president.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif office['name'] == 'Vice President of the United States' %}
-        <img class="img-fluid py-2" src="/assets/images/offices/vice-president.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif office['name'] == 'U.S. Senator' %}
-        <img class="img-fluid py-2" src="/assets/images/offices/senator.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif office['name'] == 'U.S. Representative' %}
-        <img class="img-fluid py-2" src="/assets/images/offices/representative.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif office['name'].startswith('Governor') %}
-        <img class="img-fluid py-2" src="/assets/images/offices/governor.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif office['name'].startswith('Lieutenant Governor') %}
-        <img class="img-fluid py-2" src="/assets/images/offices/lieutenant-governor.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'State Senator' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/state-senator.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'State Representative' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/state-representative.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Supreme Court Justice' in office['name'] or 'Supreme Court Chief Justice' in office['name'] or 'Supreme Court Associate Justice' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/state-supreme-court-justice.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Secretary of State' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/sec-state.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Attorney General' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/att-general.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Commissioner' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/commissioner.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Treasurer' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/treasurer.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Judge' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/judge.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Coroner' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/coroner.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'District Attorney' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/district-attorney.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Supervisor' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/supervisor.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Auditor' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/auditor.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Comptroller' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/comptroller.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'County Executive' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/county-executive.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Assessor' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/assessor.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Collector' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/collector.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Clerk' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/clerk.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Superintendent' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/superintendent.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif 'Sheriff' in office['name'] %}
-        <img class="img-fluid py-2" src="/assets/images/offices/sheriff.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% elif office['name'].startswith('Mayor') %}
-        <img class="img-fluid py-2" src="/assets/images/offices/mayor.png" alt="{{office['name']}}">
-        <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6>
-        {% else %}
-        <h4 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h4>
-        {% endif %}
-    </div>
-        {% set
-            officialIndices = office['officialIndices'] %} {% for index in officialIndices %} <div>
-                <ul class="list-group list-group-flush">
-                    <div class="card my-2">
-                        <li class="list-group-item card-body">
-                            <div class="p-2">
-                                <h4
-                                    class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-center py-1">
-                                    {% if resp['officials'][index]['urls'] %} <a
-                                        href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{% endif
-                                        %}{{resp['officials'][index]['name']}}{% if resp['officials'][index]['urls'] %}
-                                    </a> {% endif %} </h4>
-                                <div class="row">
-                                    <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center py-1">{% if
-                                        resp['officials'][index]['photoUrl'] %} <img
-                                            src="{{resp['officials'][index]['photoUrl']}}"
-                                            onerror="this.onerror=null;this.src='/assets/images/officials/blank-user-photo.png';this.classList.add('blank-photo');"
-                                            alt="{{resp['officials'][index]['name']}}" class="rep-photo"> {% elif
-                                        'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name']
-                                        == 'Joseph R. Biden' %} <img src="/assets/images/officials/joe-biden.png"
-                                            alt="{{resp['officials'][index]['name']}}" class="rep-photo"> {% elif
-                                        'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name']
-                                        == 'Kamala D. Harris' %} <img src="/assets/images/officials/kamala-harris.png"
-                                            alt="{{resp['officials'][index]['name']}}" class="rep-photo"> {% else %}
-                                        <img src="/assets/images/officials/blank-user-photo.png" alt="blank photo"
-                                            class="blank-photo"> {% endif %} </div>
-                                    <div class="col-md-6 col-lg-9">{% if resp['officials'][index]['party'] %} <div>
-                                            <b>Political Party:</b><br>{{resp['officials'][index]['party']}}
-                                        </div> {% endif %}{% if resp['officials'][index]['address'] %}<div class="my-1">
-                                            <b>Address:</b><br>
-                                            {{resp['officials'][index]['address'][0]['line1']}}<br>{{resp['officials'][index]['address'][0]['city']}},
-                                            {{resp['officials'][index]['address'][0]['state']}}
-                                            {{resp['officials'][index]['address'][0]['zip']}}
-                                        </div>{% endif %}{% if resp['officials'][index]['phones'] %}<div class="my-1">
-                                            <b>Phone Number: </b><br> {{resp['officials'][index]['phones'][0]}}
-                                        </div> {% endif %}{%if resp['officials'][index]['urls'] %}<div class="my-1">
-                                            <b>Website: </b><br><a
-                                                href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{{resp['officials'][index]['urls'][0]}}</a>
-                                        </div>
-                                    </div>
-                                </div>{% endif %}
-                            </div>
-                        </li>
-                    </div> {% endfor %}
-            </div>
-            </ul>
-    </div> {% endfor %}</div> {% else %} <div class="container mt-4">Could not find any representatives for this
-    address. Please update your profile.</div> {% endif %}
-<script>
-    const data = {{ resp | tojson | safe}}
-</script> 
-{% include 'admin-nav.j2' %} 
+{% extends 'base.html' %}
+{% block title %}
+Public Officials
+{% endblock  %}  
+{% block content %} 
+<div class="container p-1 d-flex flex-column align-items-center">    
+    <img src="/assets/images/public-officials-v5.gif" alt="" class="img-fluid"></div> 
+        {% if resp['offices'] %} 
+        <div class="container mt-4">
+        {% for office in resp['offices'] %} 
+        <div class="card d-flex flex-column my-4 py-3">
+        <!-- Card Imagesfor Public Offices -->
+        <div class="container d-flex flex-column align-items-center mt-1"> 
+            {% if office['name'] == 'President of the United States' %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/president.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif office['name'] == 'Vice President of the United States' %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/vice-president.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif office['name'] == 'U.S. Senator' %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/senator.png"
+                alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif office['name'] == 'U.S. Representative' %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/representative.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif office['name'].startswith('Governor') %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/governor.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif office['name'].startswith('Lieutenant Governor') %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/lieutenant-governor.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'State Senator' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/state-senator.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'State Representative' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/state-representative.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Supreme Court Justice' in office['name'] or 'Supreme Court Chief Justice' in office['name'] or 'Supreme Court Associate Justice' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/state-supreme-court-justice.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Secretary of State' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/sec-state.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Attorney General' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/att-general.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Commissioner' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/commissioner.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Treasurer' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/treasurer.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Judge' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/judge.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Coroner' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/coroner.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'District Attorney' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/district-attorney.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Supervisor' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/supervisor.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Auditor' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/auditor.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Comptroller' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/comptroller.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'County Executive' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/county-executive.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Assessor' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/assessor.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Collector' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/collector.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Clerk' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/clerk.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Superintendent' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/superintendent.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif 'Sheriff' in office['name'] %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/sheriff.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% elif office['name'].startswith('Mayor') %} 
+                <img class="img-fluid py-2" src="/assets/images/offices/mayor.png" alt="{{office['name']}}">
+                <h6 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h6> 
+            {% else %} 
+            <h4 class="card-title dark-blue d-flex flex-column text-center">{{office['name']}}</h4> 
+            {% endif %}
+        <!-- End Office Card Section -->
+        </div> {% set officialIndices = office['officialIndices'] %} {% for index in officialIndices %} <div>
+            <ul class="list-group list-group-flush">
+                <div class="card my-2">
+                    <li class="list-group-item card-body">
+                        <div class="p-2">
+                            <h4 class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-center py-1"> 
+                                {% if resp['officials'][index]['urls'] %} <a href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{% endif %}{{resp['officials'][index]['name']}}
+                                    {% if resp['officials'][index]['urls'] %} </a> {% endif %} </h4>
+                            <div class="row">
+                            <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center py-1">
+                        {% if resp['officials'][index]['photoUrl'] %} 
+                            <img src="{{resp['officials'][index]['photoUrl']}}" onerror="this.onerror=null;this.src='/assets/images/officials/blank-user-photo.png';this.classList.add('blank-photo');" alt="{{resp['officials'][index]['name']}}"class="rep-photo"> 
+                        {% elif 'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name'] == 'Joseph R. Biden' %} 
+                            <img src="/assets/images/officials/joe-biden.png" alt="{{resp['officials'][index]['name']}}" class="rep-photo"> 
+                        {% elif 'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name'] == 'Kamala D. Harris' %} 
+                            <img src="/assets/images/officials/kamala-harris.png" alt="{{resp['officials'][index]['name']}}" class="rep-photo"> 
+                        {% else %} 
+                            <img src="/assets/images/officials/blank-user-photo.png" alt="blank photo" class="blank-photo"> 
+                        {% endif %} 
+                    </div>
+                        <div class="col-md-6 col-lg-9">
+                            {% if resp['officials'][index]['party'] %} 
+                            <div><b>Political Party:</b><br>{{resp['officials'][index]['party']}}</div> 
+                            {% endif %}
+                            {% if resp['officials'][index]['address'] %}
+                            <div class="my-1"><b>Address:</b><br>
+                            {{resp['officials'][index]['address'][0]['line1']}}<br>{{resp['officials'][index]['address'][0]['city']}},
+                            {{resp['officials'][index]['address'][0]['state']}}
+                            {{resp['officials'][index]['address'][0]['zip']}}</div>
+                            {% endif %}
+                            {% if resp['officials'][index]['phones'] %}
+                            <div class="my-1"><b>Phone Number: </b><br> {{resp['officials'][index]['phones'][0]}}</div> {% endif %}
+                            {%if resp['officials'][index]['urls'] %}
+                            <div class="my-1"><b>Website: </b><br><a href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{{resp['officials'][index]['urls'][0]}}</a></div>
+                        </div>
+                    </div>
+                {% endif %}
+                    </div>
+                    </li>
+                </div> 
+            {% endfor %}
+        </div>
+        </ul>
+    </div> {% endfor %}
+    </div> 
+    {% else %} 
+    <div class="container mt-4">Could not find any representatives for this address. Please update your profile.</div> 
+    {% endif %}
 {% endblock %}

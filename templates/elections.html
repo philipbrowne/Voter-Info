@@ -1,14 +1,19 @@
-{% extends 'base.html' %} {% block content %} <div class="container d-flex flex-column align-items-center text-center">
-    <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/elections-gif.gif"
-        alt="" class="img-fluid">
-        
+{% extends 'base.html' %}
+{% block title %}
+Elections in {{user.state.name}}
+{% endblock  %} 
+{% block content %} 
+    <div class="container">
+    <div class="container d-flex flex-column align-items-center text-center">
+        <div class="container p-1 d-flex flex-column align-items-center"><img src="/assets/images/elections-gif.gif" alt="" class="img-fluid"> 
     </div>
-<div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag">
-</div>
-</div>
-<div class="my-2 card p-2 d-flex flex-column align-items-center">
-    <div><h6 class="text-center dark-blue">Elections in {{user.state.name}}</h6></div>
-<table class="table table-sm table-hover table-responsive">
+    <div class="my-2"><img src="/assets/images/state-flags/{{user.state_id}}.png" alt="" id="state-flag">
+    </div>
+    </div>
+    <div class="my-2 card p-2 d-flex flex-column align-items-center">
+    <div>
+        <h6 class="text-center dark-blue">Elections in {{user.state.name}}</h6></div>
+    <table class="table table-sm table-hover table-responsive">
     <thead>
         <tr>
             <th scope="col">Election</th>
@@ -16,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for election in user.state.elections  %}
+        {% for election in elections  %}
         <tr>
             <th scope="row">{{election.name}}</th>
             <td>{{election.full_date}}</td>
@@ -30,18 +35,33 @@
 {% if data['election'] %} <div class="container mt-4">
     <div class="card">
         <h3>{{data['election']['name']}}</h3>
-        <h5>{{data['election']['electionDay']}}</h5> {% if data['contests'] %} {% for contest in data['contests'] %}
-        <div class="card"><b>Ballot Item {% if contest['ballotPlacement'] %}#{{contest['ballotPlacement']}} {% endif
-                %}:</b>{% if contest['ballotTitle'] %} {{contest['ballotTitle']}} {% endif %} <div>{% if
-                contest['candidates'] %} <ul>{% for candidate in contest['candidates'] %} <li>{{candidate['name']}} -
-                        {{candidate['party']}}</li> {% endfor %}</ul> {% endif %} {% if
-                contest['referendumBallotResponses'] %} <ul> {% for response in contest['referendumBallotResponses'] %}
-                    <li>{{response}}</li> {% endfor %} </ul> {% endif %} {% endfor %} </div>
-        </div> {% endif %}
+        <h5>{{data['election']['electionDay']}}</h5> 
+        {% if data['contests'] %} 
+            {% for contest in data['contests'] %}
+            <div class="card"><b>Ballot Item {% if contest['ballotPlacement'] %}#{{contest['ballotPlacement']}} 
+                {% endif %}:</b>
+                {% if contest['ballotTitle'] %} 
+                {{contest['ballotTitle']}} {% endif %} 
+                <div>{% if contest['candidates'] %} 
+                    <ul>
+                        {% for candidate in contest['candidates'] %} 
+                        <li>{{candidate['name']}} - {{candidate['party']}}</li> 
+                        {% endfor %}
+                    </ul> 
+                    {% endif %} 
+                    {% if contest['referendumBallotResponses'] %} 
+                    <ul> 
+                        {% for response in contest['referendumBallotResponses'] %}
+                        <li>{{response}}</li> 
+                        {% endfor %} 
+                    </ul> 
+                    {% endif %} 
+                    {% endfor %} 
+                </div>
+        </div> 
+    {% endif %}
     </div>
-</div> {% endif %}
-<script>
-    const data = {{ data | tojson | safe }}
-</script> 
-{% include 'admin-nav.j2' %} 
+    </div> 
+    {% endif %}
+</div>
 {% endblock %}

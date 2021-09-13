@@ -1,0 +1,29 @@
+{% extends 'admin_base.html' %} 
+{% block title %} 
+States 
+{% endblock %} 
+{% block content %} 
+<div class="container">
+    <div class="container">
+        <div class="container p-1 d-flex flex-column align-items-center">
+            <img src="/assets/images/admin-page-img.png" alt="Admin Page" class="img-fluid">
+        </div>
+        <div class="my-4">
+            <ul class="list-group text-center fs-4">
+                <li class="list-group-item p-3 my-2">
+                    <a href="/admin/users">Admin Page for Users</a>
+                </li>
+                <li class="list-group-item p-3 my-2">
+                    <a href="/admin/states">Admin Page for States</a>
+                </li>
+                <li class="list-group-item p-3 my-2">
+                    <a href="/admin/elections">Admin Page for Elections</a>
+                </li>
+                <li class="list-group-item p-3 my-2">
+                    <a href="/admin/rules">Admin Page for Rules</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div> 
+{% endblock %}

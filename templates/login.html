@@ -1,5 +1,12 @@
-{% extends 'base.html' %} {% block content %} <h1 class="dark-blue">Login</h1> {% include 'form.j2' %} <div
-    class="mt-3"> <button type="submit" class="btn btn-success btn-lg">Login</button><a href="/reset_password" class="btn btn-warning btn-lg mx-2">Reset Password</a></div>
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock  %}  
+{% block content %} 
+<div class="container">
+<h1 class="dark-blue">Login</h1> 
+{% include 'form.j2' %} 
+<div class="mt-3"> <button type="submit" class="btn btn-success btn-lg">Login</button><a href="/reset_password" class="btn btn-warning btn-lg mx-2">Reset Password</a></div>
 </form>
-{% include 'admin-nav.j2' %} 
+</div>
 {% endblock %}

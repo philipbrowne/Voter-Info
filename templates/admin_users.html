@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block content %} <div class="container">
+{% extends 'admin_base.html' %} 
+{% block title %}
+Admin - Users
+{% endblock  %}
+{% block content %} <div class="container">
     <h1>Users</h1>
     <div class="my-4">
         <table class="table table-sm table-responsive user-table">
@@ -10,13 +14,14 @@
                 </tr>
             </thead>
             <tbody> {% for user in users %} <tr>
-                    <td>{{user.username}} <a href="/admin/users/{{user.username}}/edit"
-                            class="btn btn-outline-primary btn-sm mx-1 px-2">Edit User</a>
+                    <td><b>{{user.username}}</b> <a href="/admin/users/{{user.username}}/edit"
+                            class="btn btn-outline-primary btn-sm m-1 px-2">Edit User</a>
                         <form action="/users/{{user.username}}/delete" class="form-inline d-inline" method="POST">
-                            <button class="btn btn-outline-danger btn-sm mx-1 px-2">Delete User</button></form>
+                            <button class="btn btn-outline-danger btn-sm m-1 px-2">Delete User</button></form>
                     </td>
                     <td>{{user.first_name}} {{user.last_name}}</td>
                     <td>{{user.email}}</td>
                 </tr> {% endfor %} </tbody>
         </table>
-    </div>{% include 'admin-nav.j2' %} {% endblock %}
+    </div>
+{% endblock %}

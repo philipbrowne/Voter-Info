@@ -1,16 +1,25 @@
-{% extends 'base.html' %} {% block content %} <div class="container">
-    <h1>States</h1>
-    <div class="my-4">
-        <table class="table table-sm table-responsive user-table">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody> {% for state in states %} <tr>
-                    <th scope="row">{{state.id}}</th>
-                    <td><a href="/admin/states/{{state.id}}">{{state.name}}</a></td>
-                </tr> {% endfor %} </tbody>
-        </table>
-    </div> {% include 'admin-nav.j2' %} {% endblock %}
+{% extends 'admin_base.html' %} 
+{% block title %} 
+States 
+{% endblock %} 
+{% block content %} 
+<div class="container">
+    <div class="container">
+        <h1>States</h1>
+        <div class="my-4">
+            <table class="table table-sm table-responsive user-table mb-1">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody> {% for state in states %} <tr>
+                        <th scope="row">{{state.id}}</th>
+                        <td><a href="/admin/states/{{state.id}}">{{state.name}}</a></td>
+                    </tr> {% endfor %} </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
