@@ -13,8 +13,6 @@ from models import connect_db, db, User, State, Election, RegistrationRule
 from sqlalchemy.exc import IntegrityError
 import os
 import lob
-# lob.api_key = LOB_API_KEY
-# easypost.api_key = EASYPOST_API_KEY
 
 
 app = Flask(__name__, static_url_path='',
@@ -49,6 +47,8 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = MAIL_USERNAME
 app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
+lob.api_key = LOB_API_KEY
+easypost.api_key = EASYPOST_API_KEY
 mail = Mail(app)
 
 connect_db(app)
