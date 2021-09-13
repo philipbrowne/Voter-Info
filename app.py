@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 from flask_mail import Mail, Message
 import json
 import easypost
-from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
-from secret_keys import MAIL_USERNAME, MAIL_PASSWORD
+# from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
+# from secret_keys import MAIL_USERNAME, MAIL_PASSWORD, SECRET_KEY
 import requests
 import geocoder
+
 
 from forms import NewUserForm, UserLoginForm, EditUserForm, SendPasswordResetForm, ResetPasswordForm, StateEditForm, StateRegistrationRuleForm, ElectionForm, AdminUserForm
 from models import connect_db, db, User, State, Election, RegistrationRule
@@ -13,14 +14,15 @@ from models import connect_db, db, User, State, Election, RegistrationRule
 from sqlalchemy.exc import IntegrityError
 import os
 import lob
-lob.api_key = LOB_API_KEY
-easypost.api_key = EASYPOST_API_KEY
+# lob.api_key = LOB_API_KEY
+# easypost.api_key = EASYPOST_API_KEY
 
 
 app = Flask(__name__, static_url_path='',
             static_folder='static',
             template_folder='templates')
 
+is_prod = os.environ.get('IS_HEROKU', None)
 
 URI = os.environ.get('DATABASE_URL', 'postgresql:///voter-db')
 if URI.startswith("postgres://"):
@@ -29,7 +31,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = os.environ.get(
-    'SECRET_KEY', 'M8)\x92\xb6Gk\xeeR\xc7jr')
+    'SECRET_KEY', SECRET_KEY)
 SECRET_KEY = app.config['SECRET_KEY']
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -40,6 +42,9 @@ app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
 mail = Mail(app)
 
 connect_db(app)
+
+if os.environ.get('MAIL_USERNAME'):
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 
 
 @app.route('/favicon.ico')
