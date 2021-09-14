@@ -544,7 +544,7 @@ def admin_edit_state_info(state_id):
         form.absentee_ballot_url.data = state.absentee_ballot_url
         form.local_election_url.data = state.local_election_url
         form.ballot_tracker_url.data = state.ballot_tracker_url
-        return render_template('admin_state_edit.html', state=state, form=form)
+        return render_template('admin_state_edit.html', state=state, form=form, user=curr_user)
     if request.method == 'POST':
         if form.validate_on_submit():
             state.registration_url = form.registration_url.data
