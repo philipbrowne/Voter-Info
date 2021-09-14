@@ -1,0 +1,1143 @@
+{
+  "normalizedInput": {
+    "line1": "3546 Rosa L Parks Avenue",
+    "city": "Montgomery",
+    "state": "AL",
+    "zip": "36105"
+  },
+  "kind": "civicinfo#representativeInfoResponse",
+  "divisions": {
+    "ocd-division/country:us/state:al/cd:7": {
+      "name": "Alabama's 7th congressional district",
+      "officeIndices": [
+        3
+      ]
+    },
+    "ocd-division/country:us": {
+      "name": "United States",
+      "officeIndices": [
+        0,
+        1
+      ]
+    },
+    "ocd-division/country:us/state:al/sldl:76": {
+      "name": "Alabama State House district 76",
+      "officeIndices": [
+        14
+      ]
+    },
+    "ocd-division/country:us/state:al/sldu:26": {
+      "name": "Alabama State Senate district 26",
+      "officeIndices": [
+        13
+      ]
+    },
+    "ocd-division/country:us/state:al/county:montgomery/council_district:2": {
+      "name": "Montgomery County Commission District 2",
+      "officeIndices": [
+        19
+      ]
+    },
+    "ocd-division/country:us/state:al/circuit_court:15": {
+      "name": "AL State Circuit Court - 15th District"
+    },
+    "ocd-division/country:us/state:al/place:montgomery": {
+      "name": "Montgomery city",
+      "officeIndices": [
+        21
+      ]
+    },
+    "ocd-division/country:us/state:al": {
+      "name": "Alabama",
+      "officeIndices": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        15,
+        16
+      ]
+    },
+    "ocd-division/country:us/state:al/county:montgomery": {
+      "name": "Montgomery County",
+      "officeIndices": [
+        17,
+        18,
+        20
+      ]
+    }
+  },
+  "offices": [
+    {
+      "name": "President of the United States",
+      "divisionId": "ocd-division/country:us",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "headOfGovernment",
+        "headOfState"
+      ],
+      "officialIndices": [
+        0
+      ]
+    },
+    {
+      "name": "Vice President of the United States",
+      "divisionId": "ocd-division/country:us",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "deputyHeadOfGovernment"
+      ],
+      "officialIndices": [
+        1
+      ]
+    },
+    {
+      "name": "U.S. Senator",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "legislatorUpperBody"
+      ],
+      "officialIndices": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "U.S. Representative",
+      "divisionId": "ocd-division/country:us/state:al/cd:7",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "legislatorLowerBody"
+      ],
+      "officialIndices": [
+        4
+      ]
+    },
+    {
+      "name": "Governor of Alabama",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "headOfGovernment"
+      ],
+      "officialIndices": [
+        5
+      ]
+    },
+    {
+      "name": "Lieutenant Governor of Alabama",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "deputyHeadOfGovernment"
+      ],
+      "officialIndices": [
+        6
+      ]
+    },
+    {
+      "name": "AL Public Service Commission President",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        7
+      ]
+    },
+    {
+      "name": "AL Secretary of State",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        8
+      ]
+    },
+    {
+      "name": "AL Public Service Commissioner",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        9,
+        10
+      ]
+    },
+    {
+      "name": "AL State Treasurer",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        11
+      ]
+    },
+    {
+      "name": "AL Commissioner of Agriculture and Industries",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        12
+      ]
+    },
+    {
+      "name": "AL Attorney General",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        13
+      ]
+    },
+    {
+      "name": "AL State Auditor",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        14
+      ]
+    },
+    {
+      "name": "AL State Senator",
+      "divisionId": "ocd-division/country:us/state:al/sldu:26",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "legislatorUpperBody"
+      ],
+      "officialIndices": [
+        15
+      ]
+    },
+    {
+      "name": "AL State Representative",
+      "divisionId": "ocd-division/country:us/state:al/sldl:76",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "legislatorLowerBody"
+      ],
+      "officialIndices": [
+        16
+      ]
+    },
+    {
+      "name": "AL Supreme Court Chief Justice",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "judge"
+      ],
+      "officialIndices": [
+        17
+      ]
+    },
+    {
+      "name": "AL Supreme Court Associate Justice",
+      "divisionId": "ocd-division/country:us/state:al",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "judge"
+      ],
+      "officialIndices": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "name": "Montgomery County Circuit Clerk",
+      "divisionId": "ocd-division/country:us/state:al/county:montgomery",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        26
+      ]
+    },
+    {
+      "name": "Montgomery County Sheriff",
+      "divisionId": "ocd-division/country:us/state:al/county:montgomery",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        27
+      ]
+    },
+    {
+      "name": "Montgomery County Commissioner",
+      "divisionId": "ocd-division/country:us/state:al/county:montgomery/council_district:2",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "legislatorLowerBody"
+      ],
+      "officialIndices": [
+        28
+      ]
+    },
+    {
+      "name": "Montgomery County Revenue Commissioner",
+      "divisionId": "ocd-division/country:us/state:al/county:montgomery",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "specialPurposeOfficer"
+      ],
+      "officialIndices": [
+        29
+      ]
+    },
+    {
+      "name": "Mayor of Montgomery",
+      "divisionId": "ocd-division/country:us/state:al/place:montgomery",
+      "levels": [
+        "locality"
+      ],
+      "roles": [
+        "headOfGovernment"
+      ],
+      "officialIndices": [
+        30
+      ]
+    }
+  ],
+  "officials": [
+    {
+      "name": "Joseph R. Biden",
+      "address": [
+        {
+          "line1": "1600 Pennsylvania Avenue Northwest",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20500"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(202) 456-1111"
+      ],
+      "urls": [
+        "https://www.whitehouse.gov/",
+        "https://en.wikipedia.org/wiki/Joe_Biden"
+      ],
+      "channels": [
+        {
+          "type": "Twitter",
+          "id": "potus"
+        }
+      ]
+    },
+    {
+      "name": "Kamala D. Harris",
+      "address": [
+        {
+          "line1": "1600 Pennsylvania Avenue Northwest",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20500"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(202) 456-1111"
+      ],
+      "urls": [
+        "https://www.whitehouse.gov/",
+        "https://en.wikipedia.org/wiki/Kamala_Harris"
+      ],
+      "channels": [
+        {
+          "type": "Twitter",
+          "id": "VP"
+        }
+      ]
+    },
+    {
+      "name": "Richard C. Shelby",
+      "address": [
+        {
+          "line1": "304",
+          "line2": "2 Constitution Avenue Northeast",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20510"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(202) 224-5744"
+      ],
+      "urls": [
+        "https://www.shelby.senate.gov/",
+        "https://en.wikipedia.org/wiki/Richard_Shelby"
+      ],
+      "photoUrl": "http://bioguide.congress.gov/bioguide/photo/S/S000320.jpg",
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "RichardShelby"
+        },
+        {
+          "type": "Twitter",
+          "id": "SenShelby"
+        },
+        {
+          "type": "YouTube",
+          "id": "UCIiAyFHV8lGWRYKYXwIz81Q"
+        },
+        {
+          "type": "YouTube",
+          "id": "SenatorRichardShelby"
+        }
+      ]
+    },
+    {
+      "name": "Tommy Tuberville",
+      "address": [
+        {
+          "line1": "B40A Dirksen Senate Office Building",
+          "line2": "50 Constitution Avenue Northeast",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20510"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(202) 224-4124"
+      ],
+      "urls": [
+        "https://tuberville.senate.gov/",
+        "https://en.wikipedia.org/wiki/Tommy_Tuberville"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "SenatorTuberville"
+        },
+        {
+          "type": "Twitter",
+          "id": "SenTuberville"
+        }
+      ]
+    },
+    {
+      "name": "Terri A. Sewell",
+      "address": [
+        {
+          "line1": "2201",
+          "line2": "45 Independence Avenue Southwest",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20515"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(202) 225-2665"
+      ],
+      "urls": [
+        "https://sewell.house.gov/",
+        "https://en.wikipedia.org/wiki/Terri_Sewell"
+      ],
+      "photoUrl": "http://sewell.house.gov/sites/sewell.house.gov/files/documents/Final%20Headshot.JPG",
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "RepSewell"
+        },
+        {
+          "type": "Twitter",
+          "id": "RepTerriSewell"
+        },
+        {
+          "type": "YouTube",
+          "id": "RepSewell"
+        }
+      ]
+    },
+    {
+      "name": "Kay Ivey",
+      "address": [
+        {
+          "line1": "600 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36130"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-7100"
+      ],
+      "urls": [
+        "https://governor.alabama.gov/",
+        "https://en.wikipedia.org/wiki/Kay_Ivey"
+      ],
+      "photoUrl": "http://governor.alabama.gov/uploads/images/_size/Portrait.jpeg",
+      "emails": [
+        "constituent.services@governor.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "KayIveyAL"
+        },
+        {
+          "type": "Twitter",
+          "id": "GovernorKayIvey"
+        }
+      ]
+    },
+    {
+      "name": "Will Ainsworth",
+      "address": [
+        {
+          "line1": "11 South Union Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36130"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 261-9590"
+      ],
+      "urls": [
+        "https://ltgov.alabama.gov/",
+        "https://en.wikipedia.org/wiki/Will_Ainsworth"
+      ],
+      "emails": [
+        "ltgov@ltgov.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "willainsworthAL"
+        },
+        {
+          "type": "Twitter",
+          "id": "willainsworthAL"
+        }
+      ]
+    },
+    {
+      "name": "Twinkle Andress Cavanaugh",
+      "address": [
+        {
+          "line1": "100 North Union Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-5297"
+      ],
+      "urls": [
+        "http://www.psc.alabama.gov/Cavanaugh/commissionercavanaugh.htm"
+      ],
+      "emails": [
+        "twinkle.cavanaugh@psc.alabama.gov"
+      ]
+    },
+    {
+      "name": "John H. Merrill",
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-7200"
+      ],
+      "urls": [
+        "http://sos.alabama.gov/",
+        "https://en.wikipedia.org/wiki/John_Merrill_%28American_politician%29"
+      ],
+      "emails": [
+        "john.merrill@sos.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "JohnMerrill"
+        },
+        {
+          "type": "Twitter",
+          "id": "JohnHMerrill"
+        }
+      ]
+    },
+    {
+      "name": "Chip Beeker",
+      "address": [
+        {
+          "line1": "100 North Union Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-5191"
+      ],
+      "urls": [
+        "http://www.psc.alabama.gov/Beeker/commissionerBeeker.htm"
+      ],
+      "emails": [
+        "chip.beeker@psc.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "chipbeeker2014"
+        }
+      ]
+    },
+    {
+      "name": "Jeremy H. Oden",
+      "address": [
+        {
+          "line1": "100 North Union Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-5203"
+      ],
+      "urls": [
+        "http://www.psc.alabama.gov/Oden/CommissionerOden.htm",
+        "https://en.wikipedia.org/wiki/Jeremy_Oden"
+      ],
+      "emails": [
+        "jeremy.oden@psc.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "jeremyoden"
+        },
+        {
+          "type": "Twitter",
+          "id": "jeremyhodenpsc"
+        }
+      ]
+    },
+    {
+      "name": "John McMillan",
+      "address": [
+        {
+          "line1": "600 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-7500"
+      ],
+      "urls": [
+        "https://treasury.alabama.gov/",
+        "https://en.wikipedia.org/wiki/John_McMillan_%28Alabama_politician%29"
+      ],
+      "emails": [
+        "alatreas@treasury.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "treasurermcmillan"
+        },
+        {
+          "type": "Twitter",
+          "id": "alatreasurer"
+        }
+      ]
+    },
+    {
+      "name": "Rick Pate",
+      "address": [
+        {
+          "line1": "1445 Federal Drive",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36107"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 240-7100"
+      ],
+      "urls": [
+        "http://agi.alabama.gov/",
+        "https://en.wikipedia.org/wiki/Rick_Pate"
+      ],
+      "emails": [
+        "rick.pate@agi.alabama.gov"
+      ]
+    },
+    {
+      "name": "Steve Marshall",
+      "address": [
+        {
+          "line1": "501 Washington Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-7300"
+      ],
+      "urls": [
+        "https://www.alabamaag.gov/",
+        "https://en.wikipedia.org/wiki/Steve_Marshall_%28politician%29"
+      ],
+      "emails": [
+        "constituentaffairs@ago.state.al.us"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "AGSteveMarshall"
+        },
+        {
+          "type": "Twitter",
+          "id": "AGSteveMarshall"
+        }
+      ]
+    },
+    {
+      "name": "Jim Zeigler",
+      "party": "Republican Party",
+      "phones": [
+        "(334) 242-7010"
+      ],
+      "urls": [
+        "http://auditor.alabama.gov/",
+        "https://en.wikipedia.org/wiki/Jim_Zeigler"
+      ],
+      "emails": [
+        "jim.zeigler@auditor.alabama.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "ZeiglerStateAuditor"
+        },
+        {
+          "type": "Twitter",
+          "id": "jimzeigler"
+        }
+      ]
+    },
+    {
+      "name": "Kirk Hatcher",
+      "address": [
+        {
+          "line1": "11 South Union Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36130"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(334) 261-0700"
+      ],
+      "urls": [
+        "http://www.legislature.state.al.us/aliswww/ISD/ALSenator.aspx?NAME=Hatcher&OID_SPONSOR=108969&OID_PERSON=98507&SESSNAME="
+      ],
+      "emails": [
+        "kirk.hatcher@alsenate.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "kirkforalabama"
+        },
+        {
+          "type": "Twitter",
+          "id": "kirkhatcherAl"
+        }
+      ]
+    },
+    {
+      "name": "Thad McClammy",
+      "address": [
+        {
+          "line1": "11 South Union Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36130"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(334) 261-0580"
+      ],
+      "urls": [
+        "http://www.legislature.state.al.us/aliswww/ISD/ALRepresentative.aspx?OID_SPONSOR=100558&OID_PERSON=1101",
+        "https://en.wikipedia.org/wiki/Thad_McClammy"
+      ],
+      "photoUrl": "http://www.legislature.state.al.us/ALISWWW/House/Representative%20Pictures/McClammy_76.jpeg",
+      "emails": [
+        "thadmcclammy@aol.com"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "Representative-Thad-McClammy-279241188774880"
+        }
+      ]
+    },
+    {
+      "name": "Tom Parker",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Tom_Parker_%28judge%29"
+      ]
+    },
+    {
+      "name": "Alisa Kelli Wise",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Alisa_Kelli_Wise"
+      ]
+    },
+    {
+      "name": "Brady E. Mendheim, Jr.",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Brady_E._Mendheim_Jr."
+      ]
+    },
+    {
+      "name": "Greg Shaw",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Greg_Shaw_%28judge%29"
+      ]
+    },
+    {
+      "name": "Jay Mitchell",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Jay_Mitchell_%28judge%29"
+      ]
+    },
+    {
+      "name": "Michael F. Bolin",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Michael_F._Bolin"
+      ]
+    },
+    {
+      "name": "Sarah H. Stewart",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Sarah_Hicks_Stewart"
+      ]
+    },
+    {
+      "name": "Tommy Bryan",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Tommy_Bryan"
+      ]
+    },
+    {
+      "name": "William B. Sellers",
+      "address": [
+        {
+          "line1": "300 Dexter Avenue",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(334) 229-0700"
+      ],
+      "urls": [
+        "http://judicial.alabama.gov/Appellate/SupremeCourt",
+        "https://en.wikipedia.org/wiki/Will_Sellers"
+      ]
+    },
+    {
+      "name": "Gina Ishman",
+      "party": "Democratic Party",
+      "phones": [
+        "(334) 832-1260"
+      ],
+      "urls": [
+        "https://montgomery.alacourt.gov/"
+      ],
+      "emails": [
+        "montgomerycircuitclerk@alacourt.gov"
+      ]
+    },
+    {
+      "name": "Derrick Cunningham",
+      "address": [
+        {
+          "line1": "115 South Perry Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(334) 832-4980"
+      ],
+      "urls": [
+        "https://www.montgomerysheriff.com/"
+      ],
+      "emails": [
+        "derrickcunningham@mc-ala.org"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "Sheriff-of-Montgomery-Alabama-102518251601438"
+        },
+        {
+          "type": "Twitter",
+          "id": "derrick_mcso"
+        }
+      ]
+    },
+    {
+      "name": "Elton N. Dean, Sr.",
+      "party": "Democratic Party",
+      "phones": [
+        "(334) 832-1210"
+      ],
+      "urls": [
+        "https://www.mc-ala.org/government/county-commission"
+      ],
+      "emails": [
+        "eltondean@mc-ala.org"
+      ]
+    },
+    {
+      "name": "Janet Buskey",
+      "address": [
+        {
+          "line1": "101 South Lawrence Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(334) 832-1250"
+      ],
+      "urls": [
+        "https://revco.mc-ala.org/CAPortal/CAPortal_MainPage.aspx"
+      ],
+      "emails": [
+        "janetbuskey@mc-ala.org"
+      ]
+    },
+    {
+      "name": "Steven L. Reed",
+      "address": [
+        {
+          "line1": "103 North Perry Street",
+          "city": "Montgomery",
+          "state": "AL",
+          "zip": "36104"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(334) 625-2000"
+      ],
+      "urls": [
+        "https://www.montgomeryal.gov/city-government/mayor-s-office/mayor-steven-reed"
+      ],
+      "emails": [
+        "mayor@montgomeryal.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "MGMMayor"
+        }
+      ]
+    }

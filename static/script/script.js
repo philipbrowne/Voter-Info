@@ -47,7 +47,7 @@ async function verifyUserAddress(evt) {
   }
 }
 
-// https://github.com/EthanRBrown/rrad
+// Address Data from https://github.com/EthanRBrown/rrad
 async function generateRandomAddress() {
   const origStreetAddress = $('#street_address').val();
   const origCity = $('#city').val();

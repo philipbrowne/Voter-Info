@@ -4,104 +4,155 @@
 
 Voter Information Application - designed to provide information on voting to US Residents based on their area in an effort to increase accessibility and engagement.
 
-## Initial Capstone Proposal
+This project was completed in approximately 60 hours as part of the Springboard Software Engineering program.  
 
-This application is designed to provide information to voters to help increase engagement and participation. The website will provide access to location-specific information on voter registration, polling locations, voter registration deadlines. An additional component could be to provide information specific to that voter on their current registration status.
+## Technologies Used
 
-The application is designed for adults in the United States of all demographics.
+**Front End:**
 
-I plan on using data obtained through various APIs, such as the Google Civic Information API, Rock the Vote API, the US Vote Foundation API, Vote Smart API, and the Democracy Works Elections API. I plan to keep this open ended for now until I have spent more time researching each API and what datasets are specifically available. There are quite a few directions that I could go with this as the project expands, but the MVP would be to provide location-specific voter-registration information.
+JavaScript, AJAX, Axios, Bootstrap CSS
 
-The Database schema would likely contain a User profile for that specific user, an authentication component, should they want to save their data and quickly access it. I am leaving the rest of the Database Schema a bit more open ended for now until I have more information on the APIs. However, it would largely be tied to user specific information that is retrieved through this application.
+**Back End:**
 
-As far as issues with the API, that is something I will have to explore more as I get deeper into the project. I believe that at the very least, the Google Civic Information API should be mostly reliable.
+Python, Flask, SQLAlchemy, WTForms, BCrypt, PyJWT, Flask Mail
 
-If I go in the direction of a user-login and authentication functionality, I would definitely want to keep that information secure. I would use Bcrypt hashing and any other security measures possible to achieve this.
+**Database:**
 
-The main core functionality of this application would be to provide area-specific information to a user on voter registration, deadlines, and their polling location. I intend to go quite a bit beyond this as time permits.
+PostgreSQL
 
-User flow would include the user entering their location and the application returning information specific to that location for the user. One consideration would definitely be to have the ability to save this information and register for the site so the user could have it readily available.
+**API and Data:**
 
-## Initial Planning
+Google Civic Information, EasyPost, MapQuest. Random Address Data from RRAD/OpenAddresses
 
-**Schema:**
+**Graphic Design:**
 
-My initial Schema will incorporate a single user table - I have added a screenshot of the proposed schema in my project_screenshots folder.
+Canva and Adobe Photoshop
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-v1.png?raw=true)
+## Deployment
 
-It is very likely that more tables will be added to this project as this project gets more complex, but I believe that the basic application should be able to properly operate with this single table of data for now.
+The application is currently deployed on Heroku at https://us-voter-info.herokuapp.com/ 
 
-**Update (9/7): Second Table Added:**
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-v2.png)
+## Features
 
-Update(9/8) Table Added for Registration Rules, as well as Join Table between States/Registration Rules
+### Registration and Login
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-3.png)
+User registration occurs through User model in SQLAlchemy and Bcrypt Hashing of their Password.  Information is stored in PostgreSQL Database.  All forms on the user end of this application are rendered and verified (CSRF) through Flask WTForms.  If a user submits a username or email already in the system, an error message is generated.
 
-I have added a second table for State which I will incorporate various important state-specific details such as voter registration URL, elections schedule URL, etc.  I will add more columns to this table over time.
+Login authentication occurs by verifying password with Bcrypt hash.
 
-Update (9/10 Fifth Table added for Election Dates
+If login is successful, method returns user; if unsuccessful, it returns False.  
 
-I have added a fifth table that will cover upcoming elections.  Until I have access to an API with this data, I plan to add this information manually.
+The user enters their mailing address, or makes a request to generate a random address, which is chosen randomly from a randAddress JS file.  The source of these addresses is [RRAD](https://github.com/EthanRBrown/rrad) and these addresses are all Public Domain through the [OpenAddresses](https://openaddresses.io/) project.  
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/schema-4%20-%20elections.png)
+--Register UI Screenshot--
 
-**API Links for Project**
+--Login UI Screenshot--
 
-I am planning to use multiple APIs for this project. Several of the proposed ones are below, I will review documentation for each and proceed based on which will be the most useful. Once I have achieved an Minimum Viable Product for the application, I will begin to implement additional features and add them using the APIs below.
+### Address Verification Using EasyPost API
 
-Lob API for Address Verification: https://docs.lob.com/python -- Using for User Registration to Verify Address
+The user either uses their own address, or the randomly chosen address from randAddress.js and an AJAX request is sent to our back-end at /verify-address or /verify-random-address via POST request.  At this route, the data is sent to the [EasyPost](https://www.easypost.com/) API and verified.  If the address is verified as a real deliverable mailing address, a JSON object with the Verified Address data is returned to our Front End and handled in the DOM.  If the address is deemed undeliverable, an error is returned via JSON and the user receives a message in the DOM that the address is invalid and to try again.  I have added commented-out code in the verify-address routes that include an API call to a different Address Verification API, [Lob](https://www.lob.com/).  My experiences were better with EasyPost, but if for some reason there were issues with the API, one *further step* with this project would be to improve error handling and provide a second call to Lob if the EasyPost API is down. 
 
-Random Address File from RRAD: https://github.com/EthanRBrown/rrad - Using to Generate Random User Mailing Address
+Once the address has been verified, one more API request goes out quickly to the [Mapquest](https://developer.mapquest.com/) API to retrieve the user's county based on their address to add it to the User Profile.
 
-Associated Press Elections API: https://developer.ap.org/ap-elections-api/
+--Register UI Screenshot 2--
 
-Mapquest API for any necessary geocoding of user location: https://developer.mapquest.com/documentation/
+### Password Reset
 
-Google Civic Information API: https://developers.google.com/civic-information
+Change Password is handled via a Password Reset process through JWT and Flask Mail. 
 
-RockTheVote API (will be useful for assisting with Voter Registration): https://rock-the-vote.github.io/Voter-Registration-Tool-API-Docs/#overview
+A user requests a password via Flask View with their previously supplied Email Address.  Flask Mail emails the user at the provided address with a Password Reset Link.  The URL in this link includes a JWT Token at the end of the URL.  
 
-US Vote Foundation API: https://civicdata.usvotefoundation.org/
+At that URL, a user can fill out a very short form to reset their password.
 
-Democracy Works Elections API: https://www.democracy.works/elections-api
+--Password Reset UI Screenshot--
 
-VoteSmart API: https://votesmart.org/share/api
+### User Profile
 
-Elections Online API: https://www.electionsonline.com/integrations/api.cfm
+Upon registration and login, the application takes the user to their profile, where they can see their user information, as well as pertinent voting information based on their state.  The user can edit their profile, where a form similar to registration appears with all details except their Username and/or Password.
 
-WeVoteUSA API: https://api.wevoteusa.org/apis/v1/docs/
+--User Profile UI Screenshot--
 
-Voting Information Project API: https://vip-specification.readthedocs.io/en/release/index.html
+--Edit User UI Screenshot--
 
-CivicEngine API: https://developers.civicengine.com/docs/api/v1
+### Public Officials
 
-## Project Screenshots
+Data for Public Officials is generated via the user's address and the [Google Civic Information](https://developers.google.com/civic-information) API.  A response contains three main items of organization: division (the level of government), office (the office of the official), and official (the elected official).  I have provided three screenshot examples here:
 
-**Landing Page**
+[Google Civic Info Screenshots]
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/landing-page-1.png)
+I created multiple images for various public offices using Canva Graphic Design tools and I ran a Jinja loop through the offices and officials.  I then created a conditional through Jinja templating to evaluate which office the iteration is currently on.  
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/landing-page-2.png)
+[Public Officials Screenshots]
 
-**Election Information**
+### **Elections**
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/elections-page.png)
+I was able to retrieve extremely limited data from Google Civic Information API on upcoming elections.  At the time of first deployment, there were only seven elections being returned for the entire country, one of them occurring on September 14 in California.  I have included any election data available for a user's address from the API (users in California would be able to see this information at the time of first launch), but most users would not receive anything.
 
-**State Voting Information**
+I made fairly extensive effort to locate this data in other free Election APIs, however I was unsuccessful in locating anything that would be particularly helpful.  However, after initiating contact with their support team, I was informed that [CivicsEngine](https://www.civicengine.com/) is currently in the process of creating a free API in the future.  I believe that their data could be extremely valuable to developers.
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/voting-info-page-1.png)
+Because of this lack of information, I decided that the best thing to do for this present project was to create a new database of information containing upcoming elections, which I have included in my Database Seed file in the main folder.  I gathered this information from each state using various public resources including each state's Board of Elections website.  Of course, this information will become outdated fairly quickly, and it would be much better practice in development to fetch this data from an API that is constantly updating its information.  Unfortunately, that was not an option at the time of developing this application.  I am looking forward to seeing what data CivicsEngine releases publicly with their API and based on that data, I would definitely consider improving my application to retrieve the data in a more dynamic manner.  I have also included a link to the respective state's Board of Elections website where they can find more information on future elections.
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/voting-info-page-2.png)
+I've attempted to provide an easy way to update this information for Admin users in the Admin section of my application.
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/voting-info-page-3.png)
+[Screenshot State Elections UI]
 
-**Public Officials**
+### State Voting Information
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/public-officials-v2.png)
+Unfortunately, at the time of release, I was unable to locate any free and public API that provided Registration/Voting information and data based on the user's location.  
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/public-officials-v2-2.png)
+Similarly to the Elections section of the application, I decided that the best alternative was to create a new database on my application and manually seed the data.  
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/project_screenshots/public-officials-v2-3.png)
+Due to the fact that there are so many columns on this table, I felt that it would be best to quickly go through each of them from the State Database model.
+
+**ID:** Primary Key - State Abbreviation (i.e. 'AL' for Alabama)
+
+**name:** Name of state (i.e. Alabama)
+
+**capital:** State Capital (i.e. Montgomery)
+
+**registration_url:** URL from State Board of Elections for Voter Registration
+
+**elections_url:** Upcoming Elections URL from State Board of Elections for Upcoming Elections
+
+**Deadlines for Voter Registration:**
+
+**registration_in_person_deadline:** Deadline for Voter Registration in person
+
+**registration_mail_deadline:** Deadline for Voter Registration by mail
+
+**registration_online_deadline:** Deadline for Voter Registration online
+
+**Deadlines for Absentee Ballot Application and Voting:**
+
+**absentee_application_in_person_deadline:** Deadline to apply for Absentee Ballot in person
+
+**absentee_application_mail_deadline:** Deadline to apply for Absentee Ballot by mail
+
+**absentee_application_online_deadline:** Deadline to apply for Absentee Ballot online
+
+**voted_absentee_ballot_deadline:** Due date for Absentee Ballot
+
+**check_registration_url:** URL on State website to check voter's registration status
+
+**polling_location_url:** URL on State website to check a voter's polling location
+
+**absentee_ballot_url:**URL on State website to apply for Absentee Ballot
+
+**local_election_url:** URL on State website to locate location election board/clerks/etc
+
+**ballot_tracker_url:** URL on State website to check track ballot location
+
+I gathered this information from various sources, including the State Board of Elections websites and included it in my seed.py file.
+
+**Voter Registration Rules**
+
+I created a separate database table for Voter Registration rules.  I gathered this information from public data for each state and added it to my database.  There were very few specific rules that overlapped between states, with the main exception of "You must be a citizen of the United States".  However, I wanted to provide flexibility for any rules that were in multiple states, so I handled this with a StateRegistrationRule join table.
+
+I've attempted to provide an easy way to update this information for Admin users in the Admin section of my application.
+
+At the bottom of the State Voting Information section, I have included information from the Google Civic Information API pertaining to the user's state officials, based on that specific division in the JSON data.
+
+Screenshots for State Voting Info
+
+## Further Steps
 

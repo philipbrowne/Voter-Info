@@ -64,12 +64,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username} {self.first_name} {self.last_name}>'
 
-    def change_password(self, password):
-        """Changes user password"""
-        hashed = bcrypt.generate_password_hash(password)
-        hashed_utf8 = hashed.decode('utf8')
-        self.password = hashed_utf8
-        db.session.commit()
+   
 
     @classmethod
     def register(cls, username, password, first_name, last_name, street_address, city, county, state_id, zip_code, email):
@@ -82,8 +77,28 @@ class User(db.Model):
             username=username, password=hashed_utf8, first_name=first_name, last_name=last_name, street_address=street_address, city=city, state_id=state_id, county=county, zip_code=zip_code, email=email)
         db.session.add(user)
         return user
+    
+    @classmethod
+    def authenticate(cls, username, password):
+        """Validate that user exists and password is correct
 
-    # Source: https://github.com/smonagh/flask-password-reset
+        Return user if valid; otherwise return False.
+        """
+        # Queries for unique username from database
+        user = User.query.filter_by(username=username).first()
+        # If valid user and if password check lines up with database hash
+        if user and bcrypt.check_password_hash(user.password, password):
+            # Return User instance
+            return user
+        else:
+            return False
+        
+     def change_password(self, password):
+        """Changes user password"""
+        hashed = bcrypt.generate_password_hash(password)
+        hashed_utf8 = hashed.decode('utf8')
+        self.password = hashed_utf8
+        db.session.commit()
 
     def get_reset_token(self, SECRET_KEY, expires=500):
         return jwt.encode({'reset_password': self.username, 'exp': time() + expires},
@@ -105,20 +120,7 @@ class User(db.Model):
         user = User.query.filter_by(email=email).first()
         return user
 
-    @classmethod
-    def authenticate(cls, username, password):
-        """Validate that user exists and password is correct
 
-        Return user if valid; otherwise return False.
-        """
-        # Queries for unique username from database
-        user = User.query.filter_by(username=username).first()
-        # If valid user and if password check lines up with database hash
-        if user and bcrypt.check_password_hash(user.password, password):
-            # Return User instance
-            return user
-        else:
-            return False
 
     @property
     def registration_date(self):
