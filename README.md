@@ -6,6 +6,8 @@ Voter Info - designed to provide information on voting to US Residents based on 
 
 This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.  
 
+[TOC]
+
 ## Technologies Used
 
 **Front End:**
@@ -108,7 +110,7 @@ I created multiple images for various public offices using Canva Graphic Design 
 
 
 
-### **Elections**
+### Elections
 
 I was able to retrieve extremely limited data from Google Civic Information API on upcoming elections.  At the time of first deployment, there were only seven elections being returned for the entire country, one of them occurring on September 14 in California.  I have included any election data available for a user's address from the API (users in California would be able to see this information at the time of first launch), but most users would not receive anything.
 
