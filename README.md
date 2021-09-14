@@ -272,7 +272,7 @@ All feedback is appreciated - please feel free to connect with me using the info
 
 `createdb voter-db`
 
-``python3.7 seed.py`
+`python3.7 seed.py`
 
 **Run Application With Flask**
 
