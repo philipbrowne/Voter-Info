@@ -22,7 +22,7 @@ PostgreSQL
 
 **API and Data:**
 
-Google Civic Information, EasyPost, MapQuest. Random Address Data from RRAD/OpenAddresses
+Google Civic Information, EasyPost (alternative request using Lob included as commented code in app file), MapQuest. Random Address Data from RRAD/OpenAddresses
 
 **Graphic Design:**
 
@@ -31,6 +31,12 @@ Canva and Adobe Photoshop
 ## Deployment
 
 The application is currently deployed on Heroku at https://us-voter-info.herokuapp.com/ 
+
+## Developer
+
+**[Phil Browne](https://www.linkedin.com/in/philbrownetech/)**
+
+![](https://us-voter-info.herokuapp.com/assets/images/phil.jpg)
 
 ## Features
 
@@ -176,7 +182,69 @@ The Administrator can add, edit, and remove elections.
 
 [Admin-Page-UI-7]
 
+The Administrator can add, edit, and remove voter registration rules.
 
+[Admin-Page-UI-8]
+
+[Admin-Page-UI-9]
+
+[Admin-Page-UI-10]
 
 ## Further Steps
+
+**Data Models:**
+
+As mentioned, the situation with our State Voter Information and State Elections data is less than ideal.  I intend to continue looking for a free and public API that will provide this information.  It is my hope that the Administrator functionality will help at least partially offset this deficiency.
+
+There are many other voter information items that would be valuable, such as Absentee Voting Rules, Voter ID Rules, Early Voting Dates, Election Day Registration, etc.  Unfortunately, within the time allowed for this project, I was not able to add additional information.  However, these are definitely further items I would consider adding to my State data model.
+
+**Additional Functionality:**
+
+Setting an Email reminder system for voting based on the election date would definitely be an added function that I would like to implement in the future.  Alternatively, I could add text Reminders using the [Twilio](https://www.twilio.com/docs/usage/api) API, but would have to do it in a way that is non-invasive to the user.  A reminder to the user if they are under the age of 18 to register when eligible could also be helpful.
+
+**Improved Error Handling for APIs**
+
+With more time, I would definitely improve my error handling if an API were to go down, particularly the EasyPost API.  I've commented out the Lob API call as a backup option, and intend to explore ways I could alternatively use that if EasyPost was ever to go down.
+
+## Video Demo
+
+**Video Demo of the application:** https://us-voter-info.herokuapp.com/assets/video/Voter-Info-Demo.mp4
+
+## Local Deployment
+
+**Requirements: Python, Pip, PostgreSQL**
+
+**API Keys and Email:** Retrieve free API keys for Lob, EasyPost, Google Civic Information, and Mapquest; substitute them in the variables I have listed in app.py.  For email functionality, substitute with a gmail account of your own choosing with the MAIL_USERNAME and MAIL_PASSWORD variables in my app file.  For the SECRET_KEY variable in Flask, you can use your own variable locally.
+
+**To deploy locally using Python 3.711, pip, and Flask - Initialize PostgreSQL in your operating system and run the following commands in your terminal:**
+
+**Clone Repository and Enter Directory of Repo**
+
+`git clone https://github.com/philipbrowne/Voter-Info`
+
+`cd Voter-Info`
+
+**Create and Activate Python Virtual Environment**
+
+`python3.7 -m venv venv`
+
+`source venv/bin/activate`
+
+`pip install -r requirements.txt`
+
+**To Set Up Our Local Database:**
+
+`createdb voter-db`
+
+``python3.7 seed.py`
+
+**Run Application With Flask**
+
+`export FLASK_ENV=production`
+
+`export FLASK_RUN_PORT=8000`
+
+`flask run`
+
+Open the application in your web browser at http://localhost:8000/
 
