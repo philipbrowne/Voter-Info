@@ -154,5 +154,29 @@ At the bottom of the State Voting Information section, I have included informati
 
 Screenshots for State Voting Info
 
+### Administrator Interface
+
+Due to the amount of data that was manually added, and for long-term sustainability of this application, I decided that it was best to add an Administrator interface to the application.  Each user has a Boolean value in the User model for "is_admin" that defaults to false upon registration.  However, if a user does have the value set to True, they will have access to this administrator interface, where they can create, read, update, and delete data from our system.
+
+The Administrator can edit most of a user's details, with the exception of the password, which the user can only change themselves through the Password Reset functionality described above.
+
+[Admin-Page-UI-2]
+
+[Admin-Page-UI-3]
+
+The Administrator can edit state information - adding/removing rules, adding elections, etc.
+
+[Admin-Page-UI-4]
+
+[Admin-Page-UI-5]
+
+The Administrator can add, edit, and remove elections.
+
+[Admin-Page-UI-6]
+
+[Admin-Page-UI-7]
+
+
+
 ## Further Steps
 

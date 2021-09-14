@@ -1,11 +1,8 @@
-{% extends 'admin_base.html' %} 
-{% block title %} 
-States 
-{% endblock %} 
-{% block content %} 
-<div class="container">
+{% extends 'admin_base.html' %} {% block title %} States {% endblock %} {% block content %} <div class="container">
     <div class="container">
-        <h1>Registration Rule</h1>
+        <h1 class="text-center">Registration Rule</h1>
+        <div class="d-flex flex-column align-items-center my-3"><a href="/admin/rules/new"><button
+                    class="btn btn-outline-primary">Add New Voter Registration Rule</button></a></div>
         <div class="my-4">
             <table class="table table-sm table-responsive user-table mb-1">
                 <thead>
@@ -16,19 +13,17 @@ States
                 </thead>
                 <tbody> {% for rule in rules %} <tr>
                         <th scope="row">{{rule.rule}}<br><a href="/admin/rules/{{rule.id}}/edit"
-                            class="btn btn-outline-primary btn-sm m-1 px-2">Edit Rule</a>
-                        <form action="/admin/rules/{{rule.id}}/delete" class="form-inline d-inline" method="POST">
-                            <button class="btn btn-outline-danger btn-sm m-1 px-2">Delete Rule</button></form></th>
+                                class="btn btn-outline-primary btn-sm m-1 px-2">Edit Rule</a>
+                            <form action="/admin/rules/{{rule.id}}/delete" class="form-inline d-inline" method="POST">
+                                <button class="btn btn-outline-danger btn-sm m-1 px-2">Delete Rule</button>
+                            </form>
+                        </th>
                         <td>
-                            <ul class="list-group">
-                                {% for state in rule.states %}
-                                    <li>{{state.name}}</li>
-                                {% endfor %}
+                            <ul class="list-group"> {% for state in rule.states %} <li>{{state.name}}</li> {% endfor %}
                             </ul>
                         </td>
                     </tr> {% endfor %} </tbody>
             </table>
         </div>
     </div>
-</div> 
-{% endblock %}
+</div> {% endblock %}
