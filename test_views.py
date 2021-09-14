@@ -6,7 +6,6 @@ from models import db, User, State, Election, RegistrationRule, StateRegistratio
 
 os.environ['DATABASE_URL'] = 'postgresql://voter-test'
 from app import app
-from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, OPEN_FEC_API_KEY, ELECTIONS_ONLINE_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
 
 db.create_all()
 
