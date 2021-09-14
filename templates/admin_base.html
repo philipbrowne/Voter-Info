@@ -63,7 +63,24 @@
                 </div>
         </nav> {% endif %} {% endif %} <div class="container" style="margin-top: 2em"> {% for category, msg in
             get_flashed_messages(with_categories=True) %} <div class="alert alert-{{category}}">{{ msg }}</div> {%
-            endfor %} </div>{% block content %} {% endblock %}
+            endfor %} </div>{% block content %} {% endblock %} <footer class="p-4 mt-1 text-center dark-blue fs-4">
+            Created by Phil Browne<div>
+                <ul class="socials my-1 display-7 list-inline fs-4">
+                    <li class="list-inline-item mx-2">
+                        <a href="https://www.linkedin.com/in/philbrownetech/" target="_blank" rel="noopener noreferrer"
+                            class="link-primary"><i class="fab fa-linkedin"></i></a>
+                    </li>
+                    <li class="list-inline-item mx-2">
+                        <a href="https://github.com/philipbrowne" target="_blank" rel="noopener noreferrer"
+                            class="link-primary"><i class="fab fa-github-square"></i></a>
+                    </li>
+                    <li class="list-inline-item mx-2">
+                        <a href="mailto:pbrowne@gmail.com" target="_blank" rel="noopener noreferrer"
+                            class="link-primary"><i class="fas fa-envelope-open-text"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
         <!-- Preloading GIFs -->
         <div id="img-preload">
             <img src="/assets/images/public-officials-v5.gif">
