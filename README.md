@@ -1,10 +1,10 @@
 # Voter Info
 
-![](https://github.com/philipbrowne/Voter-Info/blob/main/static/assets/images/promo-img.png)
+![](https://us-voter-info.herokuapp.com/assets/promo-img/site-promo-img.png)
 
-Voter Information Application - designed to provide information on voting to US Residents based on their area in an effort to increase accessibility and engagement.
+Voter Info - designed to provide information on voting to US Residents based on their area in an effort to increase accessibility and engagement.
 
-This project was completed in approximately 60 hours as part of the Springboard Software Engineering program.  
+This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.  
 
 ## Technologies Used
 
@@ -38,6 +38,8 @@ The application is currently deployed on Heroku at https://us-voter-info.herokua
 
 ![](https://us-voter-info.herokuapp.com/assets/images/phil.jpg)
 
+**Email:** pbrowne@gmail.com
+
 ## Features
 
 ### Registration and Login
@@ -50,9 +52,9 @@ If login is successful, method returns user; if unsuccessful, it returns False.
 
 The user enters their mailing address, or makes a request to generate a random address, which is chosen randomly from a randAddress JS file.  The source of these addresses is [RRAD](https://github.com/EthanRBrown/rrad) and these addresses are all Public Domain through the [OpenAddresses](https://openaddresses.io/) project.  
 
---Register UI Screenshot--
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-registration-ui-screenshot2.png?raw=true)
 
---Login UI Screenshot--
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-login-ui-screenshot.png?raw=true)
 
 ### Address Verification Using EasyPost API
 
@@ -60,7 +62,7 @@ The user either uses their own address, or the randomly chosen address from rand
 
 Once the address has been verified, one more API request goes out quickly to the [Mapquest](https://developer.mapquest.com/) API to retrieve the user's county based on their address to add it to the User Profile.
 
---Register UI Screenshot 2--
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-registration-ui-screenshot1.png?raw=true)
 
 ### Password Reset
 
@@ -70,25 +72,37 @@ A user requests a password via Flask View with their previously supplied Email A
 
 At that URL, a user can fill out a very short form to reset their password.
 
---Password Reset UI Screenshot--
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-reset-password-ui-screenshot.png?raw=true)
 
 ### User Profile
 
 Upon registration and login, the application takes the user to their profile, where they can see their user information, as well as pertinent voting information based on their state.  The user can edit their profile, where a form similar to registration appears with all details except their Username and/or Password.
 
---User Profile UI Screenshot--
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-profile-ui-screenshot.png?raw=true)
 
---Edit User UI Screenshot--
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/edit-user-ui-screenshot.png?raw=true)
 
 ### Public Officials
 
 Data for Public Officials is generated via the user's address and the [Google Civic Information](https://developers.google.com/civic-information) API.  A response contains three main items of organization: division (the level of government), office (the office of the official), and official (the elected official).  I have provided three screenshot examples here:
 
-[Google Civic Info Screenshots]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/google-civic-information-screenshot-1.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/google-civic-information-screenshot-2.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/google-civic-information-screenshot-3.png?raw=true)
 
 I created multiple images for various public offices using Canva Graphic Design tools and I ran a Jinja loop through the offices and officials.  I then created a conditional through Jinja templating to evaluate which office the iteration is currently on.  
 
-[Public Officials Screenshots]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/public-officials-screenshot-1.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/public-officials-screenshot-2.png?raw=true)
+
+
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/public-officials-screenshot-3.png?raw=true)
+
+
 
 ### **Elections**
 
@@ -100,7 +114,7 @@ Because of this lack of information, I decided that the best thing to do for thi
 
 I've attempted to provide an easy way to update this information for Admin users in the Admin section of my application.
 
-[Screenshot State Elections UI]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-elections-ui-screenshot.png?raw=true)
 
 ### State Voting Information
 
@@ -158,37 +172,57 @@ I've attempted to provide an easy way to update this information for Admin users
 
 At the bottom of the State Voting Information section, I have included information from the Google Civic Information API pertaining to the user's state officials, based on that specific division in the JSON data.
 
-Screenshots for State Voting Info
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-voting-info-ui-screenshot-1.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-voting-info-ui-screenshot-2.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-voting-info-ui-screenshot-3.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-voting-info-ui-screenshot-4.png?raw=true)
 
 ### Administrator Interface
 
-Due to the amount of data that was manually added, and for long-term sustainability of this application, I decided that it was best to add an Administrator interface to the application.  Each user has a Boolean value in the User model for "is_admin" that defaults to false upon registration.  However, if a user does have the value set to True, they will have access to this administrator interface, where they can create, read, update, and delete data from our system.
+Due to the amount of data that was manually added, and for long-term sustainability of this application, I decided that it was best to add an Administrator interface to the application.  Each user has a Boolean value in the User model for "is_admin" that defaults to false upon registration.  However, if a user does have the value set to True, they will have access to this administrator interface, where they can create, read, update, and delete data from our system.  In my current Deployment, I assigned is_admin to my own user profile using Heroku's PostgreSQL interface, this can also be done similarly in local deployments.  
 
-The Administrator can edit most of a user's details, with the exception of the password, which the user can only change themselves through the Password Reset functionality described above.
+**Admin Main Page:**
 
-[Admin-Page-UI-2]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-1.png?raw=true)
 
-[Admin-Page-UI-3]
+**Admin - Users:**
+
+The Administrator can edit most of a user's details, with the exception of the password, which the user can only change themselves through the Password Reset functionality described above.  
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-2.png?raw=true)
+
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-3.png?raw=true)
+
+The Administrator can also add administrative authorization to the user.
+
+**Admin - States:**
 
 The Administrator can edit state information - adding/removing rules, adding elections, etc.
 
-[Admin-Page-UI-4]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-4.png?raw=true)
 
-[Admin-Page-UI-5]
+![[Admin-Page-UI-5]](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-5.png?raw=true)
+
+**Admin - Elections:**
 
 The Administrator can add, edit, and remove elections.
 
-[Admin-Page-UI-6]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-6.png?raw=true)
 
-[Admin-Page-UI-7]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-7.png?raw=true)
+
+**Admin: Voter Registration Rules:**
 
 The Administrator can add, edit, and remove voter registration rules.
 
-[Admin-Page-UI-8]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-8.png?raw=true)
 
-[Admin-Page-UI-9]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-9.png?raw=true)
 
-[Admin-Page-UI-10]
+![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-10.png?raw=true)
 
 ## Further Steps
 
@@ -206,6 +240,8 @@ Setting an Email reminder system for voting based on the election date would def
 
 With more time, I would definitely improve my error handling if an API were to go down, particularly the EasyPost API.  I've commented out the Lob API call as a backup option, and intend to explore ways I could alternatively use that if EasyPost was ever to go down.
 
+All feedback is appreciated - please feel free to connect with me using the information listed under "Developer".
+
 ## Video Demo
 
 **Video Demo of the application:** https://us-voter-info.herokuapp.com/assets/video/Voter-Info-Demo.mp4
@@ -220,9 +256,9 @@ With more time, I would definitely improve my error handling if an API were to g
 
 **Clone Repository and Enter Directory of Repo**
 
-`git clone https://github.com/philipbrowne/Voter-Info`
+`git clone https://github.com/philipbrowne/us-voter-info`
 
-`cd Voter-Info`
+`cd us-voter-info`
 
 **Create and Activate Python Virtual Environment**
 
