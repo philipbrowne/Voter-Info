@@ -40,6 +40,10 @@ The application is currently deployed on Heroku at https://us-voter-info.herokua
 
 **Email:** pbrowne@gmail.com
 
+## Video Demo
+
+**Video Demo of the application:** https://us-voter-info.herokuapp.com/assets/video/Voter-Info-Demo.mp4
+
 ## Features
 
 ### Registration and Login
@@ -241,10 +245,6 @@ Setting an Email reminder system for voting based on the election date would def
 With more time, I would definitely improve my error handling if an API were to go down, particularly the EasyPost API.  I've commented out the Lob API call as a backup option, and intend to explore ways I could alternatively use that if EasyPost was ever to go down.
 
 All feedback is appreciated - please feel free to connect with me using the information listed under "Developer".
-
-## Video Demo
-
-**Video Demo of the application:** https://us-voter-info.herokuapp.com/assets/video/Voter-Info-Demo.mp4
 
 ## Local Deployment
 
