@@ -93,7 +93,7 @@ class User(db.Model):
         else:
             return False
         
-     def change_password(self, password):
+    def change_password(self, password):
         """Changes user password"""
         hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode('utf8')
