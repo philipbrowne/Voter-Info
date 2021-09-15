@@ -273,7 +273,9 @@ The Administrator can add, edit, and remove voter registration rules.
 
 ##  <a name='FurtherSteps'></a>Further Steps
 
-##### <a name='DataModels'></a>Data Models:
+This application was developed as part of a project for a Software Engineering curriculum. The timeline for this project was approximately 50-60 hours. With additional time, there are numerous further steps I would take to improve this application.
+
+##### <a name='DataModels'></a>Much More Dynamic Data Models:
 
 As mentioned, the situation with our State Voter Information and State Elections data is less than ideal. I intend to continue looking for a free and public API that will provide this information. It is my hope that the Administrator functionality will help at least partially offset this deficiency.
 
