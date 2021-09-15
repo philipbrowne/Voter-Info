@@ -58,6 +58,15 @@ h6 {
   color: #fcb9b1 !important;
 }
 
+a[href^="tel:"] {
+  text-decoration: none !important;
+}
+
+a[href^="tel:"]:before {
+  display: block !important;
+  margin-right: 0.5em !important;
+}
+
 .dark-blue {
   color: #00005c !important;
 }
@@ -72,7 +81,7 @@ h6 {
 
 .rep-photo,
 .blank-photo {
-  width: 200px;
+  width: 250px;
 }
 
 @media (max-width: 1200px) {

@@ -99,11 +99,10 @@ Public Officials
                 <div class="card my-2">
                     <li class="list-group-item card-body">
                         <div class="p-2">
-                            <h4 class="card-subtitle mb-2 dark-blue d-flex justify-content-center text-center py-1"> 
-                                {% if resp['officials'][index]['urls'] %} <a href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{% endif %}{{resp['officials'][index]['name']}}
-                                    {% if resp['officials'][index]['urls'] %} </a> {% endif %} </h4>
-                            <div class="row">
-                            <div class="col-md-6 col-lg-3 d-flex flex-column align-items-center py-1">
+                            
+                            <div class="row justify-content-start align-items-center">
+                            <div class="col-md-5 col-lg-3 d-flex flex-column align-items-center justify-content-center py-1">
+                               
                         {% if resp['officials'][index]['photoUrl'] %} 
                             <img src="{{resp['officials'][index]['photoUrl']}}" onerror="this.onerror=null;this.src='/assets/images/officials/blank-user-photo.png';this.classList.add('blank-photo');" alt="{{resp['officials'][index]['name']}}"class="rep-photo"> 
                         {% elif 'photoUrl' not in resp['officials'][index] and resp['officials'][index]['name'] == 'Joseph R. Biden' %} 
@@ -114,7 +113,10 @@ Public Officials
                             <img src="/assets/images/officials/blank-user-photo.png" alt="blank photo" class="blank-photo"> 
                         {% endif %} 
                     </div>
-                        <div class="col-md-6 col-lg-9">
+                        <div class="col-md-6 col-lg-9 d-flex flex-column text-center align-items-center">
+                            <h4 class="card-subtitle mb-2 dark-blue d-flex text-center py-1 mt-2 mt-md-1"> {% if
+                                resp['officials'][index]['urls'] %} <a href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{% endif
+                                    %}{{resp['officials'][index]['name']}} {% if resp['officials'][index]['urls'] %} </a> {% endif %} </h4>
                             {% if resp['officials'][index]['party'] %} 
                             <div><b>Political Party:</b><br>{{resp['officials'][index]['party']}}</div> 
                             {% endif %}
@@ -125,12 +127,10 @@ Public Officials
                             {{resp['officials'][index]['address'][0]['zip']}}</div>
                             {% endif %}
                             {% if resp['officials'][index]['phones'] %}
-                            <div class="my-1"><b>Phone Number: </b><br> {{resp['officials'][index]['phones'][0]}}</div> {% endif %}
-                            {%if resp['officials'][index]['urls'] %}
-                            <div class="my-1"><b>Website: </b><br><a href="{{resp['officials'][index]['urls'][0]}}" target="_blank">{{resp['officials'][index]['urls'][0]}}</a></div>
+                            <div class="my-1"><b>Phone Number: </b><br><a href="tel:{{resp['officials'][index]['phones'][0]}}">{{resp['officials'][index]['phones'][0]}}</a></div> {% endif %}
                         </div>
                     </div>
-                {% endif %}
+               
                     </div>
                     </li>
                 </div> 
