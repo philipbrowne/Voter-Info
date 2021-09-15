@@ -338,4 +338,4 @@ Open the application in your web browser at http://localhost:8000/
 
 ##  <a name='Testing'></a>Testing
 
-Tests were written for Models and Views using Python's Built in [Unit Test](https://docs.python.org/3/library/unittest.html) Library.
+Tests were written for Models and Views using Python's Built in [Unit Test](https://docs.python.org/3/library/unittest.html) Framework.
