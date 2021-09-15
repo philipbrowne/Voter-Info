@@ -45,6 +45,7 @@ This project was completed in approximately 50-60 hours as part of the Springboa
     * [Set Up Local Database](#LocalDB)
     * [Run Application with Flask](#RunApplication)
     * [View Application in your Web Browser](#StartBrowser)
+9. [Testing](#Testing)
 
 ##  <a name='TechnologiesUsed'></a>Technologies Used
 
@@ -334,3 +335,7 @@ Initialize PostgreSQL in your operating system and run the following commands in
 `flask run`
 
 Open the application in your web browser at http://localhost:8000/
+
+##  <a name='Testing'></a>Testing
+
+Tests were written for Models and Views using Python's Built in [Unit Test](https://docs.python.org/3/library/unittest.html) Library.
