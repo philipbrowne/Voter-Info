@@ -334,6 +334,8 @@ Initialize PostgreSQL in your operating system and run the following commands in
 
 `flask run`
 
+###### <a name='StartBrowser'></a>View Application in your Web Browser
+
 Open the application in your web browser at http://localhost:8000/
 
 ##  <a name='Testing'></a>Testing
