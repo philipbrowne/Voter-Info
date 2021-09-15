@@ -1,4 +1,31 @@
-# Voter Info
+<!-- vscode-markdown-toc -->
+* 1. [Technologies Used](#TechnologiesUsed)
+		* 1.1. [Front End:](#FrontEnd:)
+		* 1.2. [Back End:](#BackEnd:)
+		* 1.3. [Database:](#Database:)
+		* 1.4. [API and Data:](#APIandData:)
+		* 1.5. [Graphic Design:](#GraphicDesign:)
+* 2. [Deployment](#Deployment)
+* 3. [Developer](#Developer)
+* 4. [Video Demo](#VideoDemo)
+* 5. [Demo Account For Site Use](#DemoAccountForSiteUse)
+* 6. [Features](#Features)
+	* 6.1. [Registration and Login](#RegistrationandLogin)
+	* 6.2. [Address Verification Using EasyPost API](#AddressVerificationUsingEasyPostAPI)
+	* 6.3. [Password Reset](#PasswordReset)
+	* 6.4. [User Profile](#UserProfile)
+	* 6.5. [Public Officials](#PublicOfficials)
+	* 6.6. [Elections](#Elections)
+	* 6.7. [State Voting Information](#StateVotingInformation)
+	* 6.8. [Administrator Interface](#AdministratorInterface)
+* 7. [Further Steps](#FurtherSteps)
+* 8. [Local Deployment](#LocalDeployment)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc --># Voter Info
 
 ![](https://us-voter-info.herokuapp.com/assets/promo-img/site-promo-img.png)
 
@@ -6,41 +33,33 @@ Voter Info - designed to provide information on voting to US Residents based on 
 
 This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.
 
-# Table of Contents
-1. [Technologies Used](##Technologies Used)
-2. [Front End](####Front End)
-3. [Back End](####Back End)
-4. [Database](####Database)
-5. [API and Data](####API and Data)
-6. [Graphic Design](####Graphic Design)
+##  1. <a name='TechnologiesUsed'></a>Technologies Used
 
-## Technologies Used
-
-#### Front End:
+####  1.1. <a name='FrontEnd:'></a>Front End:
 
 JavaScript, AJAX, Axios, Bootstrap CSS
 
-#### Back End:
+####  1.2. <a name='BackEnd:'></a>Back End:
 
 Python, Flask, SQLAlchemy, WTForms, BCrypt, PyJWT, Flask Mail
 
-#### Database:
+####  1.3. <a name='Database:'></a>Database:
 
 PostgreSQL
 
-#### API and Data:
+####  1.4. <a name='APIandData:'></a>API and Data:
 
 Google Civic Information, EasyPost (alternative request using Lob included as commented code in app file), MapQuest. Random Address Data from RRAD/OpenAddresses
 
-#### Graphic Design:
+####  1.5. <a name='GraphicDesign:'></a>Graphic Design:
 
 Canva and Adobe Photoshop
 
-## Deployment
+##  2. <a name='Deployment'></a>Deployment
 
 The application is currently deployed on Heroku at https://us-voter-info.herokuapp.com/
 
-## Developer
+##  3. <a name='Developer'></a>Developer
 
 **[Phil Browne](https://www.linkedin.com/in/philbrownetech/)**
 
@@ -48,20 +67,20 @@ The application is currently deployed on Heroku at https://us-voter-info.herokua
 
 **Email:** pbrowne@gmail.com
 
-## Video Demo
+##  4. <a name='VideoDemo'></a>Video Demo
 
 **Video Demo of the application:** https://us-voter-info.herokuapp.com/assets/video/Voter-Info-Demo.mp4
 
-## Demo Account For Site Use
+##  5. <a name='DemoAccountForSiteUse'></a>Demo Account For Site Use
 
 This application uses User Registration and Login. However, if you do not wish to register for an account, you can sign in as a TestUser under the credentials below:
 
 Username: TestUser
 Password: TestPassword!
 
-## Features
+##  6. <a name='Features'></a>Features
 
-### Registration and Login
+###  6.1. <a name='RegistrationandLogin'></a>Registration and Login
 
 User registration occurs through User model in SQLAlchemy and Bcrypt Hashing of their Password. Information is stored in PostgreSQL Database. All forms on the user end of this application are rendered and verified (CSRF) through Flask WTForms. If a user submits a username or email already in the system, an error message is generated.
 
@@ -75,7 +94,7 @@ The user enters their mailing address, or makes a request to generate a random a
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-login-ui-screenshot.png?raw=true)
 
-### Address Verification Using EasyPost API
+###  6.2. <a name='AddressVerificationUsingEasyPostAPI'></a>Address Verification Using EasyPost API
 
 The user either uses their own address, or the randomly chosen address from randAddress.js and an AJAX request is sent to our back-end at /verify-address or /verify-random-address via POST request. At this route, the data is sent to the [EasyPost](https://www.easypost.com/) API and verified. If the address is verified as a real deliverable mailing address, a JSON object with the Verified Address data is returned to our Front End and handled in the DOM. If the address is deemed undeliverable, an error is returned via JSON and the user receives a message in the DOM that the address is invalid and to try again. I have added commented-out code in the verify-address routes that include an API call to a different Address Verification API, [Lob](https://www.lob.com/). My experiences were better with EasyPost, but if for some reason there were issues with the API, one _further step_ with this project would be to improve error handling and provide a second call to Lob if the EasyPost API is down.
 
@@ -83,7 +102,7 @@ Once the address has been verified, one more API request goes out quickly to the
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-registration-ui-screenshot1.png?raw=true)
 
-### Password Reset
+###  6.3. <a name='PasswordReset'></a>Password Reset
 
 Change Password is handled via a Password Reset process through JWT and Flask Mail.
 
@@ -93,7 +112,7 @@ At that URL, a user can fill out a very short form to reset their password.
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/user-reset-password-ui-screenshot.png?raw=true)
 
-### User Profile
+###  6.4. <a name='UserProfile'></a>User Profile
 
 Upon registration and login, the application takes the user to their profile, where they can see their user information, as well as pertinent voting information based on their state. The user can edit their profile, where a form similar to registration appears with all details except their Username and/or Password.
 
@@ -101,7 +120,7 @@ Upon registration and login, the application takes the user to their profile, wh
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/edit-user-ui-screenshot.png?raw=true)
 
-### Public Officials
+###  6.5. <a name='PublicOfficials'></a>Public Officials
 
 Data for Public Officials is generated via the user's address and the [Google Civic Information](https://developers.google.com/civic-information) API. A response contains three main items of organization: division (the level of government), office (the office of the official), and official (the elected official). I have provided three screenshot examples here:
 
@@ -119,7 +138,7 @@ I created multiple images for various public offices using Canva Graphic Design 
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/public-officials-screenshot-3.png?raw=true)
 
-### Elections
+###  6.6. <a name='Elections'></a>Elections
 
 I was able to retrieve extremely limited data from Google Civic Information API on upcoming elections. At the time of first deployment, there were only seven elections being returned for the entire country, one of them occurring on September 14 in California. I have included any election data available for a user's address from the API (users in California would be able to see this information at the time of first launch), but most users would not receive anything.
 
@@ -131,7 +150,7 @@ I've attempted to provide an easy way to update this information for Admin users
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-elections-ui-screenshot.png?raw=true)
 
-### State Voting Information
+###  6.7. <a name='StateVotingInformation'></a>State Voting Information
 
 Unfortunately, at the time of release, I was unable to locate any free and public API that provided Registration/Voting information and data based on the user's location.
 
@@ -195,7 +214,7 @@ At the bottom of the State Voting Information section, I have included informati
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/state-voting-info-ui-screenshot-4.png?raw=true)
 
-### Administrator Interface
+###  6.8. <a name='AdministratorInterface'></a>Administrator Interface
 
 Due to the amount of data that was manually added, and for long-term sustainability of this application, I decided that it was best to add an Administrator interface to the application. Each user has a Boolean value in the User model for "is_admin" that defaults to false upon registration. However, if a user does have the value set to True, they will have access to this administrator interface, where they can create, read, update, and delete data from our system. In my current Deployment, I assigned is_admin to my own user profile using Heroku's PostgreSQL interface, this can also be done similarly in local deployments.
 
@@ -239,7 +258,7 @@ The Administrator can add, edit, and remove voter registration rules.
 
 ![](https://github.com/philipbrowne/us-voter-info/blob/main/project_screenshots/admin-page-ui-10.png?raw=true)
 
-## Further Steps
+##  7. <a name='FurtherSteps'></a>Further Steps
 
 ##### Data Models:
 
@@ -257,7 +276,7 @@ With more time, I would definitely improve my error handling if an API were to g
 
 All feedback is appreciated - please feel free to connect with me using the information listed under "Developer".
 
-## Local Deployment
+##  8. <a name='LocalDeployment'></a>Local Deployment
 
 ###### Requirements:
 
