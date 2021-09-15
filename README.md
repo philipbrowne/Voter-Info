@@ -50,7 +50,7 @@ This project was completed in approximately 50-60 hours as part of the Springboa
 
 #### <a name='FrontEnd'></a>Front End:
 
-JavaScript, AJAX, Axios, Bootstrap CSS
+JavaScript, jQuery, AJAX, Axios, Bootstrap CSS
 
 #### <a name='BackEnd'></a>Back End:
 
