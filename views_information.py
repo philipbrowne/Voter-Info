@@ -26,6 +26,8 @@ if is_prod:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
+# Views for Information Routes
+
 @app.route('/elections')
 def get_elections():
     """Returns local elections"""

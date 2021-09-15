@@ -5,6 +5,8 @@ from app import app
 db.drop_all()
 db.create_all()
 
+#Data for Each State - Please see http://www.github.com/philipbrowne/us-voter-info for more information
+
 AL = State(id='AL', name='Alabama', capital='Montgomery', registration_url='https://www.sos.alabama.gov/alabama-votes/voter/register-to-vote?ref=voteusa',
            elections_url='https://www.sos.alabama.gov/alabama-votes/voter/upcoming-elections', registration_in_person_deadline='15 days before Election Day.', registration_mail_deadline='Postmarked 15 days before Election Day.', registration_online_deadline='15 days before Election Day.', check_registration_url='https://myinfo.alabamavotes.gov/VoterView/RegistrantSearch.do', polling_location_url='https://myinfo.alabamavotes.gov/VoterView/PollingPlaceSearch.do', absentee_ballot_url='https://www.sos.alabama.gov/alabama-votes/voter/absentee-voting', local_election_url='https://sos.alabama.gov/city-county-lookup&sa=D&source=editors&ust=1631123483717000&usg=AOvVaw3wN0m7RnMeBdnN1l8i21aU', ballot_tracker_url='https://myinfo.alabamavotes.gov/VoterView/AbsenteeBallotSearch.do', absentee_application_in_person_deadline='Received 5 days before Election Day.', absentee_application_mail_deadline='Received 7 days before Election Day.', absentee_application_online_deadline='N/A', voted_absentee_ballot_deadline='Postmarked 1 day before Election Day, received by noon on Election Day.')
 AK = State(id='AK', name='Alaska', capital='Juneau', registration_url='https://www.elections.alaska.gov/Core/voterregistration.php',

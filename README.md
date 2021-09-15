@@ -6,6 +6,14 @@ Voter Info - designed to provide information on voting to US Residents based on 
 
 This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.
 
+# Table of Contents
+1. [Technologies Used](## Technologies Used)
+[Front End](#### Front End)
+[Back End](#### Back End)
+[Database](#### Database)
+[API and Data](#### API and Data)
+[Graphic Design](#### Graphic Design)
+
 ## Technologies Used
 
 #### Front End:

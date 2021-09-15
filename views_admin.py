@@ -13,7 +13,6 @@ from sqlalchemy.exc import IntegrityError
 import os
 import lob
 
-
 is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod == None:
     from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
@@ -26,6 +25,8 @@ if is_prod:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SECRET_KEY = os.environ.get('SECRET_KEY')
+
+# Views for Admin Routes
 
 @app.route('/admin')
 def admin_index():
@@ -175,7 +176,7 @@ def admin_edit_state_info(state_id):
 
 @app.route('/admin/state/<state_id>/rules/<int:rule_id>/delete', methods=['POST'])
 def remove_rule_from_state(state_id, rule_id):
-    """Removes a Voter Registration Rule from a state"""
+    """Removes Voter Registration Rule from a state"""
     state = State.query.get_or_404(state_id)
     rule = RegistrationRule.query.get_or_404(rule_id)
     state.registration_rules.remove(rule)

@@ -26,6 +26,7 @@ if is_prod:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
+# Views for User Routes
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
