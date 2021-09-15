@@ -1,3 +1,11 @@
+# Voter Info
+
+![](https://us-voter-info.herokuapp.com/assets/promo-img/site-promo-img.png)
+
+Voter Info - designed to provide information on voting to US Residents based on their area in an effort to increase accessibility and engagement.
+
+This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.
+
 <!-- vscode-markdown-toc -->
 * 1. [Technologies Used](#TechnologiesUsed)
 		* 1.1. [Front End:](#FrontEnd:)
@@ -25,13 +33,7 @@
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --># Voter Info
-
-![](https://us-voter-info.herokuapp.com/assets/promo-img/site-promo-img.png)
-
-Voter Info - designed to provide information on voting to US Residents based on their area in an effort to increase accessibility and engagement.
-
-This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.
+<!-- /vscode-markdown-toc -->
 
 ##  1. <a name='TechnologiesUsed'></a>Technologies Used
 
