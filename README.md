@@ -9,9 +9,9 @@ This project was completed in approximately 50-60 hours as part of the Springboa
 1. [Technologies Used](#TechnologiesUsed)
     * [Front End:](#FrontEnd:)
     * [Back End:](#BackEnd:)
-    * [Database:](#Database:)
-    * [API and Data:](#APIandData:)
-    * [Graphic Design:](#GraphicDesign:)
+    * [Database:](#Database)
+    * [API and Data:](#APIandData)
+    * [Graphic Design:](#GraphicDesign)
 2. [Deployment](#Deployment)
 3. [Developer](#Developer)
 4. [Video Demo](#VideoDemo)
@@ -30,23 +30,23 @@ This project was completed in approximately 50-60 hours as part of the Springboa
 
 ##  1. <a name='TechnologiesUsed'></a>Technologies Used
 
-####  1.1. <a name='FrontEnd:'></a>Front End:
+####  1.1. <a name='FrontEnd'></a>Front End:
 
 JavaScript, AJAX, Axios, Bootstrap CSS
 
-####  1.2. <a name='BackEnd:'></a>Back End:
+####  1.2. <a name='BackEnd'></a>Back End:
 
 Python, Flask, SQLAlchemy, WTForms, BCrypt, PyJWT, Flask Mail
 
-####  1.3. <a name='Database:'></a>Database:
+####  1.3. <a name='Database'></a>Database:
 
 PostgreSQL
 
-####  1.4. <a name='APIandData:'></a>API and Data:
+####  1.4. <a name='APIandData'></a>API and Data:
 
 Google Civic Information, EasyPost (alternative request using Lob included as commented code in app file), MapQuest. Random Address Data from RRAD/OpenAddresses
 
-####  1.5. <a name='GraphicDesign:'></a>Graphic Design:
+####  1.5. <a name='GraphicDesign'></a>Graphic Design:
 
 Canva and Adobe Photoshop
 
