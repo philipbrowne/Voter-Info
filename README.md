@@ -8,11 +8,11 @@ This project was completed in approximately 50-60 hours as part of the Springboa
 
 # Table of Contents
 1. [Technologies Used](## Technologies Used)
-[Front End](#### Front End)
-[Back End](#### Back End)
-[Database](#### Database)
-[API and Data](#### API and Data)
-[Graphic Design](#### Graphic Design)
+2. [Front End](#### Front End)
+3. [Back End](#### Back End)
+4. [Database](#### Database)
+5. [API and Data](#### API and Data)
+6. [Graphic Design](#### Graphic Design)
 
 ## Technologies Used
 
