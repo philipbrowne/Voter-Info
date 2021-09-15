@@ -73,7 +73,7 @@ Information and Links for {{user.state.name}}
     <h4 class="dark-blue text-center">Registration Rules for {{user.state.name}}</h4>
     <ul class="list-group">
         <li class="list-group-item list-group-item-action">
-            <h5 class="my-1 dark-blue">In order to vote in {{user.state.name}}..</h5>
+            <h5 class="my-1 dark-blue text-center">In order to vote in {{user.state.name}}..</h5>
         </li> {% for rule in user.state.registration_rules %} <li class="list-group-item list-group-item-action fs-6">
             {{rule.rule}}</li> {% endfor %}
     </ul>
@@ -81,7 +81,7 @@ Information and Links for {{user.state.name}}
 <div class="my-2 card p-2 d-flex flex-column align-items-center">
     <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2"
             src="/assets/images/voter-registration-deadlines-gif.gif" alt="Voter Registration Deadlines"></div>
-    <h5 class="my-1 dark-blue">{{user.state.name}} Voter Registration Deadlines</h5>
+    <h5 class="my-1 dark-blue text-center">{{user.state.name}} Voter Registration Deadlines</h5>
     <table class="table table-sm table-hover table-responsive">
         <thead>
             <tr>
@@ -108,7 +108,7 @@ Information and Links for {{user.state.name}}
 <div class="my-2 card p-2 d-flex flex-column align-items-center">
     <div class="container d-flex flex-column align-items-center mt-1"><img class="img-fluid py-2"
             src="/assets/images/absentee-ballot-deadlines-gif.gif" alt="Absentee Ballot Deadlines"></div>
-    <h5 class="my-1 dark-blue">{{user.state.name}} Absentee Ballot Deadlines</h5>
+    <h5 class="my-1 dark-blue text-center">{{user.state.name}} Absentee Ballot Deadlines</h5>
     <table class="table table-sm table-hover table-responsive">
         <thead>
             <tr>
@@ -147,7 +147,12 @@ Information and Links for {{user.state.name}}
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody> 
+        <tbody>
+            {% if user.state.id == 'DC' %}
+            <tr>
+                <td class="text-center">Information on DC Public Officials can be found at <a href="/officials">Public Officials.</a></td>
+            </tr>
+            {% endif %}
             {% for office in data['offices'] %} 
             {% set officialIndices = office['officialIndices'] %} 
             {% for index in officialIndices %} 
