@@ -27,8 +27,26 @@ This project was completed in approximately 50-60 hours as part of the Springboa
 	* [Elections](#Elections)
 	* [State Voting Information](#StateVotingInformation)
 	* [Administrator Interface](#AdministratorInterface)
+        * [Admin - Main Page](#AdminMainPage)
+        * [Admin - Users](#AdminUsers)
+        * [Admin - States](#AdminStates)
+        * [Admin - Elections](#AdminElections)
+        * [Admin - Voter Registration Rules](#AdminRegistrationRules)
 7. [Further Steps](#FurtherSteps)
+    * [Data Models](#DataModels)
+    * [Additional Functionality](#AdditionalFunctionality)
+    * [Improved Error Handling for APIs](#ErrorHandling)
 8. [Local Deployment](#LocalDeployment)
+    * [Requirements](#)
+    * []()
+    * []()
+    * []()
+    * []()
+    * []()
+    * []()
+
+    
+
 
 ##  <a name='TechnologiesUsed'></a>Technologies Used
 
@@ -283,7 +301,7 @@ Python, Pip, PostgreSQL
 
 Retrieve free API keys for Lob, EasyPost, Google Civic Information, and Mapquest; substitute them in the variables I have listed in app.py. For email functionality, substitute with a gmail account of your own choosing with the MAIL_USERNAME and MAIL_PASSWORD variables in my app file. For the SECRET_KEY variable in Flask, you can use your own variable locally.
 
-###### <a name='ToDeployLocally'></a>To deploy locally using Python 3.711, pip, and Flask:
+###### <a name='ToDeployLocally'></a>To deploy locally using Python 3.7.11, pip, and Flask:
 
 Initialize PostgreSQL in your operating system and run the following commands in your terminal:
 
@@ -314,5 +332,7 @@ Initialize PostgreSQL in your operating system and run the following commands in
 `export FLASK_RUN_PORT=8000`
 
 `flask run`
+
+###### <a name='StartBrowser'></a>View Application in your Web Browser
 
 Open the application in your web browser at http://localhost:8000/
