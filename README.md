@@ -6,34 +6,27 @@ Voter Info - designed to provide information on voting to US Residents based on 
 
 This project was completed in approximately 50-60 hours as part of the Springboard Software Engineering fellowship program.
 
-<!-- vscode-markdown-toc -->
-* 1. [Technologies Used](#TechnologiesUsed)
-		* 1.1. [Front End:](#FrontEnd:)
-		* 1.2. [Back End:](#BackEnd:)
-		* 1.3. [Database:](#Database:)
-		* 1.4. [API and Data:](#APIandData:)
-		* 1.5. [Graphic Design:](#GraphicDesign:)
-* 2. [Deployment](#Deployment)
-* 3. [Developer](#Developer)
-* 4. [Video Demo](#VideoDemo)
-* 5. [Demo Account For Site Use](#DemoAccountForSiteUse)
-* 6. [Features](#Features)
-	* 6.1. [Registration and Login](#RegistrationandLogin)
-	* 6.2. [Address Verification Using EasyPost API](#AddressVerificationUsingEasyPostAPI)
-	* 6.3. [Password Reset](#PasswordReset)
-	* 6.4. [User Profile](#UserProfile)
-	* 6.5. [Public Officials](#PublicOfficials)
-	* 6.6. [Elections](#Elections)
-	* 6.7. [State Voting Information](#StateVotingInformation)
-	* 6.8. [Administrator Interface](#AdministratorInterface)
-* 7. [Further Steps](#FurtherSteps)
-* 8. [Local Deployment](#LocalDeployment)
-
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
+1. [Technologies Used](#TechnologiesUsed)
+    * [Front End:](#FrontEnd:)
+    * [Back End:](#BackEnd:)
+    * [Database:](#Database:)
+    * [API and Data:](#APIandData:)
+    * [Graphic Design:](#GraphicDesign:)
+2. [Deployment](#Deployment)
+3. [Developer](#Developer)
+4. [Video Demo](#VideoDemo)
+5. [Demo Account For Site Use](#DemoAccountForSiteUse)
+6. [Features](#Features)
+    * [Registration and Login](#RegistrationandLogin)
+	* [Address Verification Using EasyPost API](#AddressVerificationUsingEasyPostAPI)
+	* [Password Reset](#PasswordReset)
+	* [User Profile](#UserProfile)
+	* [Public Officials](#PublicOfficials)
+	* [Elections](#Elections)
+	* [State Voting Information](#StateVotingInformation)
+	* [Administrator Interface](#AdministratorInterface)
+7. [Further Steps](#FurtherSteps)
+8. [Local Deployment](#LocalDeployment)
 
 ##  1. <a name='TechnologiesUsed'></a>Technologies Used
 
