@@ -1,43 +1,43 @@
-{% extends 'base.html' %} 
-{% block title %}
-Edit Profile for {{user.username}}
-{% endblock  %}
-{% block content %} 
-<div class="container">
+{% extends 'base.html' %} {% block title %} Edit Profile for {{user.username}} {% endblock %} {% block content %} <div
+    class="container">
     <div class="container p-1 d-flex flex-column align-items-center my-3">
-        <img src="/assets/images/edit-user-v3.gif" alt="" class="img-fluid"></div>
-        <h6 class="text-center dark-blue">{{user.username}}</h6>
-        <form method="POST" id="user-form" class="my-4 py-2"> {{ form.hidden_tag() }} <div class="row">
-        <div class="col-12 col-md-6"> {{form.first_name.label}} {{form.first_name(class_="form-control")}} 
-            {% for error in form.first_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
-                class="form-text text-muted">Required</small> </div>
-        <div class="col-12 col-md-6"> {{form.last_name.label}} {{form.last_name(class_="form-control")}} {% for error in
-            form.last_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
-                class="form-text text-muted">Required</small> </div>
+        <img src="/assets/images/edit-user-v3.gif" alt="" class="img-fluid">
     </div>
-    <div class="row">
-        <div class="col"> {{form.street_address.label}} {{form.street_address(class_="form-control")}} {% for error in
-            form.street_address.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
-                class="form-text text-muted">Required</small>
+    <h6 class="text-center dark-blue">{{user.username}}</h6>
+    <form method="POST" id="user-form" class="my-4 py-2"> {{ form.hidden_tag() }}
+        <!-- Prevents User from Changing Test Account Name  -->
+        {% if user.username != 'TestUser'
+        %} <div class="row">
+            <div class="col-12 col-md-6"> {{form.first_name.label}} {{form.first_name(class_="form-control")}} {% for
+                error in form.first_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
+                %}<small class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-6"> {{form.last_name.label}} {{form.last_name(class_="form-control")}} {% for
+                error in form.last_name.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor
+                %}<small class="form-text text-muted">Required</small> </div>
+        </div> 
+        {% endif %}
+        <div class="row">
+            <div class="col"> {{form.street_address.label}} {{form.street_address(class_="form-control")}} {% for error
+                in form.street_address.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-4"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
-            form.city.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
-                class="form-text text-muted">Required</small> </div>
-        <div class="col-12 col-md-4"> {{form.state_id.label}} {{form.state_id(class_="form-control")}} {% for error in
-            form.state_id.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
-                class="form-text text-muted">Required</small> </div>
-        <div class="col-12 col-md-4"> {{form.zip_code.label}} {{form.zip_code(class_="form-control")}} {% for error in
-            form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
-                class="form-text text-muted">Required</small> </div>
-    </div>
-    <div id="verify-btn">
-        <div class="d-flex flex-column align-items-center"><a class="btn btn-primary btn-large mt-2"
-                id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2"
-                id="random-address">Generate Random Address</a></div>
-    </div>
-    <div id="verify-user-address" class="mt-2"></div>
-</form>
-</div>
-{% endblock %}
+        <div class="row">
+            <div class="col-12 col-md-4"> {{form.city.label}} {{form.city(class_="form-control")}} {% for error in
+                form.city.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-4"> {{form.state_id.label}} {{form.state_id(class_="form-control")}} {% for error
+                in form.state_id.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+            <div class="col-12 col-md-4"> {{form.zip_code.label}} {{form.zip_code(class_="form-control")}} {% for error
+                in form.zip_code.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %}<small
+                    class="form-text text-muted">Required</small> </div>
+        </div>
+        <div id="verify-btn">
+            <div class="d-flex flex-column align-items-center"><a class="btn btn-primary btn-large mt-2"
+                    id="verify-user">Verify Address</a><a class="btn btn-success btn-large mt-2"
+                    id="random-address">Generate Random Address</a></div>
+        </div>
+        <div id="verify-user-address" class="mt-2"></div>
+    </form>
+</div> {% endblock %}

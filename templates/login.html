@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
-{% block title %}
-Login
-{% endblock  %}  
-{% block content %} 
-<div class="container">
-<h1 class="dark-blue">Login</h1> 
-{% include 'form.j2' %} 
-<div class="mt-3"> <button type="submit" class="btn btn-success btn-lg">Login</button><a href="/reset_password" class="btn btn-warning btn-lg mx-2">Reset Password</a></div>
-</form>
-</div>
-{% endblock %}
+{% extends 'base.html' %} {% block title %} Login {% endblock %} {% block content %} <div class="container">
+    <div class="container d-flex flex-column align-items-center text-center">
+        <h1 class="dark-blue">Login</h1>
+        <div class="my-2"><small>Users that do not wish to register can also log in to a Demo account with the following
+                credentials:<br><span class="fw-bold dark-blue">Username:</span> TestUser<br><span
+                    class="fw-bold dark-blue">Password:</span> TestPassword!</small></div>
+    </div> {% include 'form.j2' %} <div class="mt-3"> <button type="submit"
+            class="btn btn-success btn-lg">Login</button><a href="/reset_password"
+            class="btn btn-warning btn-lg mx-2">Reset Password</a></div>
+    </form>
+</div> {% endblock %}

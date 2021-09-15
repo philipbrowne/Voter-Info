@@ -57,10 +57,10 @@
             <section id="user" class="card py-lg-3 d-flex flex-column align-items-center m-2 m-lg-4 p-5">
                 <div class="container d-flex flex-column align-items-center">
                     <div class="row">
-                        <div class="col-xl-6 d-flex flex-column align-items-center"> {% if session['username'] %} <h4
-                                class="dark-blue my-3 text-center pt-xl-5 mt-xl-4">Welcome back<br><a
+                        <div class="col-xl-6 d-flex flex-column align-items-center"> {% if session['username'] %} <h3
+                                class="dark-blue my-3 py-3 text-center pt-xl-5 mt-xl-4 text-center">Welcome back<br><a
                                     href="/users/{{session['username']}}" target="_blank">{{session['username']}}</a>!
-                            </h4>
+                            </h3>
                             <div class="container d-flex flex-row align-items-center justify-content-center py-2">
                                 <a href="/state-information"><button
                                         class="btn btn-sm btn-primary mx-1 mx-md-4">Information</button></a>
@@ -68,6 +68,11 @@
                                         class="btn btn-sm btn-success mx-1 mx-md-4">Profile</button></a>
                             </div> {% else %} <h5 class="dark-blue my-3 text-center pt-xl-5 mt-xl-4"> Easily register
                                 and log in to get started! </h5>
+                            <div class="my-2 d-flex flex-column align-items-center text-center"><small><span
+                                        class="dark-blue fw-bold">Note:</span> Users that do not wish to register can
+                                    log in to a Demo account with the following credentials:<br><span
+                                        class="fw-bold dark-blue">Username:</span> TestUser<br><span
+                                        class="fw-bold dark-blue">Password:</span> TestPassword!</small></div>
                             <div class="container d-flex flex-row align-items-center justify-content-center py-2">
                                 <a href="/register"><button
                                         class="btn btn-primary btn-sm mx-1 mx-md-4">Register</button></a>
