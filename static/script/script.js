@@ -1,6 +1,6 @@
 const USERNAME = $('#user-username').text();
 
-if (USERNAME == 'TestUser'){
+if (USERNAME == 'TestUser') {
   $('#first_name').attr('readonly', 'readonly');
   $('#last_name').attr('readonly', 'readonly');
 }
@@ -102,7 +102,6 @@ async function generateRandomAddress() {
   }
 }
 
-
 function cancelVerify(origStreetAddress, origCity, origStateId, origZipCode) {
   $('#submit-form').remove();
   $('#street_address').prop('readonly', false);
@@ -149,4 +148,10 @@ $('body').on('click', '#confirm-delete', deleteUser);
 $('body').on('click', '#cancel-delete', cancelDelete);
 $('body').on('click', '#submit-form', () => {
   $('#user-form').submit();
+});
+
+$('body').on('click', '#demo-login', () => {
+  $('#username').val('TestUser');
+  $('#password').val('TestPassword!');
+  $('#login-form').submit();
 });
