@@ -7,8 +7,9 @@
     <form method="POST" id="login-form"> {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
         'hidden' %} <div class="form-group"> {{field.label}} {{field(class_="form-control")}} {% for error in
             field.errors %} <span class="form-text text-danger">{{error}}</span> {% endfor %} </div> {% endfor %}<div
-            class="mt-3 text-center"> <button type="submit" class="btn btn-success btn-lg mx-2">Login</button><span
-                class="btn btn-primary btn-lg mx-2" id="demo-login">Login as Demo User</span><a href="/reset_password"
-                class="btn btn-warning btn-lg mx-2">Reset Password</a></div>
+            class="mt-3 text-center"> <button type="submit" class="btn btn-success btn-lg mx-2 my-1">Login</button>
+            <span class="btn btn-primary btn-lg mx-2 my-1" id="demo-login">Login as Demo User</span><a
+                href="/reset_password" class="btn btn-warning btn-lg mx-2 my-1">Reset Password</a>
+        </div>
     </form>
 </div> {% endblock %}

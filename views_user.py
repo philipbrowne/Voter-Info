@@ -28,10 +28,15 @@ if is_prod:
 
 # Views for User Routes
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """User Registration Page"""
     form = NewUserForm()
+    if 'username' in session:
+        username = session['username']
+        flash(f'Already logged in as {username}', 'warning')
+        return redirect('/')
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -256,7 +261,7 @@ def delete_user(username):
         User.username == session.get('username')).first()
     user = User.query.filter(User.username == username).first()
     if username == 'TestUser':
-        flash ('Sorry, cannot delete Demo Account', 'danger')
+        flash('Sorry, cannot delete Demo Account', 'danger')
         return redirect(f'/users/{username}')
     if session.get('username') != username:
         if curr_user.is_admin == True:
@@ -275,7 +280,8 @@ def delete_user(username):
         session.pop('username')
         flash('User deleted', 'success')
         return redirect('/')
-    
+
+
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
     form = SendPasswordResetForm()
