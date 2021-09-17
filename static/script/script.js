@@ -139,3 +139,6 @@ function cancelDelete() {
 $('body').on('click', '#delete-btn', confirmDelete);
 $('body').on('click', '#confirm-delete', deleteUser);
 $('body').on('click', '#cancel-delete', cancelDelete);
+$('body').on('click', '#submit-form', () => {
+  $('#user-form').submit();
+});
