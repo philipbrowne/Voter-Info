@@ -255,6 +255,9 @@ def delete_user(username):
     curr_user = User.query.filter(
         User.username == session.get('username')).first()
     user = User.query.filter(User.username == username).first()
+    if username == 'TestUser':
+        flash ('Sorry, cannot delete Demo Account', 'danger')
+        return redirect(f'/users/{username}')
     if session.get('username') != username:
         if curr_user.is_admin == True:
             deleted_user = User.query.filter(User.username == username).first()
