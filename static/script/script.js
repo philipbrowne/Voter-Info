@@ -1,3 +1,10 @@
+const USERNAME = $('#user-username').text();
+
+if (USERNAME == 'TestUser'){
+  $('#first_name').attr('readonly', 'readonly');
+  $('#last_name').attr('readonly', 'readonly');
+}
+
 async function verifyUserAddress(evt) {
   evt.preventDefault();
   if ($('#submit-form')) {
@@ -94,6 +101,7 @@ async function generateRandomAddress() {
     });
   }
 }
+
 
 function cancelVerify(origStreetAddress, origCity, origStateId, origZipCode) {
   $('#submit-form').remove();
