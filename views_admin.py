@@ -1,22 +1,15 @@
 from app import app
-from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
-from flask_mail import Mail, Message
-import json
-import easypost
-import requests
+from flask import Flask, render_template, request, redirect, session, flash
 import geocoder
 
-from forms import NewUserForm, UserLoginForm, EditUserForm, SendPasswordResetForm, ResetPasswordForm, StateEditForm, StateRegistrationRuleForm, ElectionForm, AdminUserForm
-from models import connect_db, db, User, State, Election, RegistrationRule
+from forms import StateEditForm, StateRegistrationRuleForm, ElectionForm, AdminUserForm
+from models import db, User, State, Election, RegistrationRule
 
-from sqlalchemy.exc import IntegrityError
 import os
-import lob
 
 is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod == None:
-    from api_keys import LOB_API_KEY, GOOGLE_CIVIC_API_KEY, MAPQUEST_API_KEY, EASYPOST_API_KEY
-    from secret_keys import MAIL_USERNAME, MAIL_PASSWORD, SECRET_KEY
+    from api_keys import MAPQUEST_API_KEY
 if is_prod:
     LOB_API_KEY = os.environ.get('LOB_API_KEY')
     EASYPOST_API_KEY = os.environ.get('EASYPOST_API_KEY')
@@ -27,6 +20,7 @@ if is_prod:
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Views for Admin Routes
+
 
 @app.route('/admin')
 def admin_index():

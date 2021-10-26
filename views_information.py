@@ -1,17 +1,12 @@
 from app import app
-from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
-from flask_mail import Mail, Message
+from flask import render_template, redirect, session, flash, json
 import json
-import easypost
 import requests
-import geocoder
 
-from forms import NewUserForm, UserLoginForm, EditUserForm, SendPasswordResetForm, ResetPasswordForm, StateEditForm, StateRegistrationRuleForm, ElectionForm, AdminUserForm
-from models import connect_db, db, User, State, Election, RegistrationRule
+from models import User, Election
 
 from sqlalchemy.exc import IntegrityError
 import os
-import lob
 
 is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod == None:
@@ -27,6 +22,7 @@ if is_prod:
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Views for Information Routes
+
 
 @app.route('/elections')
 def get_elections():
@@ -58,6 +54,7 @@ def get_state_info():
         f'https://www.googleapis.com/civicinfo/v2/representatives?key={GOOGLE_CIVIC_API_KEY}&address={address}').text
     response_info = json.loads(resp)
     return render_template('state-info.html', user=curr_user, data=response_info)
+
 
 @app.route('/officials')
 def get_officials():

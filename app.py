@@ -1,14 +1,9 @@
-from flask import Flask, render_template, request, redirect, session, flash, jsonify, abort, send_from_directory, url_for, json
-from flask_mail import Mail, Message
-import json
+from flask import Flask, render_template, session, send_from_directory
+from flask_mail import Mail
+
 import easypost
-import requests
-import geocoder
+from models import connect_db, User
 
-from forms import NewUserForm, UserLoginForm, EditUserForm, SendPasswordResetForm, ResetPasswordForm, StateEditForm, StateRegistrationRuleForm, ElectionForm, AdminUserForm
-from models import connect_db, db, User, State, Election, RegistrationRule
-
-from sqlalchemy.exc import IntegrityError
 import os
 import lob
 
